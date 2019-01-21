@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.dao.StoreDao">
+  <resultMap id="BaseResultMap" type="com.air.bean.Store">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="score" jdbcType="REAL" property="score" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, name, score
+  </sql>
+</mapper>

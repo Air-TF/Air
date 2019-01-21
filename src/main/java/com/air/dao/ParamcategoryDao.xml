@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.dao.ParamcategoryDao">
+  <resultMap id="BaseResultMap" type="com.air.bean.Paramcategory">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="content_id" jdbcType="BIGINT" property="contentId" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, name, content_id
+  </sql>
+</mapper>

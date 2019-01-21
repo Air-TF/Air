@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.dao.ItemDao">
+    <resultMap id="BaseResultMap" type="com.air.bean.Item">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="content_id" jdbcType="BIGINT" property="contentId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="price" jdbcType="BIGINT" property="price"/>
+        <result column="brand" jdbcType="VARCHAR" property="brand"/>
+        <result column="created" jdbcType="DATE" property="created"/>
+        <result column="alias" jdbcType="VARCHAR" property="alias"/>
+    </resultMap>
+
+    <select id="selectItems" resultType="com.air.bean.Item">
+        select * from tb_item
+        <where>
+            <if test="itemName != null">
+                tb_item.name like "%"#{itemName}"%"
+            </if>
+            <if test="contentId != null">
+                and content_id = #{contentId}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectItemList" resultType="com.air.bean.Item">
+        select * from tb_item
+        <where>
+            <if test="itemName != null">
+                tb_item.name like "%"#{itemName}"%"
+            </if>
+            <if test="contentId != null">
+                and content_id = #{contentId}
+            </if>
+        </where>
+        <if test="start !=null and rows != null">
+            limit #{start},#{rows}
+        </if>
+    </select>
+
+    <select id="selectItemListCount" resultType="int">
+        select count(*) from tb_item
+        <where>
+            <if test="itemName != null">
+                tb_item.name like "%"#{itemName}"%"
+            </if>
+            <if test="contentId != null">
+                and content_id = #{contentId}
+            </if>
+        </where>
+    </select>
+</mapper>

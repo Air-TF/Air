@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.dao.OrderDao">
+  <resultMap id="BaseResultMap" type="com.air.bean.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="seller_id" jdbcType="BIGINT" property="sellerId" />
+    <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
+    <result column="address_id" jdbcType="BIGINT" property="addressId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="post_fee" jdbcType="INTEGER" property="postFee" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="payment_time" jdbcType="TIMESTAMP" property="paymentTime" />
+    <result column="consign_time" jdbcType="TIMESTAMP" property="consignTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="close_time" jdbcType="TIMESTAMP" property="closeTime" />
+    <result column="shipping_name" jdbcType="VARCHAR" property="shippingName" />
+    <result column="shipping_code" jdbcType="VARCHAR" property="shippingCode" />
+    <result column="buyer_message" jdbcType="VARCHAR" property="buyerMessage" />
+    <result column="buyer_rate" jdbcType="INTEGER" property="buyerRate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, seller_id, buyer_id, address_id, status, post_fee, create_time, update_time, 
+    payment_time, consign_time, end_time, close_time, shipping_name, shipping_code, buyer_message, 
+    buyer_rate
+  </sql>
+</mapper>

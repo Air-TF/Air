@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.air.dao.UserLoginDao">
+    <resultMap id="BaseResultMap" type="com.air.bean.UserLogin">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="created" jdbcType="TIMESTAMP" property="created"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, password, phone, email, created, status
+  </sql>
+    <select id="selectUserLoginByPhoneOrEmail" parameterType="String" resultType="com.air.bean.UserLogin">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_user_login
+        where phone = #{Phone}
+    </select>
+    <select id="selectUserLoginByEmail" parameterType="String" resultType="com.air.bean.UserLogin">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_user_login
+        where email = #{email}
+    </select>
+</mapper>
