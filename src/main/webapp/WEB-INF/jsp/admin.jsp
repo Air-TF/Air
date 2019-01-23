@@ -557,11 +557,10 @@
             function deleteItem(id) {
                 if (confirm('确实要删除该客户吗?')) {
                     $.ajax({
-                        type:"delete",
+                        type:"POST",
                         url: "admin/delete",
-                        data: JSON.stringify({"id": id}),
+                        data: {_method:"DELETE","id": id},
                         dataType: "json",
-                        contentType:"application/json;charset=utf-8",
                         async: false,
                         success: function (data) {
                             if (data.meta.success) {

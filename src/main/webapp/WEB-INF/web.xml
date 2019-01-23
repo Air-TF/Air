@@ -50,4 +50,15 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring-*.xml</param-value>
     </context-param>
+
+    <!--RESTful 风格 把POST请求转为 DELETE 和 PUT请求-->
+    <filter>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>HiddenHttpMethodFilter</filter-name>
+        <!-- 备注，这边的名称必须和配置'springmvc'的servlet名称一样 -->
+        <servlet-name>springDispatcherServlet</servlet-name>
+    </filter-mapping>
 </web-app>

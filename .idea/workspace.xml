@@ -6,48 +6,15 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="96811463-79b9-4c6f-acef-5866fedf41f0" name="Default Changelist" comment="完成 后台管理-&gt;产品管理-&gt; 修改数据回显&#10;select[name=&quot;content&quot;] ajax改为同步">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7519298d-44ca-44f1-a656-819995154323.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7519298d-44ca-44f1-a656-819995154323.xml" afterDir="false" />
+    <list default="true" id="96811463-79b9-4c6f-acef-5866fedf41f0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/Content.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/Content.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/air/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/service/Impl/ItemServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/service/Impl/ItemServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/service/ItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/service/ItemService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resource/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource/jdbc.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Category.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Content.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Content.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/controller/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/CategoryDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/CategoryDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/CategoryDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/CategoryDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/ItemDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/ItemDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/ItemDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/ItemDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/CategoryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/Impl/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/Impl/CategoryServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/Impl/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/Impl/ItemServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/ItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/ItemService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/jdbc.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/jsp/admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/jsp/admin.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/bean/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/bean/Category.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/bean/Content.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/bean/Content.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/air/controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/controller/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/dao/CategoryDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/dao/CategoryDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/dao/CategoryDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/dao/CategoryDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/dao/ItemDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/dao/ItemDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/dao/ItemDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/dao/ItemDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/service/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/service/CategoryService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/service/Impl/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/service/Impl/CategoryServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/service/Impl/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/service/Impl/ItemServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/service/ItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/service/ItemService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/jdbc.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -102,40 +69,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/air/controller/AdminController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="178" column="46" lean-forward="true" selection-start-line="178" selection-start-column="46" selection-end-line="178" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="51" column="20" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="563" column="69" selection-start-line="563" selection-start-column="69" selection-end-line="563" selection-end-column="69" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/Impl/ItemServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="63" selection-start-line="63" selection-end-line="63" />
-              <folding>
-                <element signature="e#1639#1640#0" expanded="true" />
-                <element signature="e#1699#1700#0" expanded="true" />
-                <element signature="e#1768#1769#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="298">
+              <caret line="175" column="17" lean-forward="true" selection-start-line="175" selection-start-column="17" selection-end-line="175" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -240,10 +175,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/air/service/Impl/ItemServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7519298d-44ca-44f1-a656-819995154323/console_2.sql" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7519298d-44ca-44f1-a656-819995154323/console_3.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/controller/AdminController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp" />
       </list>
     </option>
   </component>
@@ -465,7 +400,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548261219828" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548263517103" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="database.data.extractors.current.id" value="SQL Inserts" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -706,7 +641,8 @@
       <workItem from="1548040561441" duration="33455000" />
       <workItem from="1548076470537" duration="190000" />
       <workItem from="1548079162829" duration="3464000" />
-      <workItem from="1548143848665" duration="51197000" />
+      <workItem from="1548143848665" duration="53499000" />
+      <workItem from="1548263702512" duration="220000" />
     </task>
     <task id="LOCAL-00001" summary="project init">
       <created>1545833454365</created>
@@ -743,11 +679,18 @@
       <option name="project" value="LOCAL" />
       <updated>1548236882914</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="完成 后台管理-&gt;产品管理-&gt; 修改&amp;删除 功能&#10;完善部分Bean结构[Category,Content]&#10;增加Mybaits 删&amp;改 影响条数返回 功能">
+      <created>1548261458136</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1548261458136</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="288860000" />
+    <option name="totallyTimeSpent" value="291162000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -760,9 +703,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4969231" weight="0.18229954" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4969231" visible="true" weight="0.18381241" />
       <window_info id="Designer" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -772,8 +714,8 @@
       <window_info id="Web" order="7" sideWeight="0.5030769" side_tool="true" weight="0.2397882" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32580644" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.8516129" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49924356" visible="true" weight="0.42096773" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.31451613" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49924356" weight="0.42096773" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32903227" />
@@ -783,7 +725,7 @@
       <window_info anchor="bottom" id="Messages" order="10" weight="0.29354838" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.32903227" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" weight="0.32903227" />
-      <window_info anchor="bottom" x="22" y="267" width="1322" height="204" id="Version Control" order="13" weight="0.32419354" />
+      <window_info active="true" anchor="bottom" x="22" y="267" width="1322" height="204" id="Version Control" order="13" visible="true" weight="0.32419354" />
       <window_info anchor="bottom" id="Application Servers" order="14" weight="0.32419354" />
       <window_info anchor="bottom" id="Spring" order="15" weight="0.32903227" />
       <window_info anchor="bottom" id="Database Console" order="16" weight="0.32903227" />
@@ -947,7 +889,8 @@
     <MESSAGE value="完成 后台管理-&gt;产品管理-&gt;查询功能" />
     <MESSAGE value="完成 后台管理-&gt;产品管理-&gt;分页功能" />
     <MESSAGE value="完成 后台管理-&gt;产品管理-&gt; 修改数据回显&#10;select[name=&quot;content&quot;] ajax改为同步" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成 后台管理-&gt;产品管理-&gt; 修改数据回显&#10;select[name=&quot;content&quot;] ajax改为同步" />
+    <MESSAGE value="完成 后台管理-&gt;产品管理-&gt; 修改&amp;删除 功能&#10;完善部分Bean结构[Category,Content]&#10;增加Mybaits 删&amp;改 影响条数返回 功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成 后台管理-&gt;产品管理-&gt; 修改&amp;删除 功能&#10;完善部分Bean结构[Category,Content]&#10;增加Mybaits 删&amp;改 影响条数返回 功能" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -1266,20 +1209,6 @@
         <state relative-caret-position="-918" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="51" column="20" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="563" column="69" selection-start-line="563" selection-start-column="69" selection-end-line="563" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://7519298d-44ca-44f1-a656-819995154323/schema/air/table/tb_item">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1308,18 +1237,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/Impl/ItemServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
-          <folding>
-            <element signature="e#1639#1640#0" expanded="true" />
-            <element signature="e#1699#1700#0" expanded="true" />
-            <element signature="e#1768#1769#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/ProgramFiles/Java/jdk1.8.0_91/src.zip!/java/lang/Long.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -1334,10 +1251,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/Impl/ItemServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+          <folding>
+            <element signature="e#1639#1640#0" expanded="true" />
+            <element signature="e#1699#1700#0" expanded="true" />
+            <element signature="e#1768#1769#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="53" column="19" lean-forward="true" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="556" column="37" lean-forward="true" selection-start-line="556" selection-start-column="37" selection-end-line="556" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/air/controller/AdminController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="178" column="46" lean-forward="true" selection-start-line="178" selection-start-column="46" selection-end-line="178" selection-end-column="46" />
+        <state relative-caret-position="328">
+          <caret line="184" lean-forward="true" selection-start-line="184" selection-end-line="184" />
         </state>
       </provider>
     </entry>

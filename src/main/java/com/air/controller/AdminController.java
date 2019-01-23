@@ -162,7 +162,7 @@ public class AdminController {
         return new ResultData().success(data);
     }
 
-    @RequestMapping(value = "update",method = RequestMethod.PUT,consumes = "application/json")
+    @RequestMapping(value = "update",method = RequestMethod.PUT)
     @ResponseBody
     public ResultData update(@RequestBody Item item){
         if (itemService.updateItemById(item)){
@@ -172,10 +172,10 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(value = "delete",method = RequestMethod.DELETE,consumes = "application/json")
+    @RequestMapping(value = "delete",method = RequestMethod.DELETE)
     @ResponseBody
-    public ResultData delete(@RequestBody Item item){
-        if (itemService.deleteItemById(item.getId())){
+    public ResultData delete(Long id){
+        if (itemService.deleteItemById(id)){
             return new ResultData().success();
         }else{
             return new ResultData().failure();
