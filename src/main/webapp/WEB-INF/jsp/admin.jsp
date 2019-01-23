@@ -153,8 +153,7 @@
                     <div data-type="menu">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <form class="form-inline" action="${pageContext.request.contextPath }/admin/itemList"
-                                      method="post">
+                                <form class="form-inline">
                                     <div class="form-group">
                                         <label for="userName">客户名称</label>
                                         <input type="text" class="form-control" id="userName" value="${userName}"
@@ -165,30 +164,18 @@
                                         <select class="form-control" id="customerFrom" placeholder="客户来源"
                                                 name="custSource">
                                             <option value="">--请选择--</option>
-                                            <c:forEach items="${fromType}" var="item">
-                                                <option value="${item.dict_id}"<c:if
-                                                        test="${item.dict_id == custSource}"> selected</c:if>>${item.dict_item_name }</option>
-                                            </c:forEach>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="custIndustry">所属行业</label>
                                         <select class="form-control" id="custIndustry" name="custIndustry">
                                             <option value="">--请选择--</option>
-                                            <c:forEach items="${industryType}" var="item">
-                                                <option value="${item.dict_id}"<c:if
-                                                        test="${item.dict_id == custIndustry}"> selected</c:if>>${item.dict_item_name }</option>
-                                            </c:forEach>
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="custLevel">客户级别</label>
                                         <select class="form-control" id="custLevel" name="custLevel">
                                             <option value="">--请选择--</option>
-                                            <c:forEach items="${levelType}" var="item">
-                                                <option value="${item.dict_id}"<c:if
-                                                        test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>
-                                            </c:forEach>
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">查询</button>
@@ -214,29 +201,8 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <c:forEach items="${page.rows}" var="row">
-                                            <tr>
-                                                <td>${row.cust_id}</td>
-                                                <td>${row.cust_name}</td>
-                                                <td>${row.cust_source}</td>
-                                                <td>${row.cust_industry}</td>
-                                                <td>${row.cust_level}</td>
-                                                <td>${row.cust_phone}</td>
-                                                <td>${row.cust_mobile}</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-primary btn-xs" data-toggle="modal"
-                                                       data-target="#customerEditDialog"
-                                                       onclick="editCustomer(${row.cust_id})">修改</a>
-                                                    <a href="#" class="btn btn-danger btn-xs"
-                                                       onclick="deleteCustomer(${row.cust_id})">删除</a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
                                         </tbody>
                                     </table>
-                                    <div class="col-md-12 text-right">
-                                        <air:page url="${pageContext.request.contextPath }/admin"/>
-                                    </div>
                                     <!-- /.panel-body -->
                                 </div>
                                 <!-- /.panel -->
@@ -317,8 +283,8 @@
             <!-- /#page-wrapper -->
 
         </div>
-        <!-- 客户编辑对话框 -->
-        <div class="modal fade" id="customerEditDialog" tabindex="-1" role="dialog"
+        <!-- 产品编辑对话框 -->
+        <div class="modal fade" id="itemEditDialog" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -326,90 +292,71 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">修改客户信息</h4>
+                        <h4 class="modal-title">修改产品信息</h4>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" id="edit_customer_form">
-                            <input type="hidden" id="edit_cust_id" name="cust_id"/>
+                        <form class="form-horizontal" id="edit_item_form">
+                            <input type="hidden" id="edit_itemId" name="itemId"/>
                             <div class="form-group">
-                                <label for="edit_customerName" class="col-sm-2 control-label">客户名称</label>
+                                <label for="edit_itemName" class="col-sm-2 control-label">产品名称</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="edit_customerName" placeholder="客户名称"
-                                           name="cust_name">
+                                    <input type="text" class="form-control" id="edit_itemName" placeholder="产品名称"
+                                           name="itemName">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_customerFrom" style="float:left;padding:7px 15px 0 27px;">客户来源</label>
+                                <label for="edit_itemCategory" style="float:left;padding:7px 15px 0 27px;">产品分区</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" id="edit_customerFrom" placeholder="客户来源"
-                                            name="cust_source">
+                                    <select class="form-control" id="edit_itemCategory" placeholder="产品分区"
+                                            name="category">
                                         <option value="">--请选择--</option>
-                                        <c:forEach items="${fromType}" var="item">
-                                            <option value="${item.dict_id}"<c:if
-                                                    test="${item.dict_id == custSource}"> selected</c:if>>${item.dict_item_name }</option>
-                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_custIndustry" style="float:left;padding:7px 15px 0 27px;">所属行业</label>
+                                <label for="edit_itemContent" style="float:left;padding:7px 15px 0 27px;">产品类别</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" id="edit_custIndustry" name="cust_industry">
+                                    <select class="form-control" id="edit_itemContent" name="content">
                                         <option value="">--请选择--</option>
-                                        <c:forEach items="${industryType}" var="item">
-                                            <option value="${item.dict_id}"<c:if
-                                                    test="${item.dict_id == custIndustry}"> selected</c:if>>${item.dict_item_name }</option>
-                                        </c:forEach>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_custLevel" style="float:left;padding:7px 15px 0 27px;">客户级别</label>
+                                <label for="edit_itemTitle" class="col-sm-2 control-label">卖点</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" id="edit_custLevel" name="cust_level">
-                                        <option value="">--请选择--</option>
-                                        <c:forEach items="${levelType}" var="item">
-                                            <option value="${item.dict_id}"<c:if
-                                                    test="${item.dict_id == custLevel}"> selected</c:if>>${item.dict_item_name }</option>
-                                        </c:forEach>
-                                    </select>
+                                    <input type="text" class="form-control" id="edit_itemTitle" placeholder="卖点"
+                                           name="itemTitle">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_linkMan" class="col-sm-2 control-label">联系人</label>
+                                <label for="edit_itemImage" class="col-sm-2 control-label">图片</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="edit_linkMan" placeholder="联系人"
-                                           name="cust_linkman">
+                                    <input type="text" class="form-control" id="edit_itemImage" placeholder="图片"
+                                           name="itemImage">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_phone" class="col-sm-2 control-label">固定电话</label>
+                                <label for="edit_itemPrice" class="col-sm-2 control-label">价格</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="edit_phone" placeholder="固定电话"
-                                           name="cust_phone">
+                                    <input type="number" class="form-control" id="edit_itemPrice" placeholder="价格"
+                                           name="itemBrice">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_mobile" class="col-sm-2 control-label">移动电话</label>
+                                <label for="edit_itemBrand" class="col-sm-2 control-label">品牌</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="edit_mobile" placeholder="移动电话"
-                                           name="cust_mobile">
+                                    <input type="text" class="form-control" id="edit_itemBrand" placeholder="品牌"
+                                           name="itemBrand">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_zipcode" class="col-sm-2 control-label">邮政编码</label>
+                                <label for="edit_itemAlias" class="col-sm-2 control-label">别名</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="edit_zipcode" placeholder="邮政编码"
-                                           name="cust_zipcode">
+                                    <input type="text" class="form-control" id="edit_itemAlias" placeholder="别名"
+                                           name="itemAlias">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="edit_address" class="col-sm-2 control-label">联系地址</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="edit_address" placeholder="联系地址"
-                                           name="cust_address">
-                                </div>
-                            </div>
+
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -422,24 +369,49 @@
         <!-- /#wrapper -->
         <script type="text/javascript">
             $(function () {
-                $("select[name='category']").change(function () {
-                    $.get("admin/choose", {"categoryId": $("select[name='category']").val()}, function (data) {
-                        var mySelect = $("select[name='content']")[0];
-                        mySelect.options.length = 1;
-                        $.each(data.data, function (i, d) {
-                            mySelect.options.add(new Option(d.name, d.id));
-                        });
-                    })
-                });
-
-                $("#side-menu .menu-item").click(function () {
-                    var mySelect = $("select[name='category']")[0];
-                    if (mySelect.options.length < 2) {
-                        $.get("admin/choose", {"index": $(".menu-item").index(this)}, function (data) {
+                $(".detail-menu select[name='category']").change(function () {
+                    $.ajax({
+                        url:"admin/choose",
+                        type:"GET",
+                        data: {"categoryId": $(this).val()},
+                        dataType:"json",
+                        async:false,
+                        success:function (data) {
+                            var mySelect = $(".detail-menu select[name='content']")[0];
                             mySelect.options.length = 1;
                             $.each(data.data, function (i, d) {
                                 mySelect.options.add(new Option(d.name, d.id));
                             });
+                        }
+                    })
+                });
+
+                $("#itemEditDialog select[name='category']").change(function () {
+                    $.ajax({
+                        url:"admin/choose",
+                        type:"GET",
+                        data: {"categoryId": $(this).val()},
+                        dataType:"json",
+                        async:false,
+                        success:function (data) {
+                            var mySelect = $("#itemEditDialog select[name='content']")[0];
+                            mySelect.options.length = 1;
+                            $.each(data.data, function (i, d) {
+                                mySelect.options.add(new Option(d.name, d.id));
+                            });
+                        }
+                    })
+                });
+
+                $("#side-menu .menu-item").click(function () {
+                    if ($(".detail-menu select[name='category']")[0].options.length < 2) {
+                        $.get("admin/choose", {"index": $(".menu-item").index(this)}, function (data) {
+                            $.each($("select[name='category']"), function (i, mySelect) {
+                                mySelect.options.length = 1;
+                                $.each(data.data, function (i, d) {
+                                    mySelect.options.add(new Option(d.name, d.id));
+                                });
+                            })
                         }, "json")
                     }
                 })
@@ -471,8 +443,8 @@
                                     "<td>" + d.brand + "</td>" +
                                     "<td>" + d.alias + "</td>" +
                                     "<td>" +
-                                    "<a href=\"#\" class=\"btn btn-primary btn-xs\" data-toggle=\"modal\" data-target=\"#customerEditDialog\" onclick=\"editCustomer(" + d.id + ")\">修改</a>" +
-                                    "<a href=\"#\" class=\"btn btn-danger btn-xs\" onclick=\"deleteCustomer(" + d.id + ")\">删除</a>" +
+                                    "<a href=\"#\" class=\"btn btn-primary btn-xs\" data-toggle=\"modal\" data-target=\"#itemEditDialog\" onclick=\"editItem(" + d.id + ")\">修改</a>" +
+                                    "<a href=\"#\" class=\"btn btn-danger btn-xs\" onclick=\"deleteItem(" + d.id + ")\">删除</a>" +
                                     "</td>" +
                                     "</tr>")
                             })
@@ -489,7 +461,6 @@
                 var NavigationTag = $(".pagination");
                 NavigationTag.empty()
                 var page = data["itemPage"]
-                console.log(data)
                 if (page["rows"].length == 0) {
                     NavigationTag.css("display", "none")
                 } else {
@@ -527,23 +498,24 @@
                 }
             }
 
-            function editCustomer(id) {
-                console.log(id)
+            function editItem(id) {
                 $.ajax({
                     type: "get",
-                    url: "customer/edit.action",
-                    data: {"id": id},
+                    url: "admin/edit",
+                    data: {"itemId": id},
                     success: function (data) {
-                        $("#edit_cust_id").val(data.id);
-                        $("#edit_customerName").val(data.name);
-                        $("#edit_customerFrom").val(data.cust_source)
-                        $("#edit_custIndustry").val(data.cust_industry)
-                        $("#edit_custLevel").val(data.cust_level)
-                        $("#edit_linkMan").val(data.cust_linkman);
-                        $("#edit_phone").val(data.cust_phone);
-                        $("#edit_mobile").val(data.cust_mobile);
-                        $("#edit_zipcode").val(data.cust_zipcode);
-                        $("#edit_address").val(data.cust_address);
+                        item = data.data.item;
+                        category = data.data.category
+                        $("#edit_itemId").val(item.id);
+                        $("#edit_itemName").val(item.name);
+                        $("#edit_itemCategory").val(category.id)
+                        $("#edit_itemCategory").change();
+                        $("#edit_itemContent").val(item.contentId);
+                        $("#edit_itemTitle").val(item.title);
+                        $("#edit_itemImage").val(item.image);
+                        $("#edit_itemPrice").val(item.price);
+                        $("#edit_itemBrand").val(item.brand);
+                        $("#edit_itemAlias").val(item.alias);
                     }
                 });
             }

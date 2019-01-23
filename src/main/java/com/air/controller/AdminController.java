@@ -149,4 +149,16 @@ public class AdminController {
         }
         return new ResultData().success(dataList);
     }
+
+    @RequestMapping(value = "edit", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultData edit(HttpServletRequest request) {
+        Long itemId = Long.valueOf(request.getParameter("itemId"));
+        Map<String, Object> data = new HashMap<>();
+        Item item = itemService.selectItemById(itemId);
+        Category category = categoryService.selectCategoryByContentId(item.getContentId());
+        data.put("category", category);
+        data.put("item", item);
+        return new ResultData().success(data);
+    }
 }

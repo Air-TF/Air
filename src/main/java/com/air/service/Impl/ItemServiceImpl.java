@@ -6,6 +6,7 @@ import com.air.dao.ItemDao;
 import com.air.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -15,17 +16,19 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * 查询所有
+     *
      * @param itemName
      * @param contentId
      * @return
      */
     @Override
-    public List<Item> selectItems(String itemName,Integer contentId) {
-        return itemDao.selectItems(itemName,contentId);
+    public List<Item> selectItems(String itemName, Integer contentId) {
+        return itemDao.selectItems(itemName, contentId);
     }
 
     /**
      * 分页查询
+     *
      * @param page
      * @param rows
      * @param itemName
@@ -34,14 +37,24 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     public Page<Item> selectItemList(Integer page, Integer rows, String itemName, Integer contentId) {
-        Integer start = (page-1)*rows;
-        List<Item> itemList=itemDao.selectItemList(start,rows,itemName,contentId);
+        Integer start = (page - 1) * rows;
+        List<Item> itemList = itemDao.selectItemList(start, rows, itemName, contentId);
         Integer itemListCount = itemDao.selectItemListCount(itemName, contentId);
-        Page<Item> itemPage =new Page<>();
+        Page<Item> itemPage = new Page<>();
         itemPage.setPage(page);
         itemPage.setRows(itemList);
         itemPage.setSize(rows);
         itemPage.setTotal(itemListCount);
         return itemPage;
+    }
+
+    /**
+     * 通过Id查找产品
+     * @param itemId
+     * @return
+     */
+    @Override
+    public Item selectItemById(Long itemId) {
+        return itemDao.selectItemById(itemId);
     }
 }

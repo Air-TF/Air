@@ -51,4 +51,11 @@
             </if>
         </where>
     </select>
+
+    <select id="selectItemById" resultMap="BaseResultMap">
+        select * from tb_item
+        <where>
+            id = #{id}
+        </where>
+    </select>
 </mapper>

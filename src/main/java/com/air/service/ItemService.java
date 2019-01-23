@@ -9,4 +9,6 @@ public interface ItemService {
     List<Item> selectItems(String name, Integer contentId);
 
     Page<Item> selectItemList(Integer page, Integer rows, String itemName, Integer contentId);
+
+    Item selectItemById(Long itemId);
 }

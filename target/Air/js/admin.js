@@ -30,13 +30,6 @@ $(function () {
         $(".detail-menu div[data-type=\"" + ctx + "\"]").addClass('active')
     })
 
-    var index = sessionStorage.getItem('menu_index')
-    if (index != null) {
-        $("#side-menu .menu-item")[index].click();
-        console.log(index)
-    }
-
-
     // $("#side-menu .menu-item")[0].click()
 
     // $('#side-menu').metisMenu();
