@@ -50,11 +50,22 @@ public class ItemServiceImpl implements ItemService {
 
     /**
      * 通过Id查找产品
+     *
      * @param itemId
      * @return
      */
     @Override
     public Item selectItemById(Long itemId) {
         return itemDao.selectItemById(itemId);
+    }
+
+    @Override
+    public Boolean updateItemById(Item item) {
+        return itemDao.updateItemById(item) == 1 ? true : false;
+    }
+
+    @Override
+    public boolean deleteItemById(Long id) {
+        return itemDao.deleteItemById(id) == 1 ? true : false;
     }
 }

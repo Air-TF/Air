@@ -51,4 +51,41 @@
             </if>
         </where>
     </select>
+
+    <select id="selectItemById" resultMap="BaseResultMap">
+        select * from tb_item
+        <where>
+            id = #{id}
+        </where>
+    </select>
+
+    <update id="updateItemById" parameterType="com.air.bean.Item">
+        update tb_item
+        <set>
+            <if test="name != null">
+                tb_item.name = #{name},
+            </if>
+            <if test="contentId != null">
+                tb_item.content_id = #{contentId},
+            </if>
+            <if test="title != null">
+                tb_item.title = #{title},
+            </if>
+            <if test="image != null">
+                tb_item.image = #{image},
+            </if>
+            <if test="price != null">
+                tb_item.price = #{price},
+            </if>
+            <if test="brand != null">
+                tb_item.brand = #{brand},
+            </if>
+            <if test="alias != null">
+                tb_item.alias = #{alias}
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
 </mapper>

@@ -296,12 +296,12 @@
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal" id="edit_item_form">
-                            <input type="hidden" id="edit_itemId" name="itemId"/>
+                            <input type="hidden" id="edit_itemId" name="id"/>
                             <div class="form-group">
                                 <label for="edit_itemName" class="col-sm-2 control-label">产品名称</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="edit_itemName" placeholder="产品名称"
-                                           name="itemName">
+                                           name="name">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -316,7 +316,7 @@
                             <div class="form-group">
                                 <label for="edit_itemContent" style="float:left;padding:7px 15px 0 27px;">产品类别</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" id="edit_itemContent" name="content">
+                                    <select class="form-control" id="edit_itemContent" name="contentId">
                                         <option value="">--请选择--</option>
                                     </select>
                                 </div>
@@ -325,35 +325,35 @@
                                 <label for="edit_itemTitle" class="col-sm-2 control-label">卖点</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="edit_itemTitle" placeholder="卖点"
-                                           name="itemTitle">
+                                           name="title">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="edit_itemImage" class="col-sm-2 control-label">图片</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="edit_itemImage" placeholder="图片"
-                                           name="itemImage">
+                                           name="image">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="edit_itemPrice" class="col-sm-2 control-label">价格</label>
                                 <div class="col-sm-10">
                                     <input type="number" class="form-control" id="edit_itemPrice" placeholder="价格"
-                                           name="itemBrice">
+                                           name="price">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="edit_itemBrand" class="col-sm-2 control-label">品牌</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="edit_itemBrand" placeholder="品牌"
-                                           name="itemBrand">
+                                           name="brand">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="edit_itemAlias" class="col-sm-2 control-label">别名</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="edit_itemAlias" placeholder="别名"
-                                           name="itemAlias">
+                                           name="alias">
                                 </div>
                             </div>
 
@@ -361,22 +361,38 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" onclick="updateCustomer()">保存修改</button>
+                        <button type="button" class="btn btn-primary" onclick="updateItem()">保存修改</button>
                     </div>
                 </div>
             </div>
         </div>
         <!-- /#wrapper -->
         <script type="text/javascript">
+            $.fn.serializeObject = function()
+            {
+                var o = {};
+                var a = this.serializeArray();
+                $.each(a, function() {
+                    if (o[this.name] !== undefined) {
+                        if (!o[this.name].push) {
+                            o[this.name] = [o[this.name]];
+                        }
+                        o[this.name].push(this.value || '');
+                    } else {
+                        o[this.name] = this.value || '';
+                    }
+                });
+                return o;
+            };
             $(function () {
                 $(".detail-menu select[name='category']").change(function () {
                     $.ajax({
-                        url:"admin/choose",
-                        type:"GET",
+                        url: "admin/choose",
+                        type: "GET",
                         data: {"categoryId": $(this).val()},
-                        dataType:"json",
-                        async:false,
-                        success:function (data) {
+                        dataType: "json",
+                        async: false,
+                        success: function (data) {
                             var mySelect = $(".detail-menu select[name='content']")[0];
                             mySelect.options.length = 1;
                             $.each(data.data, function (i, d) {
@@ -388,13 +404,13 @@
 
                 $("#itemEditDialog select[name='category']").change(function () {
                     $.ajax({
-                        url:"admin/choose",
-                        type:"GET",
+                        url: "admin/choose",
+                        type: "GET",
                         data: {"categoryId": $(this).val()},
-                        dataType:"json",
-                        async:false,
-                        success:function (data) {
-                            var mySelect = $("#itemEditDialog select[name='content']")[0];
+                        dataType: "json",
+                        async: false,
+                        success: function (data) {
+                            var mySelect = $("#edit_itemContent")[0];
                             mySelect.options.length = 1;
                             $.each(data.data, function (i, d) {
                                 mySelect.options.add(new Option(d.name, d.id));
@@ -431,6 +447,7 @@
                         break;
                     case 2:
                         $.get("admin/itemList", $("#form_product").serialize() + "&page=" + page + "&rows=" + rows, function (data) {
+                            console.log(data)
                             var tableBody = $("#product_body")[0];
                             $(tableBody).empty()
                             $.each(data.data["itemPage"]["rows"], function (i, d) {
@@ -443,8 +460,8 @@
                                     "<td>" + d.brand + "</td>" +
                                     "<td>" + d.alias + "</td>" +
                                     "<td>" +
-                                    "<a href=\"#\" class=\"btn btn-primary btn-xs\" data-toggle=\"modal\" data-target=\"#itemEditDialog\" onclick=\"editItem(" + d.id + ")\">修改</a>" +
-                                    "<a href=\"#\" class=\"btn btn-danger btn-xs\" onclick=\"deleteItem(" + d.id + ")\">删除</a>" +
+                                    "<a href=\"javascript:void(0);\" class=\"btn btn-primary btn-xs\" data-toggle=\"modal\" data-target=\"#itemEditDialog\" onclick=\"editItem(" + d.id + ")\">修改</a>" +
+                                    "<a href=\"javascript:void(0);\" class=\"btn btn-danger btn-xs\" onclick=\"deleteItem(" + d.id + ")\">删除</a>" +
                                     "</td>" +
                                     "</tr>")
                             })
@@ -466,10 +483,7 @@
                 } else {
                     NavigationTag.css("display", "")
                 }
-                var pageCount = page.total / page.size;
-                if (page.total % page.size > 0) {
-                    pageCount++;
-                }
+                var pageCount = Math.ceil(page.total / page.size);
                 //显示“上一页”按钮
                 if (page.page > 1) {
                     NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(" + data["menu_index"] + "," + (page.page - 1) + "," + page.size +
@@ -485,7 +499,7 @@
                 var indexPage = (page.page - 2 > 0) ? page.page - 2 : 1;
                 for (var i = 1; i <= number && indexPage <= pageCount; indexPage++, i++) {
                     if (indexPage == page.page) {
-                        NavigationTag.append("<li class=\"active\"><a href=\"javascript:void(0);\">" + indexPage + "<span class=\"sr-only\">(current)</span></a></li>");
+                        NavigationTag.append("<li class=\"active\"><a href=\"javascript:void(0);\">" + indexPage + "</a></li>");
                         continue;
                     }
                     NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(" + data["menu_index"] + "," + indexPage + "," + page.size + ")\">" + indexPage + "</a></li>");
@@ -504,6 +518,7 @@
                     url: "admin/edit",
                     data: {"itemId": id},
                     success: function (data) {
+                        console.log(data)
                         item = data.data.item;
                         category = data.data.category
                         $("#edit_itemId").val(item.id);
@@ -520,18 +535,44 @@
                 });
             }
 
-            function updateCustomer() {
-                $.post("customer/update.action", $("#edit_customer_form").serialize(), function (data) {
-                    alert("客户信息更新成功！");
-                    window.location.reload();
+            function updateItem() {
+                $.ajax({
+                    type: "put",
+                    url: "admin/update",
+                    data: JSON.stringify($("#edit_item_form").serializeObject()),
+                    dataType:"json",
+                    contentType:"application/json",
+                    success: function (data) {
+                        if (data.meta.success) {
+                            alert("客户信息更新成功！");
+                            $("#itemEditDialog").modal('hide')
+                            refreshTabel(2, $(".pagination li.active a").text());
+                        } else {
+                            return "Error"
+                        }
+                    }
                 });
             }
 
-            function deleteCustomer(id) {
+            function deleteItem(id) {
                 if (confirm('确实要删除该客户吗?')) {
-                    $.post("customer/delete.action", {"id": id}, function (data) {
-                        alert("客户删除更新成功！");
-                        window.location.reload();
+                    $.ajax({
+                        type:"delete",
+                        url: "admin/delete",
+                        data: JSON.stringify({"id": id}),
+                        dataType: "json",
+                        contentType:"application/json;charset=utf-8",
+                        async: false,
+                        success: function (data) {
+                            if (data.meta.success) {
+                                alert("客户信息更新成功！");
+                                $("#itemEditDialog").modal('hide')
+                                refreshTabel(2, $(".pagination li.active a").text());
+                            } else {
+                                alert("delete error！");
+                                return "Error"
+                            }
+                        }
                     });
                 }
             }

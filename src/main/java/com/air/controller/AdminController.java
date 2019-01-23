@@ -161,4 +161,24 @@ public class AdminController {
         data.put("item", item);
         return new ResultData().success(data);
     }
+
+    @RequestMapping(value = "update",method = RequestMethod.PUT,consumes = "application/json")
+    @ResponseBody
+    public ResultData update(@RequestBody Item item){
+        if (itemService.updateItemById(item)){
+            return new ResultData().success();
+        }else{
+            return new ResultData().failure();
+        }
+    }
+
+    @RequestMapping(value = "delete",method = RequestMethod.DELETE,consumes = "application/json")
+    @ResponseBody
+    public ResultData delete(@RequestBody Item item){
+        if (itemService.deleteItemById(item.getId())){
+            return new ResultData().success();
+        }else{
+            return new ResultData().failure();
+        }
+    }
 }

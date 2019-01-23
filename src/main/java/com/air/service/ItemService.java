@@ -11,4 +11,8 @@ public interface ItemService {
     Page<Item> selectItemList(Integer page, Integer rows, String itemName, Integer contentId);
 
     Item selectItemById(Long itemId);
+
+    Boolean updateItemById(Item item);
+
+    boolean deleteItemById(Long id);
 }

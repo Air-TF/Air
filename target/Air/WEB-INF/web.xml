@@ -50,5 +50,4 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:spring-*.xml</param-value>
     </context-param>
-
 </web-app>

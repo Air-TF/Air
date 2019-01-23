@@ -1,9 +1,11 @@
 package com.air.bean;
 
+import java.util.List;
+
 public class Category {
     private Long id;
-
     private String name;
+    private List<Content> contentList;
 
     public Long getId() {
         return id;
@@ -19,5 +21,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public List<Content> getContentList() {
+        return contentList;
+    }
+
+    public void setContentList(List<Content> contentList) {
+        this.contentList = contentList;
     }
 }

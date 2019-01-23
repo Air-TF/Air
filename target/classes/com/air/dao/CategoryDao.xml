@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.air.dao.CategoryDao">
-  <resultMap id="BaseResultMap" type="com.air.bean.Category">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.air.bean.Category">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+
+    <select id="selectCategoryByContentId" resultMap="BaseResultMap">
+        select tb_category.id, tb_category.name from tb_category,tb_content
+        <where>
+            <if test="id != null">
+                tb_content.id=#{id}
+            </if>
+            and tb_content.category_id=tb_category.id
+        </where>
+    </select>
 </mapper>
