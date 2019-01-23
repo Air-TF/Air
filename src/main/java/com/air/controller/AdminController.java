@@ -121,7 +121,7 @@ public class AdminController {
     @ResponseBody
     public ResultData itemList(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer rows,
                                HttpServletRequest request, HttpSession httpSession, Model model) {
-        Map<String,Object> dataList = new HashMap<>();
+        Map<String, Object> dataList = new HashMap<>();
         int menu_index;
         try {
             menu_index = (Integer) httpSession.getAttribute("menu_index");
@@ -138,10 +138,11 @@ public class AdminController {
                 Integer category = Integer.valueOf(request.getParameter("category"));
                 Integer content = Integer.valueOf(request.getParameter("content"));
                 Page<Item> itemPage = itemService.selectItemList(page, rows, itemName, content);
-                dataList.put("productName",itemName);
-                dataList.put("category",category);
-                dataList.put("content",content);
-                dataList.put("itemPage",itemPage);
+                dataList.put("menu_index", menu_index);
+                dataList.put("productName", itemName);
+                dataList.put("category", category);
+                dataList.put("content", content);
+                dataList.put("itemPage", itemPage);
                 break;
             case 3:
                 break;

@@ -284,7 +284,7 @@
                                             <th>ID</th>
                                             <th>名称</th>
                                             <th>卖点</th>
-                                            <%--<th>图片</th>--%>
+                                                <%--<th>图片</th>--%>
                                             <th>价格</th>
                                             <th>品牌</th>
                                             <th>别名</th>
@@ -294,9 +294,6 @@
                                         <tbody id="product_body">
                                         </tbody>
                                     </table>
-                                    <div class="col-md-12 text-right">
-                                        <air:page url="${pageContext.request.contextPath }/admin/itemList"/>
-                                    </div>
                                     <!-- /.panel-body -->
                                 </div>
                                 <!-- /.panel -->
@@ -309,6 +306,13 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <nav>
+                            <ul class="pagination"></ul>
+                        </nav>
+                    </div>
+                </div>
             </div>
             <!-- /#page-wrapper -->
 
@@ -429,75 +433,136 @@
                 });
 
                 $("#side-menu .menu-item").click(function () {
-                    $.get("admin/choose", {"index": $(".menu-item").index(this)}, function (data) {
-                        var mySelect = $("select[name='category']")[0];
-                        mySelect.options.length = 1;
-                        $.each(data.data, function (i, d) {
-                            mySelect.options.add(new Option(d.name, d.id));
-                        });
-                    }, "json")
+                    var mySelect = $("select[name='category']")[0];
+                    if (mySelect.options.length < 2) {
+                        $.get("admin/choose", {"index": $(".menu-item").index(this)}, function (data) {
+                            mySelect.options.length = 1;
+                            $.each(data.data, function (i, d) {
+                                mySelect.options.add(new Option(d.name, d.id));
+                            });
+                        }, "json")
+                    }
                 })
 
                 $('#form_product').submit(function () {
-                    $.get("admin/itemList", $("#form_product").serialize(), function (data) {
-                        var tableBody = $("#product_body")[0];
-                        $(tableBody).empty()
-                        $.each(data.data["itemPage"]["rows"], function (i, d) {
-                            $(tableBody).append("<tr>" +
-                                "<td>" + d.id + "</td>" +
-                                "<td>" + d.name + "</td>" +
-                                "<td>" + d.title + "</td>" +
-                                // "<td>" + d.image + "</td>" +
-                                "<td>" + d.price + "</td>" +
-                                "<td>" + d.brand + "</td>" +
-                                "<td>" + d.alias + "</td>" +
-                                "<td>" +
-                                "<a href=\"#\" class=\"btn btn-primary btn-xs\" data-toggle=\"modal\" data-target=\"#customerEditDialog\" onclick=\"editCustomer(${row.cust_id})\">修改</a>" +
-                                "<a href=\"#\" class=\"btn btn-danger btn-xs\" onclick=\"deleteCustomer(${row.cust_id})\">删除</a>" +
-                                "</td>" +
-                                "</tr>")
-                        })
-                    }, "json")
-                    return false
+                    return refreshTabel(2);
                 })
+            })
 
-                function editCustomer(id) {
-                    $.ajax({
-                        type: "get",
-                        url: "customer/edit.action",
-                        data: {"id": id},
-                        success: function (data) {
-                            $("#edit_cust_id").val(data.cust_id);
-                            $("#edit_customerName").val(data.cust_name);
-                            $("#edit_customerFrom").val(data.cust_source)
-                            $("#edit_custIndustry").val(data.cust_industry)
-                            $("#edit_custLevel").val(data.cust_level)
-                            $("#edit_linkMan").val(data.cust_linkman);
-                            $("#edit_phone").val(data.cust_phone);
-                            $("#edit_mobile").val(data.cust_mobile);
-                            $("#edit_zipcode").val(data.cust_zipcode);
-                            $("#edit_address").val(data.cust_address);
-
-                        }
-                    });
+            function refreshTabel(index, page, rows) {
+                page = page || 1
+                rows = rows || 10
+                switch (index) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        $.get("admin/itemList", $("#form_product").serialize() + "&page=" + page + "&rows=" + rows, function (data) {
+                            var tableBody = $("#product_body")[0];
+                            $(tableBody).empty()
+                            $.each(data.data["itemPage"]["rows"], function (i, d) {
+                                $(tableBody).append("<tr>" +
+                                    "<td>" + d.id + "</td>" +
+                                    "<td>" + d.name + "</td>" +
+                                    "<td>" + d.title + "</td>" +
+                                    // "<td>" + d.image + "</td>" +
+                                    "<td>" + d.price + "</td>" +
+                                    "<td>" + d.brand + "</td>" +
+                                    "<td>" + d.alias + "</td>" +
+                                    "<td>" +
+                                    "<a href=\"#\" class=\"btn btn-primary btn-xs\" data-toggle=\"modal\" data-target=\"#customerEditDialog\" onclick=\"editCustomer(" + d.id + ")\">修改</a>" +
+                                    "<a href=\"#\" class=\"btn btn-danger btn-xs\" onclick=\"deleteCustomer(" + d.id + ")\">删除</a>" +
+                                    "</td>" +
+                                    "</tr>")
+                            })
+                            pageProcess(data.data)
+                        }, "json")
+                        break;
+                    case 3:
+                        break;
                 }
+                return false
+            }
 
-                function updateCustomer() {
-                    $.post("customer/update.action", $("#edit_customer_form").serialize(), function (data) {
-                        alert("客户信息更新成功！");
+            function pageProcess(data) {
+                var NavigationTag = $(".pagination");
+                NavigationTag.empty()
+                var page = data["itemPage"]
+                console.log(data)
+                if (page["rows"].length == 0) {
+                    NavigationTag.css("display", "none")
+                } else {
+                    NavigationTag.css("display", "")
+                }
+                var pageCount = page.total / page.size;
+                if (page.total % page.size > 0) {
+                    pageCount++;
+                }
+                //显示“上一页”按钮
+                if (page.page > 1) {
+                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(" + data["menu_index"] + "," + (page.page - 1) + "," + page.size +
+                        ")\">上一页</a></li>"
+                    );
+                } else {
+                    NavigationTag.append("<li class=\"disabled\"><a href=\"javascript:void(0);\">上一页</a></li>");
+                }
+                //显示当前页码的前2页码和后两页码
+                var number = 5
+                //若1 则 1 2 3 4 5, 若2 则 1 2 3 4 5, 若3 则1 2 3 4 5,
+                //若4 则 2 3 4 5 6 ,若10  则 8 9 10 11 12
+                var indexPage = (page.page - 2 > 0) ? page.page - 2 : 1;
+                for (var i = 1; i <= number && indexPage <= pageCount; indexPage++, i++) {
+                    if (indexPage == page.page) {
+                        NavigationTag.append("<li class=\"active\"><a href=\"javascript:void(0);\">" + indexPage + "<span class=\"sr-only\">(current)</span></a></li>");
+                        continue;
+                    }
+                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(" + data["menu_index"] + "," + indexPage + "," + page.size + ")\">" + indexPage + "</a></li>");
+                }
+                //显示“下一页”按钮
+                if (page.page < pageCount) {
+                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(" + data["menu_index"] + "," + (page.page + 1) + "," + page.size + ")\">下一页</a></li>");
+                } else {
+                    NavigationTag.append("<li class=\"disabled\"><a href=\"javascript:void(0);\">下一页</a></li>");
+                }
+            }
+
+            function editCustomer(id) {
+                console.log(id)
+                $.ajax({
+                    type: "get",
+                    url: "customer/edit.action",
+                    data: {"id": id},
+                    success: function (data) {
+                        $("#edit_cust_id").val(data.id);
+                        $("#edit_customerName").val(data.name);
+                        $("#edit_customerFrom").val(data.cust_source)
+                        $("#edit_custIndustry").val(data.cust_industry)
+                        $("#edit_custLevel").val(data.cust_level)
+                        $("#edit_linkMan").val(data.cust_linkman);
+                        $("#edit_phone").val(data.cust_phone);
+                        $("#edit_mobile").val(data.cust_mobile);
+                        $("#edit_zipcode").val(data.cust_zipcode);
+                        $("#edit_address").val(data.cust_address);
+                    }
+                });
+            }
+
+            function updateCustomer() {
+                $.post("customer/update.action", $("#edit_customer_form").serialize(), function (data) {
+                    alert("客户信息更新成功！");
+                    window.location.reload();
+                });
+            }
+
+            function deleteCustomer(id) {
+                if (confirm('确实要删除该客户吗?')) {
+                    $.post("customer/delete.action", {"id": id}, function (data) {
+                        alert("客户删除更新成功！");
                         window.location.reload();
                     });
                 }
-
-                function deleteCustomer(id) {
-                    if (confirm('确实要删除该客户吗?')) {
-                        $.post("customer/delete.action", {"id": id}, function (data) {
-                            alert("客户删除更新成功！");
-                            window.location.reload();
-                        });
-                    }
-                }
-            })
+            }
         </script>
     </c:otherwise>
 </c:choose>

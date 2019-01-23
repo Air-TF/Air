@@ -13,7 +13,7 @@
         <result column="alias" jdbcType="VARCHAR" property="alias"/>
     </resultMap>
 
-    <select id="selectItems" resultType="com.air.bean.Item">
+    <select id="selectItems" resultMap="BaseResultMap">
         select * from tb_item
         <where>
             <if test="itemName != null">
@@ -25,7 +25,7 @@
         </where>
     </select>
 
-    <select id="selectItemList" resultType="com.air.bean.Item">
+    <select id="selectItemList" resultMap="BaseResultMap">
         select * from tb_item
         <where>
             <if test="itemName != null">
