@@ -11,5 +11,5 @@ public interface CategoryDao {
     @Select("select * from tb_category")
     List<Category> selectCategoryList();
 
-    Category selectCategoryByContentId(@Param("id") Long id);
+    Category selectCategoryBySubcategoryId(@Param("id") Long id);
 }

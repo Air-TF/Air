@@ -4,7 +4,7 @@ import java.util.List;
 
 public class User {
     private UserLogin userlogin;
-    private Userdesc userdesc;
+    private UserDesc userDesc;
     private List<Address> addressList;
 
     public UserLogin getUserlogin() {
@@ -15,12 +15,12 @@ public class User {
         this.userlogin = userlogin;
     }
 
-    public Userdesc getUserdesc() {
-        return userdesc;
+    public UserDesc getUserDesc() {
+        return userDesc;
     }
 
-    public void setUserdesc(Userdesc userdesc) {
-        this.userdesc = userdesc;
+    public void setUserDesc(UserDesc userDesc) {
+        this.userDesc = userDesc;
     }
 
     public List<Address> getAddressList() {

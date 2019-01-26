@@ -51,7 +51,7 @@
         <param-value>classpath:spring-*.xml</param-value>
     </context-param>
 
-    <!--REST 风格 PUT DELETE 响应设置-->
+    <!--RESTful 风格 把POST请求转为 DELETE 和 PUT请求-->
     <filter>
         <filter-name>HiddenHttpMethodFilter</filter-name>
         <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>

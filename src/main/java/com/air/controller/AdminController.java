@@ -4,8 +4,8 @@ import com.air.bean.*;
 import com.air.common.utils.Page;
 import com.air.service.AdminService;
 import com.air.service.CategoryService;
-import com.air.service.ContentService;
 import com.air.service.ItemService;
+import com.air.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +29,7 @@ public class AdminController {
     @Autowired
     CategoryService categoryService;
     @Autowired
-    ContentService contentService;
+    SubcategoryService subcategoryService;
     @Autowired
     ItemService itemService;
 
@@ -89,17 +89,21 @@ public class AdminController {
      */
     @RequestMapping(value = "choose", method = RequestMethod.GET)
     @ResponseBody
-    public ResultData choose(Integer index, HttpServletRequest request, HttpSession httpSession) {
-        if (httpSession.getAttribute("menu_index") == null) {
-            httpSession.setAttribute("menu_index", index);
+    public ResultData choose(HttpServletRequest request, HttpSession httpSession) {
+        if (httpSession.getAttribute("menu") == null) {
+            Menu menu = Menu.getMenuByName(request.getParameter("menuName").trim());
+            if (menu != null) {
+                httpSession.setAttribute("menu", menu);
+            }
         }
+
         List dataList = null;
-        switch ((Integer) httpSession.getAttribute("menu_index")) {
-            case 0:
+        switch ((Menu) httpSession.getAttribute("menu")) {
+            case CATE:
                 break;
-            case 1:
+            case SUBCATE:
                 break;
-            case 2:
+            case ITEM:
                 Integer categoryId = -1;
                 String s = request.getParameter("categoryId");
                 if (s != null && s != "") {
@@ -108,10 +112,10 @@ public class AdminController {
                 if (categoryId < 0) {
                     dataList = categoryService.selectCategoryList();
                 } else {
-                    dataList = contentService.selectContentByCategoryId(categoryId);
+                    dataList = subcategoryService.selectSubcategoryByCategoryId(categoryId);
                 }
                 break;
-            case 3:
+            case PARAM:
                 break;
         }
         return new ResultData().success(dataList);
@@ -120,31 +124,26 @@ public class AdminController {
     @RequestMapping(value = "itemList", method = RequestMethod.GET)
     @ResponseBody
     public ResultData itemList(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer rows,
-                               HttpServletRequest request, HttpSession httpSession, Model model) {
+                               HttpServletRequest request, HttpSession httpSession) {
         Map<String, Object> dataList = new HashMap<>();
-        int menu_index;
-        try {
-            menu_index = (Integer) httpSession.getAttribute("menu_index");
-        } catch (Exception e) {
-            menu_index = 2;
-        }
-        switch (menu_index) {
-            case 0:
+        Menu menu = (Menu) httpSession.getAttribute("menu");
+        switch (menu) {
+            case CATE:
                 break;
-            case 1:
+            case SUBCATE:
                 break;
-            case 2:
-                String itemName = request.getParameter("productName");
+            case ITEM:
+                String itemName = request.getParameter("itemName");
                 Integer category = Integer.valueOf(request.getParameter("category"));
-                Integer content = Integer.valueOf(request.getParameter("content"));
-                Page<Item> itemPage = itemService.selectItemList(page, rows, itemName, content);
-                dataList.put("menu_index", menu_index);
-                dataList.put("productName", itemName);
+                Integer subcategory = Integer.valueOf(request.getParameter("subcategory"));
+                Page<Item> itemPage = itemService.selectItemList(page, rows, itemName, subcategory);
+                dataList.put("menuType", menu.getTypeName());
+                dataList.put("itemName", itemName);
                 dataList.put("category", category);
-                dataList.put("content", content);
+                dataList.put("subcategory", subcategory);
                 dataList.put("itemPage", itemPage);
                 break;
-            case 3:
+            case PARAM:
                 break;
         }
         return new ResultData().success(dataList);
@@ -156,28 +155,28 @@ public class AdminController {
         Long itemId = Long.valueOf(request.getParameter("itemId"));
         Map<String, Object> data = new HashMap<>();
         Item item = itemService.selectItemById(itemId);
-        Category category = categoryService.selectCategoryByContentId(item.getContentId());
+        Category category = categoryService.selectCategoryBySubcategoryId(item.getSubcategoryId());
         data.put("category", category);
         data.put("item", item);
         return new ResultData().success(data);
     }
 
-    @RequestMapping(value = "update",method = RequestMethod.PUT)
+    @RequestMapping(value = "update", method = RequestMethod.PUT)
     @ResponseBody
-    public ResultData update(@RequestBody Item item){
-        if (itemService.updateItemById(item)){
+    public ResultData update(@RequestBody Item item) {
+        if (itemService.updateItemById(item)) {
             return new ResultData().success();
-        }else{
+        } else {
             return new ResultData().failure();
         }
     }
 
-    @RequestMapping(value = "delete",method = RequestMethod.DELETE)
+    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
     @ResponseBody
-    public ResultData delete(Long id){
-        if (itemService.deleteItemById(id)){
+    public ResultData delete(Long id) {
+        if (itemService.deleteItemById(id)) {
             return new ResultData().success();
-        }else{
+        } else {
             return new ResultData().failure();
         }
     }

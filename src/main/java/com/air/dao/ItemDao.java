@@ -10,11 +10,9 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 public interface ItemDao {
-    List<Item> selectItems(@Param("itemName") String itemName, @Param("contentId") Integer contentId);
+    List<Item> selectItemList(@Param("start") Integer start, @Param("rows") Integer rows, @Param("itemName") String itemName, @Param("subcategoryId") Integer subcategoryId);
 
-    List<Item> selectItemList(@Param("start") Integer start, @Param("rows") Integer rows, @Param("itemName") String itemName, @Param("contentId") Integer contentId);
-
-    Integer selectItemListCount(@Param("itemName") String itemName, @Param("contentId") Integer contentId);
+    Integer selectItemListCount(@Param("itemName") String itemName, @Param("subcategoryId") Integer subcategoryId);
 
     Item selectItemById(@Param("id") Long id);
 

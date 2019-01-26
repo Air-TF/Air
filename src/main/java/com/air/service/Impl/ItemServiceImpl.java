@@ -15,18 +15,6 @@ public class ItemServiceImpl implements ItemService {
     ItemDao itemDao;
 
     /**
-     * 查询所有
-     *
-     * @param itemName
-     * @param contentId
-     * @return
-     */
-    @Override
-    public List<Item> selectItems(String itemName, Integer contentId) {
-        return itemDao.selectItems(itemName, contentId);
-    }
-
-    /**
      * 分页查询
      *
      * @param page
@@ -36,10 +24,10 @@ public class ItemServiceImpl implements ItemService {
      * @return
      */
     @Override
-    public Page<Item> selectItemList(Integer page, Integer rows, String itemName, Integer contentId) {
+    public Page<Item> selectItemList(Integer page, Integer rows, String itemName, Integer subcategoryId) {
         Integer start = (page - 1) * rows;
-        List<Item> itemList = itemDao.selectItemList(start, rows, itemName, contentId);
-        Integer itemListCount = itemDao.selectItemListCount(itemName, contentId);
+        List<Item> itemList = itemDao.selectItemList(start, rows, itemName, subcategoryId);
+        Integer itemListCount = itemDao.selectItemListCount(itemName, subcategoryId);
         Page<Item> itemPage = new Page<>();
         itemPage.setPage(page);
         itemPage.setRows(itemList);

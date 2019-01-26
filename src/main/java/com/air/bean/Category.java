@@ -5,7 +5,7 @@ import java.util.List;
 public class Category {
     private Long id;
     private String name;
-    private List<Content> contentList;
+    private List<Subcategory> subcategoryList;
 
     public Long getId() {
         return id;
@@ -23,11 +23,11 @@ public class Category {
         this.name = name == null ? null : name.trim();
     }
 
-    public List<Content> getContentList() {
-        return contentList;
+    public List<Subcategory> getSubcategoryList() {
+        return subcategoryList;
     }
 
-    public void setContentList(List<Content> contentList) {
-        this.contentList = contentList;
+    public void setSubcategoryList(List<Subcategory> subcategoryList) {
+        this.subcategoryList = subcategoryList;
     }
 }

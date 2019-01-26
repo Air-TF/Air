@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.air.dao.ParamdescDao">
-  <resultMap id="BaseResultMap" type="com.air.bean.Paramdesc">
+<mapper namespace="com.air.dao.ParamDescDao">
+  <resultMap id="BaseResultMap" type="com.air.bean.ParamDesc">
     <id column="item_id" jdbcType="BIGINT" property="itemId" />
-    <id column="content_id" jdbcType="BIGINT" property="contentId" />
+    <id column="subcategory_id" jdbcType="BIGINT" property="paramSubcategoryId" />
     <result column="describe" jdbcType="VARCHAR" property="describe" />
   </resultMap>
   <sql id="Base_Column_List">

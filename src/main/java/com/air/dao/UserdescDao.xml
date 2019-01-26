@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.air.dao.UserdescDao">
-  <resultMap id="BaseResultMap" type="com.air.bean.Userdesc">
-    <id column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="sex" jdbcType="INTEGER" property="sex" />
-    <result column="birthday" jdbcType="DATE" property="birthday" />
-  </resultMap>
-</mapper>

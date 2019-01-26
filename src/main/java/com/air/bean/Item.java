@@ -7,7 +7,7 @@ public class Item {
 
     private String name;
 
-    private Long contentId;
+    private Long subcategoryId;
 
     private String title;
 
@@ -37,12 +37,12 @@ public class Item {
         this.name = name == null ? null : name.trim();
     }
 
-    public Long getContentId() {
-        return contentId;
+    public Long getSubcategoryId() {
+        return subcategoryId;
     }
 
-    public void setContentId(Long contentId) {
-        this.contentId = contentId;
+    public void setSubcategoryId(Long subcategoryId) {
+        this.subcategoryId = subcategoryId;
     }
 
     public String getTitle() {

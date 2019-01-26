@@ -2,7 +2,6 @@
          pageEncoding="UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="air" uri="http://air.com/common/" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -25,7 +24,6 @@
 
     <!-- Custom CSS -->
     <link href="css/admin.css" rel="stylesheet">
-
 
     <!-- Custom Fonts -->
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -99,39 +97,30 @@
                 </div>
                 <!-- /.navbar-header -->
 
-                <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown"><a class="dropdown-toggle"
-                                            data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
-                        <i class="fa fa-caret-down"></i>
-                    </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> 用户设置</a></li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> 系统设置</a></li>
-                            <li class="divider"></li>
-                            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
-                                退出登录</a></li>
-                        </ul> <!-- /.dropdown-user --></li>
-                    <!-- /.dropdown -->
-                </ul>
-                <!-- /.navbar-top-links -->
-
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-                            <li class="sidebar-search">
-                                <div class="input-group custom-search-form">
-                                    <input type="text" class="form-control" placeholder="查询内容...">
-                                    <span class="input-group-btn">
-								<button class="btn btn-default" type="button">
-									<i class="fa fa-search" style="padding: 3px 0 3px 0;"></i>
-								</button>
-							</span>
-                                </div> <!-- /input-group -->
+                            <li><a class="menu-item" href="javascript:void(0);" id="menu" aria-expanded="false"><i
+                                    class="fa fa-list-alt fa-fw"></i>目录管理</a>
+                                <ul class="nav nav-second-level">
+                                    <li><a aria-expanded="false"><i class="fa fa-dashboard fa-fw"></i>分区管理</a>
+                                        <ul class="nav nav-third-level">
+                                            <li><a><i class="fa fa-dashboard fa-fw"></i>新增分区</a>
+                                            <li><a><i class="fa fa-dashboard fa-fw"></i>分区管理</a>
+                                        </ul>
+                                    </li>
+                                    <li><a><i class="fa fa-dashboard fa-fw"></i>目录管理</a></li>
+                                </ul>
                             </li>
-                            <li><a class="menu-item" id="menu"><i class="fa fa-edit fa-fw"></i>目录管理</a></li>
                             <li><a class="menu-item" id="attr"><i class="fa fa-dashboard fa-fw"></i>属性管理</a></li>
-                            <li><a class="menu-item" id="product"><i class="fa fa-dashboard fa-fw"></i>产品管理</a></li>
-                            <li><a class="menu-item" id="user"><i class="fa fa-dashboard fa-fw"></i>用户管理</a></li>
+                            <li><a class="menu-item" id="item"><i class="fa fa-dashboard fa-fw"></i>产品管理</a></li>
+                            <li><a class="menu-item" id="user" aria-expanded="false"><i
+                                    class="fa fa-dashboard fa-fw"></i>用户管理</a>
+                                <ul class="nav nav-third-level">
+                                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#userEditDialog"><i
+                                            class="fa fa-dashboard fa-fw"></i>新增用户</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                     <!-- /.sidebar-collapse -->
@@ -148,7 +137,6 @@
                 </div>
                 <!-- /.row -->
                 <div class="detail-menu">
-
                         <%--content list--%>
                     <div data-type="menu">
                         <div class="panel panel-default">
@@ -187,7 +175,7 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">客户信息列表</div>
                                     <!-- /.panel-heading -->
-                                    <table class="table table-bordered table-striped">
+                                    <table class="table table-bordered table-striped table-hover">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
@@ -214,14 +202,14 @@
                     <div data-type="attr">
                         <div>属性</div>
                     </div>
-                        <%--product list--%>
-                    <div data-type="product">
+                        <%--item list--%>
+                    <div data-type="item">
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <form class="form-inline" id="form_product">
+                                <form class="form-inline" id="form_item" data-type="item">
                                     <div class="form-group">
-                                        <label for="productName">名称</label>
-                                        <input type="text" class="form-control" name="productName" id="productName">
+                                        <label for="itemName">名称</label>
+                                        <input type="text" class="form-control" name="itemName" id="itemName">
                                     </div>
                                     <div class="form-group">
                                         <label for="customerFrom">分区</label>
@@ -231,7 +219,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="customerFrom">类别</label>
-                                        <select class="form-control" placeholder="产品类别" name="content">
+                                        <select class="form-control" placeholder="产品类别" name="subcategory">
                                             <option value="">--请选择--</option>
                                         </select>
                                     </div>
@@ -241,10 +229,10 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default table-responsive">
                                     <div class="panel-heading">产品信息列表</div>
                                     <!-- /.panel-heading -->
-                                    <table class="table table-bordered table-striped">
+                                    <table class="table table-bordered table-striped table-hover">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
@@ -257,7 +245,7 @@
                                             <th>操作</th>
                                         </tr>
                                         </thead>
-                                        <tbody id="product_body">
+                                        <tbody id="item_body">
                                         </tbody>
                                     </table>
                                     <!-- /.panel-body -->
@@ -314,9 +302,10 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_itemContent" style="float:left;padding:7px 15px 0 27px;">产品类别</label>
+                                <label for="edit_itemSubcategory"
+                                       style="float:left;padding:7px 15px 0 27px;">产品类别</label>
                                 <div class="col-sm-10">
-                                    <select class="form-control" id="edit_itemContent" name="contentId">
+                                    <select class="form-control" id="edit_itemSubcategory" name="subcategoryId">
                                         <option value="">--请选择--</option>
                                     </select>
                                 </div>
@@ -366,13 +355,144 @@
                 </div>
             </div>
         </div>
+
+        <%-- 用户编辑对话框 --%>
+        <div class="modal fade" id="userEditDialog" tabindex="-1" role="dialog"
+             aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">修改用户信息</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="edit_user_form">
+                            <input type="hidden" id="edit_userId" name="id"/>
+                            <div class="form-group">
+                                <label for="edit_userName" class="col-sm-2 control-label">姓名</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="edit_userName" placeholder="姓名"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userPassword" class="col-sm-2 control-label">密码</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="edit_userPassword" placeholder="密码"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userPhone" class="col-sm-2 control-label">电话</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="edit_userPhone" placeholder="电话"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userEmail" class="col-sm-2 control-label">邮箱</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="edit_userEmail" placeholder="邮箱"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="edit_userStatus" placeholder="状态"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" placeholder="状态"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" placeholder="状态"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" placeholder="状态"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" placeholder="状态"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" placeholder="状态"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" placeholder="状态"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" placeholder="状态"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" placeholder="状态"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" placeholder="状态"
+                                           name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" placeholder="状态"
+                                           name="name">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="button" class="btn btn-primary" onclick="insertUser()">保存新增</button>
+                        <button type="button" class="btn btn-primary" onclick="updateItem()">保存修改</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- /#wrapper -->
         <script type="text/javascript">
-            $.fn.serializeObject = function()
-            {
+            $.fn.serializeObject = function () {
                 var o = {};
                 var a = this.serializeArray();
-                $.each(a, function() {
+                $.each(a, function () {
                     if (o[this.name] !== undefined) {
                         if (!o[this.name].push) {
                             o[this.name] = [o[this.name]];
@@ -393,7 +513,7 @@
                         dataType: "json",
                         async: false,
                         success: function (data) {
-                            var mySelect = $(".detail-menu select[name='content']")[0];
+                            var mySelect = $(".detail-menu select[name='subcategory']")[0];
                             mySelect.options.length = 1;
                             $.each(data.data, function (i, d) {
                                 mySelect.options.add(new Option(d.name, d.id));
@@ -410,7 +530,7 @@
                         dataType: "json",
                         async: false,
                         success: function (data) {
-                            var mySelect = $("#edit_itemContent")[0];
+                            var mySelect = $("#edit_itemSubcategory")[0];
                             mySelect.options.length = 1;
                             $.each(data.data, function (i, d) {
                                 mySelect.options.add(new Option(d.name, d.id));
@@ -421,34 +541,38 @@
 
                 $("#side-menu .menu-item").click(function () {
                     if ($(".detail-menu select[name='category']")[0].options.length < 2) {
-                        $.get("admin/choose", {"index": $(".menu-item").index(this)}, function (data) {
-                            $.each($("select[name='category']"), function (i, mySelect) {
-                                mySelect.options.length = 1;
-                                $.each(data.data, function (i, d) {
-                                    mySelect.options.add(new Option(d.name, d.id));
-                                });
-                            })
+                        $.get("admin/choose", {"menuName": this.id}, function (data) {
+                            if (data.meta.success) {
+                                $.each($("select[name='category']"), function (i, mySelect) {
+                                    mySelect.options.length = 1;
+                                    $.each(data.data, function (i, d) {
+                                        mySelect.options.add(new Option(d.name, d.id));
+                                    });
+                                })
+                            } else {
+                                console.log('error')
+                            }
                         }, "json")
                     }
                 })
 
-                $('#form_product').submit(function () {
-                    return refreshTabel(2);
+                $('.detail-menu .form-inline').submit(function () {
+                    return refreshTabel($(this).attr("data-type"));
                 })
             })
 
-            function refreshTabel(index, page, rows) {
+            function refreshTabel(type, page, rows) {
                 page = page || 1
                 rows = rows || 10
-                switch (index) {
+                switch (type) {
                     case 0:
                         break;
                     case 1:
                         break;
-                    case 2:
-                        $.get("admin/itemList", $("#form_product").serialize() + "&page=" + page + "&rows=" + rows, function (data) {
+                    case 'item':
+                        $.get("admin/itemList", $("#form_item").serialize() + "&page=" + page + "&rows=" + rows, function (data) {
                             console.log(data)
-                            var tableBody = $("#product_body")[0];
+                            var tableBody = $("#item_body")[0];
                             $(tableBody).empty()
                             $.each(data.data["itemPage"]["rows"], function (i, d) {
                                 $(tableBody).append("<tr>" +
@@ -486,7 +610,7 @@
                 var pageCount = Math.ceil(page.total / page.size);
                 //显示“上一页”按钮
                 if (page.page > 1) {
-                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(" + data["menu_index"] + "," + (page.page - 1) + "," + page.size +
+                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + data["menuType"] + "\'," + (page.page - 1) + "," + page.size +
                         ")\">上一页</a></li>"
                     );
                 } else {
@@ -502,11 +626,11 @@
                         NavigationTag.append("<li class=\"active\"><a href=\"javascript:void(0);\">" + indexPage + "</a></li>");
                         continue;
                     }
-                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(" + data["menu_index"] + "," + indexPage + "," + page.size + ")\">" + indexPage + "</a></li>");
+                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + data["menuType"] + "\'," + indexPage + "," + page.size + ")\">" + indexPage + "</a></li>");
                 }
                 //显示“下一页”按钮
                 if (page.page < pageCount) {
-                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(" + data["menu_index"] + "," + (page.page + 1) + "," + page.size + ")\">下一页</a></li>");
+                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + data["menuType"] + "\'," + (page.page + 1) + "," + page.size + ")\">下一页</a></li>");
                 } else {
                     NavigationTag.append("<li class=\"disabled\"><a href=\"javascript:void(0);\">下一页</a></li>");
                 }
@@ -525,7 +649,7 @@
                         $("#edit_itemName").val(item.name);
                         $("#edit_itemCategory").val(category.id)
                         $("#edit_itemCategory").change();
-                        $("#edit_itemContent").val(item.contentId);
+                        $("#edit_itemSubcategory").val(item.subcategoryId);
                         $("#edit_itemTitle").val(item.title);
                         $("#edit_itemImage").val(item.image);
                         $("#edit_itemPrice").val(item.price);
@@ -540,13 +664,32 @@
                     type: "put",
                     url: "admin/update",
                     data: JSON.stringify($("#edit_item_form").serializeObject()),
-                    dataType:"json",
-                    contentType:"application/json",
+                    dataType: "json",
+                    contentType: "application/json",
                     success: function (data) {
                         if (data.meta.success) {
-                            alert("客户信息更新成功！");
+                            alert("修改成功")
                             $("#itemEditDialog").modal('hide')
-                            refreshTabel(2, $(".pagination li.active a").text());
+                            refreshTabel('item', $(".pagination li.active a").text());
+                        } else {
+                            alert("未修改")
+                            return "Error"
+                        }
+                    }
+                });
+            }
+
+            function insertUser() {
+                $.ajax({
+                    type: "post",
+                    url: "admin/insert",
+                    data: $("#edit_item_form").serialize(),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (data) {
+                        if (data.meta.success) {
+                            alert("添加成功！");
+                            $("#itemEditDialog").modal('hide')
                         } else {
                             return "Error"
                         }
@@ -557,16 +700,16 @@
             function deleteItem(id) {
                 if (confirm('确实要删除该客户吗?')) {
                     $.ajax({
-                        type:"POST",
+                        type: "POST",
                         url: "admin/delete",
-                        data: {_method:"DELETE","id": id},
+                        data: {_method: "DELETE", "id": id},
                         dataType: "json",
                         async: false,
                         success: function (data) {
                             if (data.meta.success) {
                                 alert("客户信息更新成功！");
                                 $("#itemEditDialog").modal('hide')
-                                refreshTabel(2, $(".pagination li.active a").text());
+                                refreshTabel('item', $(".pagination li.active a").text());
                             } else {
                                 alert("delete error！");
                                 return "Error"

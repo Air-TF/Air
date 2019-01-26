@@ -931,30 +931,30 @@
       <Comment>顶级分类</Comment>
       <Collation>latin1_swedish_ci</Collation>
     </table>
-    <table id="235" parent="2" name="tb_content">
-      <Comment>二级分类</Comment>
-      <Collation>latin1_swedish_ci</Collation>
-    </table>
-    <table id="236" parent="2" name="tb_item">
+    <table id="235" parent="2" name="tb_item">
       <Comment>产品表</Comment>
     </table>
-    <table id="237" parent="2" name="tb_order">
+    <table id="236" parent="2" name="tb_order">
       <Comment>订单表</Comment>
     </table>
-    <table id="238" parent="2" name="tb_param_category">
-      <Comment>商品详情目录</Comment>
+    <table id="237" parent="2" name="tb_param_category">
+      <Comment>商品详情类别</Comment>
     </table>
-    <table id="239" parent="2" name="tb_param_content">
-      <Comment>商品详情字段</Comment>
-    </table>
-    <table id="240" parent="2" name="tb_param_desc">
+    <table id="238" parent="2" name="tb_param_desc">
       <Comment>参数详情</Comment>
     </table>
-    <table id="241" parent="2" name="tb_store">
+    <table id="239" parent="2" name="tb_param_subcategory">
+      <Comment>商品详情字段</Comment>
+    </table>
+    <table id="240" parent="2" name="tb_store">
       <Comment>店铺表</Comment>
     </table>
-    <table id="242" parent="2" name="tb_store_item">
+    <table id="241" parent="2" name="tb_store_item">
       <Comment>店铺商品表</Comment>
+    </table>
+    <table id="242" parent="2" name="tb_subcategory">
+      <Comment>二级分类</Comment>
+      <Collation>latin1_swedish_ci</Collation>
     </table>
     <table id="243" parent="2" name="tb_user_desc">
       <Comment>用户详细信息</Comment>
@@ -1083,137 +1083,103 @@
       <DataType>varchar(64)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
-      <Collation>utf8_general_ci</Collation>
     </column>
-    <column id="264" parent="235" name="category_id">
+    <column id="264" parent="235" name="subcategory_id">
       <Position>3</Position>
+      <Comment>所属类别，二级类别</Comment>
       <DataType>bigint(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="265" parent="235" name="category_id">
-      <ColNames>category_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="266" parent="235" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="267" parent="235" name="tb_content_ibfk_1">
-      <ColNames>category_id</ColNames>
-      <RefSchemaName>air</RefSchemaName>
-      <RefTableName>tb_category</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="268" parent="236" name="id">
-      <Position>1</Position>
-      <DataType>bigint(32)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="269" parent="236" name="name">
-      <Position>2</Position>
-      <DataType>varchar(64)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="270" parent="236" name="content_id">
-      <Position>3</Position>
-      <Comment>所属类目，二级类目</Comment>
-      <DataType>bigint(32)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="271" parent="236" name="title">
+    <column id="265" parent="235" name="title">
       <Position>4</Position>
       <Comment>卖点</Comment>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="272" parent="236" name="image">
+    <column id="266" parent="235" name="image">
       <Position>5</Position>
       <Comment>商品图片</Comment>
       <DataType>varchar(500)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="273" parent="236" name="price">
+    <column id="267" parent="235" name="price">
       <Position>6</Position>
       <Comment>商品价格，单位为：分</Comment>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="274" parent="236" name="brand">
+    <column id="268" parent="235" name="brand">
       <Position>7</Position>
       <Comment>品牌</Comment>
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="275" parent="236" name="created">
+    <column id="269" parent="235" name="created">
       <Position>8</Position>
       <Comment>上市时间</Comment>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="276" parent="236" name="alias">
+    <column id="270" parent="235" name="alias">
       <Position>9</Position>
       <Comment>别名</Comment>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="277" parent="236" name="content_id">
-      <ColNames>content_id</ColNames>
+    <index id="271" parent="235" name="tb_item_tb_subcategory_id_fk">
+      <ColNames>subcategory_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="278" parent="236" name="PRIMARY">
+    <key id="272" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="279" parent="236" name="tb_item_ibfk_1">
-      <ColNames>content_id</ColNames>
+    <foreign-key id="273" parent="235" name="tb_item_tb_subcategory_id_fk">
+      <ColNames>subcategory_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
-      <RefTableName>tb_content</RefTableName>
+      <RefTableName>tb_subcategory</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="280" parent="237" name="id">
+    <column id="274" parent="236" name="id">
       <Position>1</Position>
       <DataType>bigint(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="281" parent="237" name="seller_id">
+    <column id="275" parent="236" name="seller_id">
       <Position>2</Position>
       <Comment>卖家</Comment>
       <DataType>bigint(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="282" parent="237" name="buyer_id">
+    <column id="276" parent="236" name="buyer_id">
       <Position>3</Position>
       <Comment>买家</Comment>
       <DataType>bigint(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="283" parent="237" name="address_id">
+    <column id="277" parent="236" name="address_id">
       <Position>4</Position>
       <Comment>收货地址</Comment>
       <DataType>bigint(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="284" parent="237" name="status">
+    <column id="278" parent="236" name="status">
       <Position>5</Position>
       <Comment>状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭</Comment>
       <DataType>int(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="237" name="post_fee">
+    <column id="279" parent="236" name="post_fee">
       <Position>6</Position>
       <Comment>邮费</Comment>
       <DataType>int(10)|0s</DataType>
@@ -1221,49 +1187,49 @@
       <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="237" name="create_time">
+    <column id="280" parent="236" name="create_time">
       <Position>7</Position>
       <Comment>订单创建时间</Comment>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="287" parent="237" name="update_time">
+    <column id="281" parent="236" name="update_time">
       <Position>8</Position>
       <Comment>订单更新时间</Comment>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="288" parent="237" name="payment_time">
+    <column id="282" parent="236" name="payment_time">
       <Position>9</Position>
       <Comment>付款时间</Comment>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="289" parent="237" name="consign_time">
+    <column id="283" parent="236" name="consign_time">
       <Position>10</Position>
       <Comment>发货时间</Comment>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="237" name="end_time">
+    <column id="284" parent="236" name="end_time">
       <Position>11</Position>
       <Comment>交易完成时间</Comment>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="237" name="close_time">
+    <column id="285" parent="236" name="close_time">
       <Position>12</Position>
       <Comment>交易关闭时间</Comment>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="237" name="shipping_name">
+    <column id="286" parent="236" name="shipping_name">
       <Position>13</Position>
       <Comment>物流名称</Comment>
       <DataType>varchar(20)|0s</DataType>
@@ -1271,7 +1237,7 @@
       <ColumnKind>normal</ColumnKind>
       <Collation>utf8_bin</Collation>
     </column>
-    <column id="293" parent="237" name="shipping_code">
+    <column id="287" parent="236" name="shipping_code">
       <Position>14</Position>
       <Comment>物流单号</Comment>
       <DataType>varchar(20)|0s</DataType>
@@ -1279,231 +1245,265 @@
       <ColumnKind>normal</ColumnKind>
       <Collation>utf8_bin</Collation>
     </column>
-    <column id="294" parent="237" name="buyer_message">
+    <column id="288" parent="236" name="buyer_message">
       <Position>15</Position>
       <Comment>买家留言</Comment>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
       <Collation>utf8_bin</Collation>
     </column>
-    <column id="295" parent="237" name="buyer_rate">
+    <column id="289" parent="236" name="buyer_rate">
       <Position>16</Position>
       <Comment>买家是否已经评价</Comment>
       <DataType>int(2)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="296" parent="237" name="seller_id">
+    <index id="290" parent="236" name="seller_id">
       <ColNames>seller_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="297" parent="237" name="buyer_id">
+    <index id="291" parent="236" name="buyer_id">
       <ColNames>buyer_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="298" parent="237" name="address_id">
+    <index id="292" parent="236" name="address_id">
       <ColNames>address_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="299" parent="237" name="PRIMARY">
+    <key id="293" parent="236" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="300" parent="237" name="tb_order_ibfk_1">
+    <foreign-key id="294" parent="236" name="tb_order_ibfk_1">
       <ColNames>seller_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
       <RefTableName>tb_user_login</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="301" parent="237" name="tb_order_ibfk_2">
+    <foreign-key id="295" parent="236" name="tb_order_ibfk_2">
       <ColNames>buyer_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
       <RefTableName>tb_user_login</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="302" parent="237" name="tb_order_ibfk_3">
+    <foreign-key id="296" parent="236" name="tb_order_ibfk_3">
       <ColNames>address_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
       <RefTableName>tb_address</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="303" parent="238" name="id">
+    <column id="297" parent="237" name="id">
       <Position>1</Position>
       <DataType>bigint(32)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="304" parent="238" name="name">
+    <column id="298" parent="237" name="name">
       <Position>2</Position>
       <Comment>参数目录</Comment>
       <DataType>varchar(64)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="305" parent="238" name="content_id">
+    <column id="299" parent="237" name="subcategory_id">
       <Position>3</Position>
       <DataType>bigint(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="306" parent="238" name="content_id">
-      <ColNames>content_id</ColNames>
+    <index id="300" parent="237" name="tb_param_category_tb_subcategory_id_fk">
+      <ColNames>subcategory_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="307" parent="238" name="PRIMARY">
+    <key id="301" parent="237" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="308" parent="238" name="tb_param_category_ibfk_1">
-      <ColNames>content_id</ColNames>
+    <foreign-key id="302" parent="237" name="tb_param_category_tb_subcategory_id_fk">
+      <ColNames>subcategory_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
-      <RefTableName>tb_content</RefTableName>
+      <RefTableName>tb_subcategory</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="309" parent="239" name="id">
+    <column id="303" parent="238" name="item_id">
+      <Position>1</Position>
+      <DataType>bigint(32)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="304" parent="238" name="subcategory_id">
+      <Position>2</Position>
+      <DataType>bigint(32)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="305" parent="238" name="describe">
+      <Position>3</Position>
+      <DataType>varchar(500)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="306" parent="238" name="tb_param_desc_tb_param_subcategory_id_fk">
+      <ColNames>subcategory_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="307" parent="238" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>item_id
+subcategory_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="308" parent="238" name="tb_param_desc_ibfk_1">
+      <ColNames>item_id</ColNames>
+      <RefSchemaName>air</RefSchemaName>
+      <RefTableName>tb_item</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="309" parent="238" name="tb_param_desc_tb_param_subcategory_id_fk">
+      <ColNames>subcategory_id</ColNames>
+      <RefSchemaName>air</RefSchemaName>
+      <RefTableName>tb_param_subcategory</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="310" parent="239" name="id">
       <Position>1</Position>
       <DataType>bigint(32)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="310" parent="239" name="name">
+    <column id="311" parent="239" name="name">
       <Position>2</Position>
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="311" parent="239" name="category_id">
+    <column id="312" parent="239" name="category_id">
       <Position>3</Position>
       <DataType>bigint(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="312" parent="239" name="category_id">
+    <index id="313" parent="239" name="category_id">
       <ColNames>category_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="313" parent="239" name="PRIMARY">
+    <key id="314" parent="239" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="314" parent="239" name="tb_param_content_ibfk_1">
+    <foreign-key id="315" parent="239" name="tb_param_subcategory_ibfk_1">
       <ColNames>category_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
       <RefTableName>tb_param_category</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="315" parent="240" name="item_id">
+    <column id="316" parent="240" name="user_id">
       <Position>1</Position>
       <DataType>bigint(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="316" parent="240" name="content_id">
-      <Position>2</Position>
-      <DataType>bigint(32)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="317" parent="240" name="describe">
-      <Position>3</Position>
-      <DataType>varchar(500)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="318" parent="240" name="content_id">
-      <ColNames>content_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="319" parent="240" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>item_id
-content_id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="320" parent="240" name="tb_param_desc_ibfk_1">
-      <ColNames>item_id</ColNames>
-      <RefSchemaName>air</RefSchemaName>
-      <RefTableName>tb_item</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <foreign-key id="321" parent="240" name="tb_param_desc_ibfk_2">
-      <ColNames>content_id</ColNames>
-      <RefSchemaName>air</RefSchemaName>
-      <RefTableName>tb_param_content</RefTableName>
-      <RefColNames>id</RefColNames>
-    </foreign-key>
-    <column id="322" parent="241" name="user_id">
-      <Position>1</Position>
-      <DataType>bigint(32)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="323" parent="241" name="name">
+    <column id="317" parent="240" name="name">
       <Position>2</Position>
       <Comment>店铺名字</Comment>
       <DataType>varchar(64)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="324" parent="241" name="score">
+    <column id="318" parent="240" name="score">
       <Position>3</Position>
       <Comment>评分</Comment>
       <DataType>float(4)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="325" parent="241" name="PRIMARY">
+    <key id="319" parent="240" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="326" parent="241" name="tb_store_ibfk_1">
+    <foreign-key id="320" parent="240" name="tb_store_ibfk_1">
       <ColNames>user_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
       <RefTableName>tb_user_login</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="327" parent="242" name="store_id">
+    <column id="321" parent="241" name="store_id">
       <Position>1</Position>
       <DataType>bigint(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="328" parent="242" name="item_id">
+    <column id="322" parent="241" name="item_id">
       <Position>2</Position>
       <DataType>bigint(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="329" parent="242" name="price">
+    <column id="323" parent="241" name="price">
       <Position>3</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="330" parent="242" name="item_id">
+    <index id="324" parent="241" name="item_id">
       <ColNames>item_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="331" parent="242" name="PRIMARY">
+    <key id="325" parent="241" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>store_id
 item_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="332" parent="242" name="tb_store_item_ibfk_1">
+    <foreign-key id="326" parent="241" name="tb_store_item_ibfk_1">
       <ColNames>store_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
       <RefTableName>tb_store</RefTableName>
       <RefColNames>user_id</RefColNames>
     </foreign-key>
-    <foreign-key id="333" parent="242" name="tb_store_item_ibfk_2">
+    <foreign-key id="327" parent="241" name="tb_store_item_ibfk_2">
       <ColNames>item_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
       <RefTableName>tb_item</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="328" parent="242" name="id">
+      <Position>1</Position>
+      <DataType>bigint(32)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="329" parent="242" name="name">
+      <Position>2</Position>
+      <DataType>varchar(64)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+      <Collation>utf8_general_ci</Collation>
+    </column>
+    <column id="330" parent="242" name="category_id">
+      <Position>3</Position>
+      <DataType>bigint(32)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="331" parent="242" name="category_id">
+      <ColNames>category_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="332" parent="242" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="333" parent="242" name="tb_subcategory_ibfk_1">
+      <ColNames>category_id</ColNames>
+      <RefSchemaName>air</RefSchemaName>
+      <RefTableName>tb_category</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
     <column id="334" parent="243" name="user_id">

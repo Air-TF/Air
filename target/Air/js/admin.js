@@ -26,11 +26,13 @@ $(function () {
             .removeClass('fa-dashboard').addClass('fa-edit')
         $(".page-header").text(this.text)
         var ctx = $(this).attr('id')
-        $(".detail-menu div").removeClass("active")
-        $(".detail-menu div[data-type=\"" + ctx + "\"]").addClass('active')
+        $(".detail-menu > div").removeClass("active")
+        $(".detail-menu > div[data-type=\"" + ctx + "\"]").addClass('active')
+
+        $(".navbar-collapse").collapse("hide")
     })
 
     // $("#side-menu .menu-item")[0].click()
 
-    // $('#side-menu').metisMenu();
+    $('#side-menu').metisMenu();
 });

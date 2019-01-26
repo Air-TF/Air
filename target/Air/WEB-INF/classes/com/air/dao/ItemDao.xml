@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.air.bean.Item">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="content_id" jdbcType="BIGINT" property="contentId"/>
+        <result column="subcategory_id" jdbcType="BIGINT" property="subcategoryId"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="image" jdbcType="VARCHAR" property="image"/>
         <result column="price" jdbcType="BIGINT" property="price"/>
@@ -19,8 +19,8 @@
             <if test="itemName != null">
                 tb_item.name like "%"#{itemName}"%"
             </if>
-            <if test="contentId != null">
-                and content_id = #{contentId}
+            <if test="subcategoryId != null">
+                and subcategory_id = #{subcategoryId}
             </if>
         </where>
     </select>
@@ -31,8 +31,8 @@
             <if test="itemName != null">
                 tb_item.name like "%"#{itemName}"%"
             </if>
-            <if test="contentId != null">
-                and content_id = #{contentId}
+            <if test="subcategoryId != null">
+                and subcategory_id = #{subcategoryId}
             </if>
         </where>
         <if test="start !=null and rows != null">
@@ -46,8 +46,8 @@
             <if test="itemName != null">
                 tb_item.name like "%"#{itemName}"%"
             </if>
-            <if test="contentId != null">
-                and content_id = #{contentId}
+            <if test="subcategoryId != null">
+                and subcategory_id = #{subcategoryId}
             </if>
         </where>
     </select>
@@ -65,8 +65,8 @@
             <if test="name != null">
                 tb_item.name = #{name},
             </if>
-            <if test="contentId != null">
-                tb_item.content_id = #{contentId},
+            <if test="subcategoryId != null">
+                tb_item.subcategory_id = #{subcategoryId},
             </if>
             <if test="title != null">
                 tb_item.title = #{title},
