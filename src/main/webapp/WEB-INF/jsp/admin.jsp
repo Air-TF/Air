@@ -38,6 +38,9 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
+    <!-- Vue JavaScript -->
+    <script src="js/vue.min.js"></script>
+
     <!-- Metis Menu Plugin JavaScript -->
     <script src="js/metisMenu.min.js"></script>
 
@@ -246,6 +249,23 @@
                                         </tr>
                                         </thead>
                                         <tbody id="item_body">
+                                        <template v-for="item in items">
+                                            <tr>
+                                                <td>{{ item.id }}</td>
+                                                <td>{{ item.name }}</td>
+                                                <td>{{ item.title }}</td>
+                                                <td>{{ item.price }}</td>
+                                                <td>{{ item.brand }}</td>
+                                                <td>{{ item.alias }}</td>
+                                                <td>
+                                                    <a href="javascript:void(0);" class="btn btn-primary btn-xs"
+                                                       data-toggle="modal" data-target="#itemEditDialog"
+                                                       @click="editItem(item.id)">修改</a>
+                                                    <a href="javascript:void(0);" class="btn btn-danger btn-xs"
+                                                       @click="deleteItem(item.id)">删除</a>
+                                                </td>
+                                            </tr>
+                                        </template>
                                         </tbody>
                                     </table>
                                     <!-- /.panel-body -->
@@ -572,22 +592,11 @@
                     case 'item':
                         $.get("admin/itemList", $("#form_item").serialize() + "&page=" + page + "&rows=" + rows, function (data) {
                             console.log(data)
-                            var tableBody = $("#item_body")[0];
-                            $(tableBody).empty()
-                            $.each(data.data["itemPage"]["rows"], function (i, d) {
-                                $(tableBody).append("<tr>" +
-                                    "<td>" + d.id + "</td>" +
-                                    "<td>" + d.name + "</td>" +
-                                    "<td>" + d.title + "</td>" +
-                                    // "<td>" + d.image + "</td>" +
-                                    "<td>" + d.price + "</td>" +
-                                    "<td>" + d.brand + "</td>" +
-                                    "<td>" + d.alias + "</td>" +
-                                    "<td>" +
-                                    "<a href=\"javascript:void(0);\" class=\"btn btn-primary btn-xs\" data-toggle=\"modal\" data-target=\"#itemEditDialog\" onclick=\"editItem(" + d.id + ")\">修改</a>" +
-                                    "<a href=\"javascript:void(0);\" class=\"btn btn-danger btn-xs\" onclick=\"deleteItem(" + d.id + ")\">删除</a>" +
-                                    "</td>" +
-                                    "</tr>")
+                            new Vue({
+                                el: "#item_body",
+                                data: {
+                                    items: data.data["itemPage"]["rows"]
+                                }
                             })
                             pageProcess(data.data)
                         }, "json")
