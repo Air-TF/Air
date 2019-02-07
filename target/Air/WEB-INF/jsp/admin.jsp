@@ -103,23 +103,42 @@
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
                         <ul class="nav" id="side-menu">
-                            <li><a class="menu-item" href="javascript:void(0);" id="menu" aria-expanded="false"><i
+                            <li><a href="javascript:void(0);" aria-expanded="false"><i
                                     class="fa fa-list-alt fa-fw"></i>目录管理</a>
                                 <ul class="nav nav-second-level">
-                                    <li><a aria-expanded="false"><i class="fa fa-dashboard fa-fw"></i>分区管理</a>
+                                    <li>
+                                        <a href="javascript:void(0);" aria-expanded="false"><i
+                                                class="fa fa-dashboard fa-fw"></i>分区管理</a>
                                         <ul class="nav nav-third-level">
-                                            <li><a><i class="fa fa-dashboard fa-fw"></i>新增分区</a>
-                                            <li><a><i class="fa fa-dashboard fa-fw"></i>分区管理</a>
+                                            <li>
+                                                <a href="javascript:void(0);"><i class="fa fa-dashboard fa-fw"></i>新增分区</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0);" class="menu-item" id="menu">
+                                                    <i class="fa fa-dashboard fa-fw"></i>修改分区
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
-                                    <li><a><i class="fa fa-dashboard fa-fw"></i>目录管理</a></li>
+                                    <li>
+                                        <a href="javascript:void(0);"><i class="fa fa-dashboard fa-fw"></i>类别管理</a>
+                                    </li>
                                 </ul>
                             </li>
-                            <li><a class="menu-item" id="attr"><i class="fa fa-dashboard fa-fw"></i>属性管理</a></li>
-                            <li><a class="menu-item" id="item"><i class="fa fa-dashboard fa-fw"></i>产品管理</a></li>
-                            <li><a class="menu-item" id="user" aria-expanded="false"><i
-                                    class="fa fa-dashboard fa-fw"></i>用户管理</a>
-                                <ul class="nav nav-third-level">
+                            <li>
+                                <a href="javascript:void(0);" class="menu-item" id="attr" aria-expanded="false">
+                                    <i class="fa fa-dashboard fa-fw"></i>属性管理</a>
+                                <ul class="nav nav-second-level"></ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-item" id="item" aria-expanded="false">
+                                    <i class="fa fa-dashboard fa-fw"></i>产品管理</a>
+                                <ul class="nav nav-second-level"></ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-item" id="user" aria-expanded="false">
+                                    <i class="fa fa-dashboard fa-fw"></i>用户管理</a>
+                                <ul class="nav nav-second-level">
                                     <li><a href="javascript:void(0);" data-toggle="modal" data-target="#userEditDialog"><i
                                             class="fa fa-dashboard fa-fw"></i>新增用户</a></li>
                                 </ul>
@@ -230,8 +249,8 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-12">
+                        <div class="row" id="item_body">
+                            <div class="col-lg-12" v-if="visible">
                                 <div class="panel panel-default table-responsive">
                                     <div class="panel-heading">产品信息列表</div>
                                     <!-- /.panel-heading -->
@@ -248,7 +267,7 @@
                                             <th>操作</th>
                                         </tr>
                                         </thead>
-                                        <tbody id="item_body">
+                                        <tbody>
                                         <template v-for="item in items">
                                             <tr>
                                                 <td>{{ item.id }}</td>
@@ -272,7 +291,9 @@
                                 </div>
                                 <!-- /.panel -->
                             </div>
-                            <!-- /.col-lg-12 -->
+                            <div class="col-lg-12" v-else-if="total== 0">
+                                数据为空
+                            </div>
                         </div>
                     </div>
                     <div data-type="user">
@@ -313,7 +334,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_itemCategory" style="float:left;padding:7px 15px 0 27px;">产品分区</label>
+                                <label for="edit_itemCategory" class="col-sm-2 control-label">产品分区</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" id="edit_itemCategory" placeholder="产品分区"
                                             name="category">
@@ -322,8 +343,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_itemSubcategory"
-                                       style="float:left;padding:7px 15px 0 27px;">产品类别</label>
+                                <label for="edit_itemSubcategory" class="col-sm-2 control-label">产品类别</label>
                                 <div class="col-sm-10">
                                     <select class="form-control" id="edit_itemSubcategory" name="subcategoryId">
                                         <option value="">--请选择--</option>
@@ -524,6 +544,16 @@
                 });
                 return o;
             };
+
+            var item_Body = new Vue({
+                el: "#item_body",
+                data: {
+                    visible: false,
+                    total: -1,
+                    items: []
+                }
+            })
+
             $(function () {
                 $(".detail-menu select[name='category']").change(function () {
                     $.ajax({
@@ -581,13 +611,6 @@
                 })
             })
 
-            // var itemBody = new Vue({
-            //     el: "#item_body",
-            //     data: {
-            //         items: []
-            //     }
-            // })
-
             function refreshTabel(type, page, rows) {
                 page = page || 1
                 rows = rows || 10
@@ -599,13 +622,15 @@
                     case 'item':
                         $.get("admin/itemList", $("#form_item").serialize() + "&page=" + page + "&rows=" + rows, function (data) {
                             console.log(data)
-                            // itemBody.items = data.data["itemPage"]["rows"]
-                            new Vue({
-                                el: "#item_body",
-                                data: {
-                                    items: data.data["itemPage"]["rows"]
-                                }
-                            })
+                            // new Vue({
+                            //     el: "#item_body",
+                            //     data: {
+                            //         items: data.data["itemPage"]["rows"]
+                            //     }
+                            // })
+                            data.data["itemPage"]["rows"].length > 0 ? item_Body.visible = true : item_Body.visible = false
+                            item_Body.total = data.data["itemPage"]["total"]
+                            item_Body.items = data.data["itemPage"]["rows"]
                             pageProcess(data.data)
                         }, "json")
                         break;

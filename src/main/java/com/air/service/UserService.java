@@ -4,5 +4,7 @@ import com.air.bean.UserLogin;
 
 public interface UserService {
 
-    UserLogin login(UserLogin userlogin);
+    Boolean login(UserLogin userlogin);
+
+    Boolean InsertUserLogin(UserLogin userLogin);
 }

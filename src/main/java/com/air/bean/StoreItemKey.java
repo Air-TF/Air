@@ -1,15 +1,15 @@
 package com.air.bean;
 
 public class StoreItemKey {
-    private Long storeId;
+    private String storeId;
 
     private Long itemId;
 
-    public Long getStoreId() {
+    public String getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(Long storeId) {
+    public void setStoreId(String storeId) {
         this.storeId = storeId;
     }
 

@@ -13,13 +13,29 @@ public class UserServiceImpl implements UserService {
     UserLoginDao userLoginDao;
 
     @Override
-    public UserLogin login(UserLogin userlogin) {
-        if (userlogin.getPhone()!=null){
-            return userLoginDao.selectUserLoginByPhone(userlogin.getPhone());
-        }else if (userlogin.getEmail()!=null){
-            return userLoginDao.selectUserLoginByEmail(userlogin.getEmail());
-        }else{
-            return null;
+    public Boolean login(UserLogin userlogin) {
+        UserLogin user;
+        if (userlogin.getPhone() != null) {
+            user = userLoginDao.selectUserLoginByPhone(userlogin.getPhone());
+        } else if (userlogin.getEmail() != null) {
+            user = userLoginDao.selectUserLoginByEmail(userlogin.getEmail());
+        } else {
+            return false;
+        }
+
+        if (userlogin.getPassword().equals(user.getPassword())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean InsertUserLogin(UserLogin userLogin) {
+        if (userLoginDao.InsertUserLogin(userLogin) == 1) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

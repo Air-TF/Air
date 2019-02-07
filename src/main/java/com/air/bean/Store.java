@@ -1,17 +1,17 @@
 package com.air.bean;
 
 public class Store {
-    private Long userId;
+    private String userId;
 
     private String name;
 
     private Float score;
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

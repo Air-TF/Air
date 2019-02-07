@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.air.dao.UserLoginDao">
     <resultMap id="BaseResultMap" type="com.air.bean.UserLogin">
-        <id column="id" jdbcType="BIGINT" property="id"/>
+        <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
@@ -13,7 +13,7 @@
     <sql id="Base_Column_List">
     id, name, password, phone, email, created, status
   </sql>
-    <select id="selectUserLoginByPhoneOrEmail" parameterType="String" resultType="com.air.bean.UserLogin">
+    <select id="selectUserLoginByPhone" parameterType="String" resultType="com.air.bean.UserLogin">
         select
         <include refid="Base_Column_List"/>
         from tb_user_login
@@ -25,4 +25,9 @@
         from tb_user_login
         where email = #{email}
     </select>
+
+    <insert id="InsertUserLogin">
+        insert into tb_user_login(id, name, password, phone, created, status)
+        values(#{id},#{phone},#{password},#{phone},NOW(),1)
+    </insert>
 </mapper>

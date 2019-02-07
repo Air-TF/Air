@@ -5,9 +5,9 @@ import java.util.Date;
 public class Order {
     private Long id;
 
-    private Long sellerId;
+    private String sellerId;
 
-    private Long buyerId;
+    private String buyerId;
 
     private Long addressId;
 
@@ -43,19 +43,19 @@ public class Order {
         this.id = id;
     }
 
-    public Long getSellerId() {
+    public String getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(Long sellerId) {
+    public void setSellerId(String sellerId) {
         this.sellerId = sellerId;
     }
 
-    public Long getBuyerId() {
+    public String getBuyerId() {
         return buyerId;
     }
 
-    public void setBuyerId(Long buyerId) {
+    public void setBuyerId(String buyerId) {
         this.buyerId = buyerId;
     }
 

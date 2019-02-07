@@ -971,7 +971,7 @@
     </column>
     <column id="246" parent="233" name="uer_id">
       <Position>2</Position>
-      <DataType>bigint(32)|0s</DataType>
+      <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1154,14 +1154,14 @@
     <column id="275" parent="236" name="seller_id">
       <Position>2</Position>
       <Comment>卖家</Comment>
-      <DataType>bigint(32)|0s</DataType>
+      <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="276" parent="236" name="buyer_id">
       <Position>3</Position>
       <Comment>买家</Comment>
-      <DataType>bigint(32)|0s</DataType>
+      <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1275,13 +1275,13 @@
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="294" parent="236" name="tb_order_ibfk_1">
+    <foreign-key id="294" parent="236" name="tb_order_ibfk_4">
       <ColNames>seller_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
       <RefTableName>tb_user_login</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="295" parent="236" name="tb_order_ibfk_2">
+    <foreign-key id="295" parent="236" name="tb_order_ibfk_5">
       <ColNames>buyer_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
       <RefTableName>tb_user_login</RefTableName>
@@ -1403,7 +1403,7 @@ subcategory_id</ColNames>
     </foreign-key>
     <column id="316" parent="240" name="user_id">
       <Position>1</Position>
-      <DataType>bigint(32)|0s</DataType>
+      <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1434,7 +1434,7 @@ subcategory_id</ColNames>
     </foreign-key>
     <column id="321" parent="241" name="store_id">
       <Position>1</Position>
-      <DataType>bigint(32)|0s</DataType>
+      <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1460,7 +1460,7 @@ subcategory_id</ColNames>
 item_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="326" parent="241" name="tb_store_item_ibfk_1">
+    <foreign-key id="326" parent="241" name="tb_store_item_ibfk_3">
       <ColNames>store_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
       <RefTableName>tb_store</RefTableName>
@@ -1529,7 +1529,7 @@ item_id</ColNames>
     </key>
     <column id="338" parent="244" name="id">
       <Position>1</Position>
-      <DataType>bigint(32)|0s</DataType>
+      <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1551,6 +1551,7 @@ item_id</ColNames>
       <Position>4</Position>
       <Comment>电话</Comment>
       <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="342" parent="244" name="email">
@@ -1575,10 +1576,19 @@ item_id</ColNames>
       <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="345" parent="244" name="PRIMARY">
+    <index id="345" parent="244" name="tb_user_login_phone_uindex">
+      <ColNames>phone</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="346" parent="244" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
+    </key>
+    <key id="347" parent="244" name="tb_user_login_phone_uindex">
+      <ColNames>phone</ColNames>
+      <UnderlyingIndexName>tb_user_login_phone_uindex</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>
