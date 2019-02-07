@@ -1,6 +1,6 @@
 package com.air.bean;
 
-public class ParamDesc extends ParamDescKey {
+public class ParamDesc extends ParamSubcategory {
     private String describe;
 
     public String getDescribe() {

@@ -687,11 +687,12 @@
                         console.log(data)
                         item = data.data.item;
                         category = data.data.category
+                        subcategory = data.data.subcategory
                         $("#edit_itemId").val(item.id);
                         $("#edit_itemName").val(item.name);
                         $("#edit_itemCategory").val(category.id)
                         $("#edit_itemCategory").change();
-                        $("#edit_itemSubcategory").val(item.subcategoryId);
+                        $("#edit_itemSubcategory").val(subcategory.id);
                         $("#edit_itemTitle").val(item.title);
                         $("#edit_itemImage").val(item.image);
                         $("#edit_itemPrice").val(item.price);

@@ -12,4 +12,6 @@ public interface CategoryDao {
     List<Category> selectCategoryList();
 
     Category selectCategoryBySubcategoryId(@Param("id") Long id);
+
+    Category selectCategoryByItemId(@Param("id")Long id);
 }

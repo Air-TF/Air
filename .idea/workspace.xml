@@ -7,42 +7,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="96811463-79b9-4c6f-acef-5866fedf41f0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/air/common/utils/CommonsUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7519298d-44ca-44f1-a656-819995154323.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7519298d-44ca-44f1-a656-819995154323.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/Address.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/StoreItemKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/StoreItemKey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/UserLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/UserLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/ParamCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/ParamCategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/ParamDesc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/ParamDesc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/ParamDescKey.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/ParamSubcategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/ParamSubcategory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/bean/Subcategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/bean/Subcategory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/air/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/dao/UserLoginDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/dao/UserLoginDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/dao/UserLoginDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/dao/UserLoginDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/service/Impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/service/Impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/dao/SubcategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/dao/SubcategoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/dao/SubcategoryDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/dao/SubcategoryDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/service/Impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/service/Impl/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/service/Impl/ItemServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/service/Impl/ItemServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/service/Impl/SubcategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/service/Impl/SubcategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/air/service/SubcategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/air/service/SubcategoryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Address.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Address.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Store.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Store.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/StoreitemKey.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/StoreitemKey.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/UserLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/UserLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/UserLoginDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/UserLoginDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/UserLoginDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/UserLoginDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/Impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/Impl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Paramcategory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Paramcategory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Paramdesc.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/Paramdesc.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/bean/ParamdescKey.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/controller/AdminController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/CategoryDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/CategoryDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/CategoryDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/CategoryDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/ItemDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/dao/ItemDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/CategoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/Impl/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/classes/com/air/service/Impl/CategoryServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Air/WEB-INF/jsp/admin.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/Air/WEB-INF/jsp/admin.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/bean/Address.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/bean/Address.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/bean/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/bean/Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/bean/Store.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/bean/Store.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/bean/StoreitemKey.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/bean/StoreitemKey.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/bean/UserLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/bean/UserLogin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/dao/UserLoginDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/dao/UserLoginDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/dao/UserLoginDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/dao/UserLoginDao.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/service/Impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/service/Impl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/air/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/air/bean/Item.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/bean/Item.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/air/bean/Paramcategory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/bean/Paramcategory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/air/bean/Paramdesc.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/bean/Paramdesc.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/air/bean/ParamdescKey.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/air/controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/controller/AdminController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/air/dao/CategoryDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/dao/CategoryDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/air/dao/CategoryDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/dao/CategoryDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/air/dao/ItemDao.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/dao/ItemDao.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/air/service/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/service/CategoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/air/service/Impl/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/air/service/Impl/CategoryServiceImpl.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -84,7 +90,7 @@
         <item name="@localhost" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="air: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="tb_user_login: table" type="285a2a93:MysqlImplModel$Table" />
+        <item name="tb_address: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
     <select />
@@ -97,23 +103,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/air/controller/AdminController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="900">
+              <caret line="182" column="5" lean-forward="true" selection-start-line="182" selection-start-column="5" selection-end-line="182" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/ItemService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="137" column="32" selection-start-line="137" selection-start-column="32" selection-end-line="137" selection-end-column="32" />
-              <folding>
-                <element signature="n#c:when#0;n#c:choose#0;n#jsp:root#0;n#!!top" />
-                <element signature="n#div#0;n#template#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#div#3;n#body#0;n#html#0;n#!!top" />
-              </folding>
+            <state relative-caret-position="187">
+              <caret line="14" column="36" lean-forward="true" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -134,10 +137,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>deleteItem</find>
-      <find>serializeObject</find>
-      <find>table</find>
-      <find>only</find>
       <find>.metismenu</find>
       <find>side-menu</find>
       <find>$.each(data.data, function (i, d)</find>
@@ -164,6 +163,10 @@
       <find>submit-item</find>
       <find>form_item</find>
       <find>item_body</find>
+      <find>subca</find>
+      <find>subcategory</find>
+      <find>edit</find>
+      <find>cate</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -172,39 +175,22 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="7519298d-44ca-44f1-a656-819995154323/schema/air/table/tb_param_desc/index/content_id" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Paramcontent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/ParamdescKey.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Paramdesc.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Paramcategory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/ParamCategory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/ParamSubcategory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/ParamDescKey.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Userdesc.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/bean/StoreitemKey.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Storeitem.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/dao/ParamcategoryDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/service/Impl/ContentServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/bean/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/dao/SubcategoryDao.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/dao/ParamcontentDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/dao/ParamDescDao.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/dao/ParamcategoryDao.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/dao/ParamSubcategoryDao.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/dao/StoreItemDao.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/dao/UserDescDao.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Item.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Category.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/service/ItemService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/service/Impl/ItemServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/service/Impl/CategoryServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/service/CategoryService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.xml" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7519298d-44ca-44f1-a656-819995154323/console_3.sql" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Menu.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/css/bootstrap.min.css" />
         <option value="$PROJECT_DIR$/src/main/webapp/js/admin.js" />
         <option value="$PROJECT_DIR$/src/main/webapp/index.html" />
@@ -213,16 +199,33 @@
         <option value="$PROJECT_DIR$/src/main/java/com/air/service/Impl/UserServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/test/java/CommonTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/bean/UserLogin.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Address.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Order.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Store.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/bean/StoreItemKey.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/common/utils/CommonsUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/dao/UserLoginDao.xml" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7519298d-44ca-44f1-a656-819995154323/console.sql" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/product.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Menu.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/ParamSubcategory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/ParamCategory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Subcategory.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/ParamDesc.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Item.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/service/CategoryService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/service/Impl/CategoryServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.xml" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/7519298d-44ca-44f1-a656-819995154323/console.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/service/Impl/ItemServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/service/SubcategoryService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/service/Impl/SubcategoryServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/dao/SubcategoryDao.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/air/controller/AdminController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/dao/SubcategoryDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/air/bean/Address.java" />
       </list>
     </option>
   </component>
@@ -330,7 +333,18 @@
               <item name="Air" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="air" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Air" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Air" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="air" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Air" type="b2602c69:ProjectViewProjectNode" />
@@ -338,7 +352,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Air" type="b2602c69:ProjectViewProjectNode" />
@@ -394,7 +407,7 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549539664983" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549545306789" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="database.data.extractors.current.id" value="SQL Inserts" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../DPRS" />
@@ -668,7 +681,7 @@
       <workItem from="1548651122965" duration="11382000" />
       <workItem from="1549107981196" duration="8535000" />
       <workItem from="1549153158475" duration="460000" />
-      <workItem from="1549153812128" duration="28905000" />
+      <workItem from="1549153812128" duration="35160000" />
     </task>
     <task id="LOCAL-00001" summary="project init">
       <created>1545833454365</created>
@@ -726,7 +739,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548667002146</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="修复翻页数据不刷新问题，部分优化">
+      <created>1549539809662</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1549539809662</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -762,7 +782,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="387939000" />
+    <option name="totallyTimeSpent" value="394194000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -775,9 +795,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4969231" visible="true" weight="0.22844176" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4969231" visible="true" weight="0.22844176" />
       <window_info id="Designer" order="1" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Capture Tool" order="3" />
@@ -798,7 +817,7 @@
       <window_info anchor="bottom" id="Messages" order="10" weight="0.29354838" />
       <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.32903227" />
       <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" weight="0.32903227" />
-      <window_info anchor="bottom" x="22" y="267" width="1322" height="204" id="Version Control" order="13" weight="0.37096775" />
+      <window_info active="true" anchor="bottom" x="22" y="267" width="1322" height="204" id="Version Control" order="13" visible="true" weight="0.37096775" />
       <window_info anchor="bottom" id="Application Servers" order="14" weight="0.32419354" />
       <window_info anchor="bottom" id="Spring" order="15" weight="0.32903227" />
       <window_info anchor="bottom" id="Database Console" order="16" weight="0.32903227" />
@@ -965,155 +984,14 @@
     <MESSAGE value="完成 后台管理-&gt;产品管理-&gt; 修改&amp;删除 功能&#10;完善部分Bean结构[Category,Content]&#10;增加Mybaits 删&amp;改 影响条数返回 功能" />
     <MESSAGE value="解决RESTful风格ajax请求PUT&amp;DELETE方式data为null问题" />
     <MESSAGE value="加入Vue.js 模板，用于显示表格" />
-    <option name="LAST_COMMIT_MESSAGE" value="加入Vue.js 模板，用于显示表格" />
+    <MESSAGE value="修复翻页数据不刷新问题，部分优化" />
+    <option name="LAST_COMMIT_MESSAGE" value="修复翻页数据不刷新问题，部分优化" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/js/bootstrap.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="28953" selection-start-line="5" selection-start-column="28953" selection-end-line="5" selection-end-column="28953" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/js/jquery.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="19489" selection-start-line="3" selection-start-column="19489" selection-end-line="3" selection-end-column="19489" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="31" column="5" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding>
-            <element signature="e#488#489#0" expanded="true" />
-            <element signature="e#526#527#0" expanded="true" />
-            <element signature="e#599#600#0" expanded="true" />
-            <element signature="e#653#654#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/ItemService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="12" column="147" selection-start-line="12" selection-start-column="134" selection-end-line="12" selection-end-column="147" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/Impl/ItemServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/CategoryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="9" column="52" lean-forward="true" selection-start-line="9" selection-start-column="52" selection-end-line="9" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/Impl/CategoryServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="22" column="40" lean-forward="true" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#445#446#0" expanded="true" />
-            <element signature="e#500#501#0" expanded="true" />
-            <element signature="e#572#573#0" expanded="true" />
-            <element signature="e#636#637#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="45" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/ParamcategoryDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="13" column="42" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7519298d-44ca-44f1-a656-819995154323/console_4.sql" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7519298d-44ca-44f1-a656-819995154323/console_3.sql" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7519298d-44ca-44f1-a656-819995154323/console_2.sql" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7519298d-44ca-44f1-a656-819995154323/console_1.sql" />
-    <entry file="das://7519298d-44ca-44f1-a656-819995154323/schema/air/table/tb_item">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true">
-            <filter text="id =1414" />
-            <filter text="id = 1414" />
-            <filter text="id=28" />
-            <filter text="brand like &quot;%联想%&quot; and content_id =31" />
-            <filter text="brand like &quot;%联想%&quot;" />
-            <filter text="brand like &quot;%锤子%&quot;" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="387">
-          <caret line="48" column="45" selection-start-line="48" selection-start-column="45" selection-end-line="48" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/4.2.4.RELEASE/spring-web-4.2.4.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="136" selection-start-line="136" selection-end-line="136" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/Menu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
-          <folding>
-            <element signature="e#177#178#0" expanded="true" />
-            <element signature="e#213#214#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/js/vue.min.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1152,13 +1030,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/Address.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="39" column="31" selection-start-line="39" selection-start-column="31" selection-end-line="39" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/StoreItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1180,24 +1051,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/Order.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="57" column="33" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://D:/ProgramFiles/Java/jdk1.8.0_91/src.zip!/java/lang/NumberFormatException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="64" selection-start-line="64" selection-end-line="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/ProgramFiles/Java/jdk1.8.0_91/src.zip!/java/lang/Long.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="630" column="32" selection-start-line="630" selection-start-column="32" selection-end-line="630" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -1218,16 +1075,6 @@
           <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
         </state>
       </provider>
-    </entry>
-    <entry file="das://7519298d-44ca-44f1-a656-819995154323/schema/air/table/tb_user_login">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7519298d-44ca-44f1-a656-819995154323/console.sql">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1274,6 +1121,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+          <folding>
+            <element signature="e#177#178#0" expanded="true" />
+            <element signature="e#213#214#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/ParamDescDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/ParamDescDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/ParamDescKey.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/ProgramFiles/Java/jdk1.8.0_91/src.zip!/java/lang/Long.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="53" column="19" selection-start-line="53" selection-start-column="19" selection-end-line="53" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/Impl/CategoryServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="7" column="22" lean-forward="true" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#445#446#0" expanded="true" />
+            <element signature="e#500#501#0" expanded="true" />
+            <element signature="e#576#577#0" expanded="true" />
+            <element signature="e#644#645#0" expanded="true" />
+            <element signature="e#713#714#0" expanded="true" />
+            <element signature="e#740#741#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://7519298d-44ca-44f1-a656-819995154323/schema/air/table/tb_user_login">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/7519298d-44ca-44f1-a656-819995154323/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="16" lean-forward="true" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/CategoryDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="25" column="57" lean-forward="true" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/ParamSubcategory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1281,50 +1218,178 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/ParamDescKey.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/SubcategoryService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="691" column="59" selection-start-line="691" selection-start-column="59" selection-end-line="691" selection-end-column="59" />
+          <folding>
+            <element signature="n#c:when#0;n#c:choose#0;n#jsp:root#0;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://7519298d-44ca-44f1-a656-819995154323/schema/air/table/tb_item">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true">
+            <filter text="id =1414" />
+            <filter text="id = 1414" />
+            <filter text="id=28" />
+            <filter text="brand like &quot;%联想%&quot; and content_id =31" />
+            <filter text="brand like &quot;%联想%&quot;" />
+            <filter text="brand like &quot;%锤子%&quot;" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/Impl/SubcategoryServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="22" column="45" selection-start-line="22" selection-start-column="45" selection-end-line="22" selection-end-column="45" />
+          <folding>
+            <element signature="e#656#657#0" expanded="true" />
+            <element signature="e#683#684#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/SubcategoryDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/Subcategory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
-          <caret line="5" column="36" lean-forward="true" selection-start-line="5" selection-start-column="36" selection-end-line="5" selection-end-column="36" />
+          <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/SubcategoryDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="36" lean-forward="true" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="21" column="36" lean-forward="true" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/Impl/ItemServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="56" column="31" selection-start-line="56" selection-start-column="31" selection-end-line="56" selection-end-column="31" />
+          <folding>
+            <element signature="e#1337#1338#0" expanded="true" />
+            <element signature="e#1408#1409#0" expanded="true" />
+            <element signature="e#1468#1469#0" expanded="true" />
+            <element signature="e#1537#1538#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/dao/ItemDao.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="73" column="13" lean-forward="true" selection-start-line="73" selection-start-column="13" selection-end-line="73" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/Order.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="557">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/Category.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+          <folding>
+            <element signature="e#488#489#0" expanded="true" />
+            <element signature="e#526#527#0" expanded="true" />
+            <element signature="e#599#600#0" expanded="true" />
+            <element signature="e#653#654#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="38" lean-forward="true" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/ParamCategory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/ParamDesc.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="28" lean-forward="true" selection-start-line="3" selection-start-column="28" selection-end-line="3" selection-end-column="28" />
+        <state relative-caret-position="34">
+          <caret line="2" column="43" lean-forward="true" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/Address.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/air/bean/Item.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <caret line="22" column="42" lean-forward="true" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
           <folding>
-            <element signature="e#616#617#0" expanded="true" />
-            <element signature="e#652#653#0" expanded="true" />
-            <element signature="e#708#709#0" expanded="true" />
-            <element signature="e#758#759#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/CategoryService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/air/controller/AdminController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="900">
+          <caret line="182" column="5" lean-forward="true" selection-start-line="182" selection-start-column="5" selection-end-line="182" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/admin.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/air/service/ItemService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="137" column="32" selection-start-line="137" selection-start-column="32" selection-end-line="137" selection-end-column="32" />
-          <folding>
-            <element signature="n#c:when#0;n#c:choose#0;n#jsp:root#0;n#!!top" />
-            <element signature="n#div#0;n#template#0;n#div#1;n#div#2;n#div#1;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#div#3;n#body#0;n#html#0;n#!!top" />
-          </folding>
+        <state relative-caret-position="187">
+          <caret line="14" column="36" lean-forward="true" selection-start-line="14" selection-start-column="36" selection-end-line="14" selection-end-column="36" />
         </state>
       </provider>
     </entry>

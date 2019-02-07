@@ -1,7 +1,7 @@
 package com.air.bean;
 
 public enum Menu {
-    CATE("category"), SUBCATE("category"), ITEM("item"), PARAM("param");
+    CATE("category"), SUBCATE("subcategory"), ITEM("item"), PARAM("param");
     private String typeName;
 
     public String getTypeName() {

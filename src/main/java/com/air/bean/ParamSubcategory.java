@@ -5,8 +5,6 @@ public class ParamSubcategory {
 
     private String name;
 
-    private Long paramCategoryId;
-
     public Long getId() {
         return id;
     }
@@ -21,13 +19,5 @@ public class ParamSubcategory {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
-    }
-
-    public Long getParamCategoryId() {
-        return paramCategoryId;
-    }
-
-    public void setParamCategoryId(Long paramCategoryId) {
-        this.paramCategoryId = paramCategoryId;
     }
 }

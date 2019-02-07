@@ -8,4 +8,6 @@ public interface CategoryService {
     List<Category> selectCategoryList();
 
     Category selectCategoryBySubcategoryId(Long id);
+
+    Category selectCategoryByItemId(Long id);
 }

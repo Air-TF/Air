@@ -22,4 +22,9 @@ public class CategoryServiceImpl implements CategoryService {
     public Category selectCategoryBySubcategoryId(Long id) {
         return categoryDao.selectCategoryBySubcategoryId(id);
     }
+
+    @Override
+    public Category selectCategoryByItemId(Long id) {
+        return categoryDao.selectCategoryByItemId(id);
+    }
 }

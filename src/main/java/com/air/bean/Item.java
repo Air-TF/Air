@@ -1,13 +1,12 @@
 package com.air.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class Item {
     private Long id;
 
     private String name;
-
-    private Long subcategoryId;
 
     private String title;
 
@@ -20,6 +19,8 @@ public class Item {
     private Date created;
 
     private String alias;
+
+    private List<ParamDesc> paramDescList;
 
     public Long getId() {
         return id;
@@ -35,14 +36,6 @@ public class Item {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
-    }
-
-    public Long getSubcategoryId() {
-        return subcategoryId;
-    }
-
-    public void setSubcategoryId(Long subcategoryId) {
-        this.subcategoryId = subcategoryId;
     }
 
     public String getTitle() {
@@ -91,5 +84,13 @@ public class Item {
 
     public void setAlias(String alias) {
         this.alias = alias == null ? null : alias.trim();
+    }
+
+    public List<ParamDesc> getParamDescList() {
+        return paramDescList;
+    }
+
+    public void setParamDescList(List<ParamDesc> paramDescList) {
+        this.paramDescList = paramDescList;
     }
 }

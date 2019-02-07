@@ -14,7 +14,12 @@ public class SubcategoryServiceImpl implements SubcategoryService {
     SubcategoryDao subcategoryDao;
 
     @Override
-    public List<Subcategory> selectSubcategoryByCategoryId(Integer categoryId) {
-        return subcategoryDao.selectSubcategoryByCategoryId(categoryId);
+    public List<Subcategory> selectSubcategoryListByCategoryId(Integer categoryId) {
+        return subcategoryDao.selectSubcategoryListByCategoryId(categoryId);
+    }
+
+    @Override
+    public Subcategory selectSubcategoryByItemId(Long id) {
+        return subcategoryDao.selectSubcategoryByItemId(id);
     }
 }

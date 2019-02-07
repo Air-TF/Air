@@ -5,8 +5,6 @@ import java.util.Date;
 public class Address {
     private Long id;
 
-    private String uerId;
-
     private String name;
 
     private String phone;
@@ -31,14 +29,6 @@ public class Address {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUerId() {
-        return uerId;
-    }
-
-    public void setUerId(String uerId) {
-        this.uerId = uerId;
     }
 
     public String getName() {

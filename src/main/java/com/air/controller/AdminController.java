@@ -111,7 +111,7 @@ public class AdminController {
                 if (categoryId < 0) {
                     dataList = categoryService.selectCategoryList();
                 } else {
-                    dataList = subcategoryService.selectSubcategoryByCategoryId(categoryId);
+                    dataList = subcategoryService.selectSubcategoryListByCategoryId(categoryId);
                 }
                 break;
             case PARAM:
@@ -154,8 +154,10 @@ public class AdminController {
         Long itemId = Long.valueOf(request.getParameter("itemId"));
         Map<String, Object> data = new HashMap<>();
         Item item = itemService.selectItemById(itemId);
-        Category category = categoryService.selectCategoryBySubcategoryId(item.getSubcategoryId());
+        Category category = categoryService.selectCategoryByItemId(item.getId());
+        Subcategory subcategory = subcategoryService.selectSubcategoryByItemId(item.getId());
         data.put("category", category);
+        data.put("subcategory",subcategory);
         data.put("item", item);
         return new ResultData().success(data);
     }

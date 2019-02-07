@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.air.dao.SubcategoryDao">
-  <resultMap id="BaseResultMap" type="com.air.bean.Subcategory">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, name, category_id
-  </sql>
+    <resultMap id="BaseResultMap" type="com.air.bean.Subcategory">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+
+    <select id="selectSubcategoryByItemId" resultMap="BaseResultMap">
+        select tb_subcategory.id, tb_subcategory.name
+        from tb_subcategory, tb_item
+        <where>
+            <if test="id != null">
+                tb_item.id = #{id}
+            </if>
+            and tb_subcategory.id = tb_item.subcategory_id
+        </where>
+    </select>
 </mapper>

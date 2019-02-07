@@ -20,7 +20,7 @@ public class ItemServiceImpl implements ItemService {
      * @param page
      * @param rows
      * @param itemName
-     * @param contentId
+     * @param subcategoryId
      * @return
      */
     @Override

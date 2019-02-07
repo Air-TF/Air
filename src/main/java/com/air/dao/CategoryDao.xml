@@ -15,4 +15,15 @@
             and tb_subcategory.category_id=tb_category.id
         </where>
     </select>
+
+    <select id="selectCategoryByItemId" resultMap="BaseResultMap">
+        select tb_category.id,tb_category.name from  tb_category,tb_subcategory,tb_item
+        <where>
+            <if test="id != null">
+                tb_item.id = #{id}
+            </if>
+            and tb_subcategory.id = tb_item.subcategory_id
+            and tb_subcategory.category_id=tb_category.id
+        </where>
+    </select>
 </mapper>
