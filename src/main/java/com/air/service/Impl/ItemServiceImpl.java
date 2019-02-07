@@ -56,4 +56,9 @@ public class ItemServiceImpl implements ItemService {
     public boolean deleteItemById(Long id) {
         return itemDao.deleteItemById(id) == 1 ? true : false;
     }
+
+    @Override
+    public Item selectDetailedItemById(Long id) {
+        return itemDao.selectDetailedItemById(id);
+    }
 }

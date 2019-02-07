@@ -20,7 +20,7 @@ public class Item {
 
     private String alias;
 
-    private List<ParamDesc> paramDescList;
+    private List<ParamCategory> paramCategoryList;
 
     public Long getId() {
         return id;
@@ -86,11 +86,11 @@ public class Item {
         this.alias = alias == null ? null : alias.trim();
     }
 
-    public List<ParamDesc> getParamDescList() {
-        return paramDescList;
+    public List<ParamCategory> getParamCategoryList() {
+        return paramCategoryList;
     }
 
-    public void setParamDescList(List<ParamDesc> paramDescList) {
-        this.paramDescList = paramDescList;
+    public void setParamCategoryList(List<ParamCategory> paramCategoryList) {
+        this.paramCategoryList = paramCategoryList;
     }
 }

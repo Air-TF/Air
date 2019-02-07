@@ -13,4 +13,6 @@ public interface ItemService {
     Boolean updateItemById(Item item);
 
     boolean deleteItemById(Long id);
+
+    Item selectDetailedItemById(Long id);
 }

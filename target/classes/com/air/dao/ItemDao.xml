@@ -12,6 +12,26 @@
         <result column="alias" jdbcType="VARCHAR" property="alias"/>
     </resultMap>
 
+    <resultMap id="DetailedItemResultMap" type="com.air.bean.Item">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+        <result column="price" jdbcType="BIGINT" property="price"/>
+        <result column="brand" jdbcType="VARCHAR" property="brand"/>
+        <result column="created" jdbcType="DATE" property="created"/>
+        <result column="alias" jdbcType="VARCHAR" property="alias"/>
+        <collection property="paramCategoryList" javaType="java.util.List" ofType="com.air.bean.ParamCategory">
+            <id column="c_id" jdbcType="BIGINT" property="id"/>
+            <result column="c_name" jdbcType="VARCHAR" property="name"/>
+            <collection property="paramDescList" javaType="java.util.List" ofType="com.air.bean.ParamDesc">
+                <id column="s_id" jdbcType="BIGINT" property="id"/>
+                <result column="s_name" jdbcType="VARCHAR" property="name"/>
+                <result column="describe" jdbcType="VARCHAR" property="describe"/>
+            </collection>
+        </collection>
+    </resultMap>
+
     <select id="selectItemList" resultMap="BaseResultMap">
         select * from tb_item
         <where>
@@ -72,4 +92,18 @@
             id = #{id}
         </where>
     </update>
+
+    <select id="selectDetailedItemById" resultMap="DetailedItemResultMap">
+        select i.id, i.name, i.title, i.image, i.price, i.brand, i.created,
+               i.alias,c.id c_id, c.name c_name, s.id s_id, s.name s_name,d.`describe`
+        from tb_item i
+          left outer join tb_param_desc d on d.item_id = i.id
+          left outer join tb_param_subcategory s on s.id = d.subcategory_id
+          left outer join tb_param_category c on c.id = s.category_id
+        <where>
+            <if test="id != null">
+                i.id = #{id}
+            </if>
+        </where>
+    </select>
 </mapper>

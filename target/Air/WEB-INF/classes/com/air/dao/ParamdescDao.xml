@@ -6,7 +6,4 @@
     <id column="subcategory_id" jdbcType="BIGINT" property="paramSubcategoryId" />
     <result column="describe" jdbcType="VARCHAR" property="describe" />
   </resultMap>
-  <sql id="Base_Column_List">
-    item_id, content_id, describe
-  </sql>
 </mapper>

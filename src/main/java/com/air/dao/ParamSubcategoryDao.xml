@@ -6,7 +6,4 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="category_id" jdbcType="BIGINT" property="categoryId" />
   </resultMap>
-  <sql id="Base_Column_List">
-    id, name, category_id
-  </sql>
 </mapper>

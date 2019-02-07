@@ -969,7 +969,7 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="233" name="uer_id">
+    <column id="246" parent="233" name="user_id">
       <Position>2</Position>
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1039,7 +1039,7 @@
       <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
     </column>
     <index id="256" parent="233" name="uer_id">
-      <ColNames>uer_id</ColNames>
+      <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="257" parent="233" name="PRIMARY">
@@ -1048,7 +1048,7 @@
       <Primary>1</Primary>
     </key>
     <foreign-key id="258" parent="233" name="tb_address_ibfk_1">
-      <ColNames>uer_id</ColNames>
+      <ColNames>user_id</ColNames>
       <RefSchemaName>air</RefSchemaName>
       <RefTableName>tb_user_login</RefTableName>
       <RefColNames>id</RefColNames>
@@ -1508,7 +1508,7 @@ item_id</ColNames>
     </foreign-key>
     <column id="334" parent="243" name="user_id">
       <Position>1</Position>
-      <DataType>bigint(32)|0s</DataType>
+      <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1527,40 +1527,46 @@ item_id</ColNames>
       <ColNames>user_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="338" parent="244" name="id">
+    <foreign-key id="338" parent="243" name="tb_user_desc_ibfk_1">
+      <ColNames>user_id</ColNames>
+      <RefSchemaName>air</RefSchemaName>
+      <RefTableName>tb_user_login</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="339" parent="244" name="id">
       <Position>1</Position>
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="339" parent="244" name="name">
+    <column id="340" parent="244" name="name">
       <Position>2</Position>
       <Comment>用户名</Comment>
       <DataType>varchar(64)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="340" parent="244" name="password">
+    <column id="341" parent="244" name="password">
       <Position>3</Position>
       <Comment>密码</Comment>
       <DataType>varchar(32)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="341" parent="244" name="phone">
+    <column id="342" parent="244" name="phone">
       <Position>4</Position>
       <Comment>电话</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="342" parent="244" name="email">
+    <column id="343" parent="244" name="email">
       <Position>5</Position>
       <Comment>邮箱</Comment>
       <DataType>varchar(64)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="343" parent="244" name="created">
+    <column id="344" parent="244" name="created">
       <Position>6</Position>
       <Comment>激活时间</Comment>
       <DataType>datetime|0s</DataType>
@@ -1568,7 +1574,7 @@ item_id</ColNames>
       <ColumnKind>normal</ColumnKind>
       <OnUpdate>CURRENT_TIMESTAMP</OnUpdate>
     </column>
-    <column id="344" parent="244" name="status">
+    <column id="345" parent="244" name="status">
       <Position>7</Position>
       <Comment>状态：0：未激活；1：正常；2：冻结；9：注销</Comment>
       <DataType>int(10)|0s</DataType>
@@ -1576,17 +1582,17 @@ item_id</ColNames>
       <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="345" parent="244" name="tb_user_login_phone_uindex">
+    <index id="346" parent="244" name="tb_user_login_phone_uindex">
       <ColNames>phone</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="346" parent="244" name="PRIMARY">
+    <key id="347" parent="244" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="347" parent="244" name="tb_user_login_phone_uindex">
+    <key id="348" parent="244" name="tb_user_login_phone_uindex">
       <ColNames>phone</ColNames>
       <UnderlyingIndexName>tb_user_login_phone_uindex</UnderlyingIndexName>
     </key>

@@ -157,7 +157,7 @@ public class AdminController {
         Category category = categoryService.selectCategoryByItemId(item.getId());
         Subcategory subcategory = subcategoryService.selectSubcategoryByItemId(item.getId());
         data.put("category", category);
-        data.put("subcategory",subcategory);
+        data.put("subcategory", subcategory);
         data.put("item", item);
         return new ResultData().success(data);
     }
@@ -181,4 +181,11 @@ public class AdminController {
             return new ResultData().failure();
         }
     }
+
+    @RequestMapping(value = "getItem", method = RequestMethod.GET)
+    @ResponseBody
+    public ResultData getItem(Long id) {
+        return new ResultData().success(itemService.selectDetailedItemById(id));
+    }
+
 }

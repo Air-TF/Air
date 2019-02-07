@@ -7,7 +7,7 @@ public class ParamCategory {
 
     private String name;
 
-    private List<ParamSubcategory> paramSubcategoryList;
+    private List<ParamDesc> paramDescList;
 
     public Long getId() {
         return id;
@@ -25,11 +25,11 @@ public class ParamCategory {
         this.name = name == null ? null : name.trim();
     }
 
-    public List<ParamSubcategory> getParamSubcategoryList() {
-        return paramSubcategoryList;
+    public List<ParamDesc> getParamDescList() {
+        return paramDescList;
     }
 
-    public void setParamSubcategoryList(List<ParamSubcategory> paramSubcategoryList) {
-        this.paramSubcategoryList = paramSubcategoryList;
+    public void setParamDescList(List<ParamDesc> paramDescList) {
+        this.paramDescList = paramDescList;
     }
 }

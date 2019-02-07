@@ -20,4 +20,6 @@ public interface ItemDao {
 
     @Delete("delete from tb_item where id = #{id}")
     Integer deleteItemById(Long id);
+
+    Item selectDetailedItemById(@Param("id") Long id);
 }
