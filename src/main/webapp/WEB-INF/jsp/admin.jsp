@@ -59,10 +59,10 @@
             <form class="form-login" method="post">
                 <h2 class="form-login-heading">Please sign in</h2>
                 <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="text" id="inputEmail" name="phone" class="form-control" placeholder="Phone number"
+                <input type="text" id="inputEmail" name="phone" class="form-control" placeholder="Phone number" value="123"
                        required autofocus>
                 <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password"
+                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" value="123"
                        required>
                 <div class="checkbox">
                     <label>
@@ -245,7 +245,7 @@
                                             <option value="">--请选择--</option>
                                         </select>
                                     </div>
-                                    <input type="submit" class="btn btn-primary" id="submit-item" value="查询"/>
+                                    <input type="submit" class="btn btn-primary submit"  value="查询"/>
                                 </form>
                             </div>
                         </div>

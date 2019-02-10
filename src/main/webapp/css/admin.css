@@ -55,7 +55,7 @@ body {
 }
 
 #page-wrapper {
-    padding: 0 15px;
+    padding: 50px 15px;
     min-height: 568px;
     background-color: #fff;
 }
@@ -64,7 +64,7 @@ body {
     #page-wrapper {
         position: inherit;
         margin: 0 0 0 250px;
-        padding: 0 30px;
+        padding: 50px 30px;
         border-left: 1px solid #e7e7e7;
     }
 }
@@ -75,6 +75,11 @@ body {
 
 #page-wrapper .detail-menu > div.active{
     display: block;
+}
+
+.navbar{
+    position: absolute;
+    width: inherit;
 }
 
 .navbar-top-links {

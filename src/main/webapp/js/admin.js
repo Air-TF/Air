@@ -5,8 +5,10 @@ $(function () {
         width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
         if (width < 768) {
             $('div.navbar-collapse').addClass('collapse');
+            $('input.submit').addClass('btn-block')
             topOffset = 100; // 2-row-menu
         } else {
+            $('input.submit').removeClass('btn-block')
             $('div.navbar-collapse').removeClass('collapse');
         }
 
