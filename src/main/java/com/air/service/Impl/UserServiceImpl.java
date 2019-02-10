@@ -23,19 +23,16 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        if (userlogin.getPassword().equals(user.getPassword())) {
-            return true;
-        } else {
-            return false;
-        }
+        return userlogin.getPassword().equals(user.getPassword()) ? true : false;
     }
 
     @Override
-    public Boolean InsertUserLogin(UserLogin userLogin) {
-        if (userLoginDao.InsertUserLogin(userLogin) == 1) {
-            return true;
-        } else {
-            return false;
-        }
+    public Boolean insertUserLogin(UserLogin userLogin) {
+        return userLoginDao.insertUserLogin(userLogin) == 1 ? true : false;
+    }
+
+    @Override
+    public Boolean updateUser(UserLogin userLogin) {
+        return userLoginDao.updateUser(userLogin) == 1 ? true : false;
     }
 }

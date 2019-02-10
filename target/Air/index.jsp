@@ -1,6 +1,5 @@
 <html>
 <body>
-<h2>Hello World!</h2>
-
+<a href="/admin">后台管理</a>
 </body>
 </html>

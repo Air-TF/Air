@@ -10,24 +10,51 @@
         <result column="created" jdbcType="TIMESTAMP" property="created"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
     </resultMap>
-    <sql id="Base_Column_List">
-    id, name, password, phone, email, created, status
-  </sql>
     <select id="selectUserLoginByPhone" parameterType="String" resultType="com.air.bean.UserLogin">
-        select
-        <include refid="Base_Column_List"/>
+        select *
         from tb_user_login
         where phone = #{Phone}
     </select>
     <select id="selectUserLoginByEmail" parameterType="String" resultType="com.air.bean.UserLogin">
-        select
-        <include refid="Base_Column_List"/>
+        select *
         from tb_user_login
         where email = #{email}
     </select>
 
     <insert id="InsertUserLogin">
         insert into tb_user_login(id, name, password, phone, created, status)
-        values(#{id},#{phone},#{password},#{phone},NOW(),1)
+        values (#{id}, #{phone}, #{password}, #{phone}, NOW(), 1)
     </insert>
+
+    <update id="updateUser" parameterType="com.air.bean.UserLogin">
+        update tb_user_login
+        <set>
+            <if test="name != null">
+                tb_user_login.name = #{name}
+            </if>
+        </set>
+        <set>
+            <if test="password != null">
+                tb_user_login.password = #{password}
+            </if>
+        </set>
+        <set>
+            <if test="phone != null">
+                tb_user_login.phone = #{phone}
+            </if>
+        </set>
+        <set>
+            <if test="email != null">
+                tb_user_login.email = #{email}
+            </if>
+        </set>
+        <set>
+            <if test="status != null">
+                tb_user_login.status = #{status}
+            </if>
+        </set>
+        <where>
+            tb_user_login.id = #{id}
+        </where>
+    </update>
 </mapper>

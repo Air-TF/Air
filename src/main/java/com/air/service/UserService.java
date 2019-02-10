@@ -6,5 +6,7 @@ public interface UserService {
 
     Boolean login(UserLogin userlogin);
 
-    Boolean InsertUserLogin(UserLogin userLogin);
+    Boolean insertUserLogin(UserLogin userLogin);
+
+    Boolean updateUser(UserLogin userLogin);
 }

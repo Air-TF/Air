@@ -120,6 +120,15 @@ public class AdminController {
         return new ResultData().success(dataList);
     }
 
+    /**
+     * 分页数据列表
+     *
+     * @param page
+     * @param rows
+     * @param request
+     * @param httpSession
+     * @return
+     */
     @RequestMapping(value = "itemList", method = RequestMethod.GET)
     @ResponseBody
     public ResultData itemList(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer rows,
@@ -148,12 +157,18 @@ public class AdminController {
         return new ResultData().success(dataList);
     }
 
+    /**
+     * 编辑对象回显
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "edit", method = RequestMethod.GET)
     @ResponseBody
     public ResultData edit(HttpServletRequest request) {
         Long itemId = Long.valueOf(request.getParameter("itemId"));
         Map<String, Object> data = new HashMap<>();
-        Item item = itemService.selectItemById(itemId);
+        Item item = itemService.selectDetailedItemById(itemId);
         Category category = categoryService.selectCategoryByItemId(item.getId());
         Subcategory subcategory = subcategoryService.selectSubcategoryByItemId(item.getId());
         data.put("category", category);
@@ -162,6 +177,12 @@ public class AdminController {
         return new ResultData().success(data);
     }
 
+    /**
+     * 更新数据
+     *
+     * @param item
+     * @return
+     */
     @RequestMapping(value = "update", method = RequestMethod.PUT)
     @ResponseBody
     public ResultData update(@RequestBody Item item) {
@@ -172,6 +193,12 @@ public class AdminController {
         }
     }
 
+    /**
+     * 删除对象
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "delete", method = RequestMethod.DELETE)
     @ResponseBody
     public ResultData delete(Long id) {

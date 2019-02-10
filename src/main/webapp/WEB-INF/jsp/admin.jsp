@@ -327,15 +327,15 @@
                         <form class="form-horizontal" id="edit_item_form">
                             <input type="hidden" id="edit_itemId" name="id"/>
                             <div class="form-group">
-                                <label for="edit_itemName" class="col-sm-2 control-label">产品名称</label>
-                                <div class="col-sm-10">
+                                <label for="edit_itemName" class="col-sm-3 control-label">产品名称</label>
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control" id="edit_itemName" placeholder="产品名称"
                                            name="name">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_itemCategory" class="col-sm-2 control-label">产品分区</label>
-                                <div class="col-sm-10">
+                                <label for="edit_itemCategory" class="col-sm-3 control-label">产品分区</label>
+                                <div class="col-sm-9">
                                     <select class="form-control" id="edit_itemCategory" placeholder="产品分区"
                                             name="category">
                                         <option value="">--请选择--</option>
@@ -343,49 +343,70 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_itemSubcategory" class="col-sm-2 control-label">产品类别</label>
-                                <div class="col-sm-10">
+                                <label for="edit_itemSubcategory" class="col-sm-3 control-label">产品类别</label>
+                                <div class="col-sm-9">
                                     <select class="form-control" id="edit_itemSubcategory" name="subcategoryId">
                                         <option value="">--请选择--</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_itemTitle" class="col-sm-2 control-label">卖点</label>
-                                <div class="col-sm-10">
+                                <label for="edit_itemTitle" class="col-sm-3 control-label">卖点</label>
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control" id="edit_itemTitle" placeholder="卖点"
                                            name="title">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_itemImage" class="col-sm-2 control-label">图片</label>
-                                <div class="col-sm-10">
+                                <label for="edit_itemImage" class="col-sm-3 control-label">图片</label>
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control" id="edit_itemImage" placeholder="图片"
                                            name="image">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_itemPrice" class="col-sm-2 control-label">价格</label>
-                                <div class="col-sm-10">
+                                <label for="edit_itemPrice" class="col-sm-3 control-label">价格</label>
+                                <div class="col-sm-9">
                                     <input type="number" class="form-control" id="edit_itemPrice" placeholder="价格"
                                            name="price">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_itemBrand" class="col-sm-2 control-label">品牌</label>
-                                <div class="col-sm-10">
+                                <label for="edit_itemBrand" class="col-sm-3 control-label">品牌</label>
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control" id="edit_itemBrand" placeholder="品牌"
                                            name="brand">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="edit_itemAlias" class="col-sm-2 control-label">别名</label>
-                                <div class="col-sm-10">
+                                <label for="edit_itemAlias" class="col-sm-3 control-label">别名</label>
+                                <div class="col-sm-9">
                                     <input type="text" class="form-control" id="edit_itemAlias" placeholder="别名"
                                            name="alias">
                                 </div>
                             </div>
-
+                            <template v-for="(Category,i) in CategoryList">
+                                <input type="hidden" :name="'paramCategoryList['+i+'].id'" :value="Category.id"/>
+                                <div class="form-group">
+                                    <label class="col-sm-12 label-info text-center"
+                                           :name="'paramCategoryList['+i+'].name'">{{ Category.name }}</label>
+                                </div>
+                                <template v-for="(detail,j) in Category.paramDescList">
+                                    <input type="hidden"
+                                           :name="'paramCategoryList[' + i + '].paramDescList[' + j + '].id'"
+                                           :value="detail.id"/>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label"
+                                               :name="'paramCategoryList[' + i + '].paramDescList[' + j + '].name'">{{
+                                            detail.name }}</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" class="form-control" :placeholder="detail.name"
+                                                   v-model="detail.describe"
+                                                   :name="'paramCategoryList[' + i + '].paramDescList[' + j + '].describe'">
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -445,77 +466,6 @@
                                            name="name">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" placeholder="状态"
-                                           name="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" placeholder="状态"
-                                           name="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" placeholder="状态"
-                                           name="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" placeholder="状态"
-                                           name="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" placeholder="状态"
-                                           name="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" placeholder="状态"
-                                           name="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" placeholder="状态"
-                                           name="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" placeholder="状态"
-                                           name="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" placeholder="状态"
-                                           name="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
-                                <div class="col-sm-10">
-                                    <input type="number" class="form-control" placeholder="状态"
-                                           name="name">
-                                </div>
-                            </div>
-
                         </form>
                     </div>
                     <div class="modal-footer">
@@ -533,15 +483,36 @@
                 var o = {};
                 var a = this.serializeArray();
                 $.each(a, function () {
-                    if (o[this.name] !== undefined) {
-                        if (!o[this.name].push) {
-                            o[this.name] = [o[this.name]];
-                        }
-                        o[this.name].push(this.value || '');
-                    } else {
-                        o[this.name] = this.value || '';
+                    var name = this.name.split(/\[\d+\]\./)
+                    var num = this.name.match(/\d+/g)
+                    switch (name.length) {
+                        case 3:
+                            if (o[name[0]] == undefined) add(o, name[0], [{}])
+                            if (o[name[0]][num[0]] == undefined && num[0] > 0) add(o, name[0], {})
+                            if (o[name[0]][num[0]][name[1]] == undefined) add(o[name[0]][num[0]], name[1], [{}])
+                            if (o[name[0]][num[0]][name[1]][num[1]] == undefined && num[1] > 0) add(o[name[0]][num[0]], name[1], {})
+                            add(o[name[0]][num[0]][name[1]][num[1]], name[2], this.value);
+                            break;
+                        case 2:
+                            if (o[name[0]] == undefined) add(o, name[0], [{}])
+                            if ((o[name[0]][num[0]] == undefined && num[0] > 0)) add(o, name[0], {})
+                            add(o[name[0]][num[0]], name[1], this.value)
+                            break;
+                        case 1:
+                            add(o, name[0], this.value)
                     }
                 });
+
+                function add(obj, name, value) {
+                    if (obj[name] !== undefined) {
+                        if (!obj[name].push) {
+                            obj[name] = [obj[name]];
+                        }
+                        obj[name].push(value || '');
+                    } else {
+                        obj[name] = value || '';
+                    }
+                }
                 return o;
             };
 
@@ -554,6 +525,12 @@
                 }
             })
 
+            var itemEditDialog = new Vue({
+                el: "#itemEditDialog",
+                data: {
+                    CategoryList: [],
+                }
+            })
             $(function () {
                 $(".detail-menu select[name='category']").change(function () {
                     $.ajax({
@@ -622,12 +599,6 @@
                     case 'item':
                         $.get("admin/itemList", $("#form_item").serialize() + "&page=" + page + "&rows=" + rows, function (data) {
                             console.log(data)
-                            // new Vue({
-                            //     el: "#item_body",
-                            //     data: {
-                            //         items: data.data["itemPage"]["rows"]
-                            //     }
-                            // })
                             data.data["itemPage"]["rows"].length > 0 ? item_Body.visible = true : item_Body.visible = false
                             item_Body.total = data.data["itemPage"]["total"]
                             item_Body.items = data.data["itemPage"]["rows"]
@@ -698,6 +669,7 @@
                         $("#edit_itemPrice").val(item.price);
                         $("#edit_itemBrand").val(item.brand);
                         $("#edit_itemAlias").val(item.alias);
+                        itemEditDialog.CategoryList = item.paramCategoryList;
                     }
                 });
             }

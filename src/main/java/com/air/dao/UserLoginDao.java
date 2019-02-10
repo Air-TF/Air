@@ -7,5 +7,7 @@ public interface UserLoginDao {
 
     UserLogin selectUserLoginByEmail(String email);
 
-    Integer InsertUserLogin(UserLogin userLogin);
+    Integer insertUserLogin(UserLogin userLogin);
+
+    Integer updateUser(UserLogin userLogin);
 }

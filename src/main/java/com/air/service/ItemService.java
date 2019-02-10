@@ -10,9 +10,11 @@ public interface ItemService {
 
     Item selectItemById(Long itemId);
 
+    Item selectDetailedItemById(Long id);
+
     Boolean updateItemById(Item item);
 
     boolean deleteItemById(Long id);
 
-    Item selectDetailedItemById(Long id);
+
 }

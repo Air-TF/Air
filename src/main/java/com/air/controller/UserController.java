@@ -18,8 +18,6 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    private static final Logger log = Logger.getLogger(UserController.class);
-
     /**
      * 登录验证
      *
@@ -58,13 +56,25 @@ public class UserController {
         userLogin.setPhone(phone);
         userLogin.setPassword(password);
         try {
-            if (userService.InsertUserLogin(userLogin)) {
+            if (userService.insertUserLogin(userLogin)) {
                 return new ResultData().success();
-            }else{
+            } else {
                 return new ResultData().failure("注册失败");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResultData().failure("用户已存在");
         }
+    }
+
+    /**
+     * 更新用户信息
+     *
+     * @param userLogin
+     * @return
+     */
+    @RequestMapping(value = "update", method = RequestMethod.PUT)
+    public ResultData update(UserLogin userLogin) {
+        userService.updateUser(userLogin);
+        return new ResultData().success();
     }
 }
