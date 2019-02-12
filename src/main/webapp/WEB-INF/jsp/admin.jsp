@@ -59,11 +59,11 @@
             <form class="form-login" method="post">
                 <h2 class="form-login-heading">Please sign in</h2>
                 <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="text" id="inputEmail" name="phone" class="form-control" placeholder="Phone number" value="123"
-                       required autofocus>
+                <input type="text" id="inputEmail" name="phone" class="form-control" placeholder="Phone number"
+                       value="123" required autofocus>
                 <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" value="123"
-                       required>
+                <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password"
+                       value="123" required>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" name="remember" value="remember-me"> Remember me
@@ -86,7 +86,6 @@
     </c:when>
     <c:otherwise>
         <div id="wrapper">
-            <!-- Navigation -->
             <nav class="navbar navbar-default navbar-static-top" role="navigation"
                  style="margin-bottom: 0">
                 <div class="navbar-header">
@@ -98,7 +97,6 @@
                     </button>
                     <a class="navbar-brand" href="/admin">后台管理系统 v1.0</a>
                 </div>
-                <!-- /.navbar-header -->
 
                 <div class="navbar-default sidebar" role="navigation">
                     <div class="sidebar-nav navbar-collapse">
@@ -133,21 +131,22 @@
                             <li>
                                 <a href="javascript:void(0);" class="menu-item" id="item" aria-expanded="false">
                                     <i class="fa fa-dashboard fa-fw"></i>产品管理</a>
-                                <ul class="nav nav-second-level"></ul>
+                                <ul class="nav nav-second-level">
+                                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#itemEditDialog">
+                                        <i class="fa fa-dashboard fa-fw"></i>新增产品</a></li>
+                                </ul>
                             </li>
                             <li>
                                 <a href="javascript:void(0);" class="menu-item" id="user" aria-expanded="false">
                                     <i class="fa fa-dashboard fa-fw"></i>用户管理</a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#userEditDialog"><i
-                                            class="fa fa-dashboard fa-fw"></i>新增用户</a></li>
+                                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#userEditDialog">
+                                        <i class="fa fa-dashboard fa-fw"></i>新增用户</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </div>
-                    <!-- /.sidebar-collapse -->
                 </div>
-                <!-- /.navbar-static-side -->
             </nav>
 
             <div id="page-wrapper">
@@ -155,20 +154,13 @@
                     <div class="col-lg-12">
                         <h1 class="page-header"></h1>
                     </div>
-                    <!-- /.col-lg-12 -->
                 </div>
-                <!-- /.row -->
                 <div class="detail-menu">
                         <%--content list--%>
                     <div data-type="menu">
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <form class="form-inline">
-                                    <div class="form-group">
-                                        <label for="userName">客户名称</label>
-                                        <input type="text" class="form-control" id="userName" value="${userName}"
-                                               name="userName">
-                                    </div>
                                     <div class="form-group">
                                         <label for="customerFrom">客户来源</label>
                                         <select class="form-control" id="customerFrom" placeholder="客户来源"
@@ -245,22 +237,20 @@
                                             <option value="">--请选择--</option>
                                         </select>
                                     </div>
-                                    <input type="submit" class="btn btn-primary submit"  value="查询"/>
+                                    <input type="submit" class="btn btn-primary submit" value="查询"/>
                                 </form>
                             </div>
                         </div>
-                        <div class="row" id="item_body">
-                            <div class="col-lg-12" v-if="visible">
+                        <div class="row">
+                            <div class="col-lg-12" v-show="visible && menu_type === 'item'">
                                 <div class="panel panel-default table-responsive">
                                     <div class="panel-heading">产品信息列表</div>
-                                    <!-- /.panel-heading -->
                                     <table class="table table-bordered table-striped table-hover">
                                         <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>名称</th>
                                             <th>卖点</th>
-                                                <%--<th>图片</th>--%>
                                             <th>价格</th>
                                             <th>品牌</th>
                                             <th>别名</th>
@@ -287,21 +277,74 @@
                                         </template>
                                         </tbody>
                                     </table>
-                                    <!-- /.panel-body -->
                                 </div>
-                                <!-- /.panel -->
                             </div>
-                            <div class="col-lg-12" v-else-if="total== 0">
+                            <div class="col-lg-12" v-show="total== 0">
                                 数据为空
                             </div>
                         </div>
                     </div>
+                        <%-- user list --%>
                     <div data-type="user">
-                        <div>用户</div>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <form class="form-inline" id="form_user" data-type="user">
+                                    <div class="form-group">
+                                        <label for="userName">用户名</label>
+                                        <input type="text" class="form-control" name="userName" id="userName">
+                                    </div>
+                                    <input type="submit" class="btn btn-primary submit" value="查询"/>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12" v-show="visible && menu_type === 'user'">
+                                <div class="panel panel-default table-responsive">
+                                    <div class="panel-heading">用户信息列表</div>
+                                    <table class="table table-bordered table-striped table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>昵称</th>
+                                            <th>密码</th>
+                                            <th>电话</th>
+                                            <th>邮箱</th>
+                                            <th>创建时间</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <template v-for="item in items">
+                                            <tr>
+                                                <td>{{ item.id }}</td>
+                                                <td>{{ item.name }}</td>
+                                                <td>{{ item.password }}</td>
+                                                <td>{{ item.phone }}</td>
+                                                <td>{{ item.email }}</td>
+                                                <td>{{ item.created }}</td>
+                                                <td>{{ item.status }}</td>
+                                                <td>
+                                                    <a href="javascript:void(0);" class="btn btn-primary btn-xs"
+                                                       data-toggle="modal" data-target="#userEditDialog"
+                                                       @click="editItem(item.id)">修改</a>
+                                                    <a href="javascript:void(0);" class="btn btn-danger btn-xs"
+                                                       @click="deleteItem(item.id)">删除</a>
+                                                </td>
+                                            </tr>
+                                        </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-12" v-show="total== 0">
+                                数据为空
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" v-show="total > 0">
                     <div class="col-md-12 text-right">
                         <nav>
                             <ul class="pagination"></ul>
@@ -309,7 +352,6 @@
                     </div>
                 </div>
             </div>
-            <!-- /#page-wrapper -->
 
         </div>
         <!-- 产品编辑对话框 -->
@@ -321,7 +363,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title">修改产品信息</h4>
+                        <h4 class="modal-title">产品信息</h4>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal" id="edit_item_form">
@@ -426,7 +468,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title">修改用户信息</h4>
+                        <h4 class="modal-title">用户信息</h4>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal" id="edit_user_form">
@@ -442,42 +484,40 @@
                                 <label for="edit_userPassword" class="col-sm-2 control-label">密码</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="edit_userPassword" placeholder="密码"
-                                           name="name">
+                                           name="password">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="edit_userPhone" class="col-sm-2 control-label">电话</label>
                                 <div class="col-sm-10">
                                     <input type="number" class="form-control" id="edit_userPhone" placeholder="电话"
-                                           name="name">
+                                           name="phone">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="edit_userEmail" class="col-sm-2 control-label">邮箱</label>
                                 <div class="col-sm-10">
                                     <input type="email" class="form-control" id="edit_userEmail" placeholder="邮箱"
-                                           name="name">
+                                           name="email">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="edit_userStatus" class="col-sm-2 control-label">状态</label>
                                 <div class="col-sm-10">
                                     <input type="number" class="form-control" id="edit_userStatus" placeholder="状态"
-                                           name="name">
+                                           name="status">
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" onclick="insertUser()">保存新增</button>
-                        <button type="button" class="btn btn-primary" onclick="updateItem()">保存修改</button>
+                        <button type="button" class="btn btn-primary" onclick="insertUser()">保存</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- /#wrapper -->
         <script type="text/javascript">
             $.fn.serializeObject = function () {
                 var o = {};
@@ -513,13 +553,15 @@
                         obj[name] = value || '';
                     }
                 }
+
                 return o;
             };
 
             var item_Body = new Vue({
-                el: "#item_body",
+                el: "#page-wrapper",
                 data: {
                     visible: false,
+                    menu_type: "",
                     total: -1,
                     items: []
                 }
@@ -528,9 +570,16 @@
             var itemEditDialog = new Vue({
                 el: "#itemEditDialog",
                 data: {
-                    CategoryList: [],
+                    CategoryList: []
                 }
             })
+            var userEditDialog = new Vue({
+                el: "userEditDialog",
+                data: {
+                    isNew: true
+                }
+            })
+
             $(function () {
                 $(".detail-menu select[name='category']").change(function () {
                     $.ajax({
@@ -567,50 +616,80 @@
                 });
 
                 $("#side-menu .menu-item").click(function () {
-                    if ($(".detail-menu select[name='category']")[0].options.length < 2) {
-                        $.get("admin/choose", {"menuName": this.id}, function (data) {
-                            if (data.meta.success) {
-                                $.each($("select[name='category']"), function (i, mySelect) {
-                                    mySelect.options.length = 1;
-                                    $.each(data.data, function (i, d) {
-                                        mySelect.options.add(new Option(d.name, d.id));
-                                    });
-                                })
-                            } else {
-                                console.log('error')
+                    var menuName = this.id
+                    item_Body.total = -1;
+                    // item_Body.menu_type = menuName;
+                    $.get("admin/choose", {"menuName": menuName}, function (data) {
+                        if (data.meta.success) {
+                            switch (menuName) {
+                                case 'item':
+                                    if ($(".detail-menu select[name='category']")[0].options.length < 2) {
+                                        $.each($("select[name='category']"), function (i, mySelect) {
+                                            mySelect.options.length = 1;
+                                            $.each(data.data, function (i, d) {
+                                                mySelect.options.add(new Option(d.name, d.id));
+                                            });
+                                        })
+                                    }
+                                    break;
                             }
-                        }, "json")
-                    }
+                        } else {
+                            console.log('error')
+                        }
+
+                    }, "json")
+
                 })
 
                 $('.detail-menu .form-inline').submit(function () {
                     return refreshTabel($(this).attr("data-type"));
                 })
+
+                // 模态框初始化
+                $('#itemEditDialog').on('hide.bs.modal', function () {
+                    $("#edit_itemId").val("");
+                    $("#edit_itemName").val("");
+                    $("#edit_itemCategory").val("");
+                    $("#edit_itemSubcategory")[0].options.length = 1;
+                    $("#edit_itemSubcategory").val("")
+                    $("#edit_itemTitle").val("");
+                    $("#edit_itemImage").val("");
+                    $("#edit_itemPrice").val("");
+                    $("#edit_itemBrand").val("");
+                    $("#edit_itemAlias").val("");
+                    itemEditDialog.CategoryList = [];
+                })
             })
 
+            //刷新表格
             function refreshTabel(type, page, rows) {
                 page = page || 1
                 rows = rows || 10
+                var requsetParam = "&page=" + page + "&rows=" + rows;
                 switch (type) {
                     case 0:
                         break;
                     case 1:
                         break;
                     case 'item':
-                        $.get("admin/itemList", $("#form_item").serialize() + "&page=" + page + "&rows=" + rows, function (data) {
-                            console.log(data)
-                            data.data["itemPage"]["rows"].length > 0 ? item_Body.visible = true : item_Body.visible = false
-                            item_Body.total = data.data["itemPage"]["total"]
-                            item_Body.items = data.data["itemPage"]["rows"]
-                            pageProcess(data.data)
-                        }, "json")
+                        requsetParam = $("#form_item").serialize() + requsetParam;
                         break;
-                    case 3:
+                    case 'user':
+                        requsetParam = $("#form_user").serialize() + requsetParam
                         break;
                 }
+                $.get("admin/itemList", requsetParam, function (data) {
+                    console.log(data)
+                    data.data["itemPage"]["rows"].length > 0 ? item_Body.visible = true : item_Body.visible = false
+                    item_Body.total = data.data["itemPage"]["total"]
+                    item_Body.items = data.data["itemPage"]["rows"]
+                    item_Body.menu_type = data.data["menuType"]
+                    pageProcess(data.data)
+                }, "json")
                 return false
             }
 
+            //分页器
             function pageProcess(data) {
                 var NavigationTag = $(".pagination");
                 NavigationTag.empty()
@@ -623,7 +702,7 @@
                 var pageCount = Math.ceil(page.total / page.size);
                 //显示“上一页”按钮
                 if (page.page > 1) {
-                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + data["menuType"] + "\'," + (page.page - 1) + "," + page.size +
+                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + item_Body.menu_type + "\'," + (page.page - 1) + "," + page.size +
                         ")\">上一页</a></li>"
                     );
                 } else {
@@ -639,73 +718,29 @@
                         NavigationTag.append("<li class=\"active\"><a href=\"javascript:void(0);\">" + indexPage + "</a></li>");
                         continue;
                     }
-                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + data["menuType"] + "\'," + indexPage + "," + page.size + ")\">" + indexPage + "</a></li>");
+                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + item_Body.menu_type + "\'," + indexPage + "," + page.size + ")\">" + indexPage + "</a></li>");
                 }
                 //显示“下一页”按钮
                 if (page.page < pageCount) {
-                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + data["menuType"] + "\'," + (page.page + 1) + "," + page.size + ")\">下一页</a></li>");
+                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + item_Body.menu_type + "\'," + (page.page + 1) + "," + page.size + ")\">下一页</a></li>");
                 } else {
                     NavigationTag.append("<li class=\"disabled\"><a href=\"javascript:void(0);\">下一页</a></li>");
                 }
-            }
-
-            function editItem(id) {
-                $.ajax({
-                    type: "get",
-                    url: "admin/edit",
-                    data: {"itemId": id},
-                    success: function (data) {
-                        console.log(data)
-                        item = data.data.item;
-                        category = data.data.category
-                        subcategory = data.data.subcategory
-                        $("#edit_itemId").val(item.id);
-                        $("#edit_itemName").val(item.name);
-                        $("#edit_itemCategory").val(category.id)
-                        $("#edit_itemCategory").change();
-                        $("#edit_itemSubcategory").val(subcategory.id);
-                        $("#edit_itemTitle").val(item.title);
-                        $("#edit_itemImage").val(item.image);
-                        $("#edit_itemPrice").val(item.price);
-                        $("#edit_itemBrand").val(item.brand);
-                        $("#edit_itemAlias").val(item.alias);
-                        itemEditDialog.CategoryList = item.paramCategoryList;
-                    }
-                });
-            }
-
-            function updateItem() {
-                $.ajax({
-                    type: "put",
-                    url: "admin/update",
-                    data: JSON.stringify($("#edit_item_form").serializeObject()),
-                    dataType: "json",
-                    contentType: "application/json",
-                    success: function (data) {
-                        if (data.meta.success) {
-                            alert("修改成功")
-                            $("#itemEditDialog").modal('hide')
-                            refreshTabel('item', $(".pagination li.active a").text());
-                        } else {
-                            alert("未修改")
-                            return "Error"
-                        }
-                    }
-                });
             }
 
             function insertUser() {
                 $.ajax({
                     type: "post",
                     url: "admin/insert",
-                    data: $("#edit_item_form").serialize(),
+                    data: JSON.stringify($("#edit_user_form").serializeObject()),
                     dataType: "json",
                     contentType: "application/json",
                     success: function (data) {
                         if (data.meta.success) {
                             alert("添加成功！");
-                            $("#itemEditDialog").modal('hide')
+                            $("#userEditDialog").modal('hide')
                         } else {
+                            alert("添加异常！")
                             return "Error"
                         }
                     }
@@ -733,6 +768,52 @@
                     });
                 }
             }
+
+            function updateItem() {
+                $.ajax({
+                    type: "put",
+                    url: "admin/update",
+                    data: JSON.stringify($("#edit_item_form").serializeObject()),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (data) {
+                        if (data.meta.success) {
+                            alert("修改成功")
+                            $("#itemEditDialog").modal('hide')
+                            refreshTabel('item', $(".pagination li.active a").text());
+                        } else {
+                            alert("未修改")
+                            return "Error"
+                        }
+                    }
+                });
+            }
+
+            function editItem(id) {
+                $.ajax({
+                    type: "get",
+                    url: "admin/edit",
+                    data: {"itemId": id},
+                    success: function (data) {
+                        console.log(data)
+                        item = data.data.item;
+                        category = data.data.category
+                        subcategory = data.data.subcategory
+                        $("#edit_itemId").val(item.id);
+                        $("#edit_itemName").val(item.name);
+                        $("#edit_itemCategory").val(category.id)
+                        $("#edit_itemCategory").change();
+                        $("#edit_itemSubcategory").val(subcategory.id);
+                        $("#edit_itemTitle").val(item.title);
+                        $("#edit_itemImage").val(item.image);
+                        $("#edit_itemPrice").val(item.price);
+                        $("#edit_itemBrand").val(item.brand);
+                        $("#edit_itemAlias").val(item.alias);
+                        itemEditDialog.CategoryList = item.paramCategoryList;
+                    }
+                });
+            }
+
         </script>
     </c:otherwise>
 </c:choose>

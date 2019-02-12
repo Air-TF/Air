@@ -1,12 +1,15 @@
 package com.air.controller;
 
 import com.air.bean.*;
+import com.air.common.utils.CommonsUtils;
 import com.air.common.utils.Page;
-import com.air.service.AdminService;
-import com.air.service.CategoryService;
-import com.air.service.ItemService;
-import com.air.service.SubcategoryService;
+import com.air.dao.UserLoginDao;
+import com.air.service.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +17,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +29,7 @@ import java.util.Map;
 @RequestMapping("/admin")
 public class AdminController {
 
+    private Logger logger = Logger.getLogger(AdminController.class);
 
     @Autowired
     AdminService adminService;
@@ -31,6 +39,8 @@ public class AdminController {
     SubcategoryService subcategoryService;
     @Autowired
     ItemService itemService;
+    @Autowired
+    UserService userService;
 
 
     /**
@@ -89,7 +99,7 @@ public class AdminController {
     @RequestMapping(value = "choose", method = RequestMethod.GET)
     @ResponseBody
     public ResultData choose(HttpServletRequest request, HttpSession httpSession) {
-        if (httpSession.getAttribute("menu") == null) {
+        if (request.getParameter("menuName") != null) {
             Menu menu = Menu.getMenuByName(request.getParameter("menuName").trim());
             if (menu != null) {
                 httpSession.setAttribute("menu", menu);
@@ -115,6 +125,9 @@ public class AdminController {
                 }
                 break;
             case PARAM:
+                break;
+            case USER:
+
                 break;
         }
         return new ResultData().success(dataList);
@@ -145,7 +158,7 @@ public class AdminController {
                 Integer category = Integer.valueOf(request.getParameter("category"));
                 Integer subcategory = Integer.valueOf(request.getParameter("subcategory"));
                 Page<Item> itemPage = itemService.selectItemList(page, rows, itemName, subcategory);
-                dataList.put("menuType", menu.getTypeName());
+                dataList.put("menuType", menu.getTypeName()); //设置分页器链接
                 dataList.put("itemName", itemName);
                 dataList.put("category", category);
                 dataList.put("subcategory", subcategory);
@@ -153,12 +166,40 @@ public class AdminController {
                 break;
             case PARAM:
                 break;
+            case USER:
+                String userName = request.getParameter("userName");
+                Page<UserLogin> userPage = userService.selectUserList(page, rows, userName);
+                dataList.put("itemPage", userPage);
+                dataList.put("menuType", menu.getTypeName());
+                break;
         }
         return new ResultData().success(dataList);
     }
 
+    @RequestMapping(value = "insert", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultData insert(HttpServletRequest request, HttpSession httpSession) throws IOException {
+        Menu menu = (Menu) httpSession.getAttribute("menu");
+        ObjectMapper mapper = new ObjectMapper();
+        BufferedReader reader = request.getReader();
+        String json = reader.readLine();
+        Boolean success = false;
+        switch (menu) {
+            case USER:
+                UserLogin userLogin = mapper.readValue(json, UserLogin.class);
+                userLogin.setId(CommonsUtils.getUUID());
+                success = userService.insertUserLogin(userLogin);
+                break;
+        }
+        if (success) {
+            return new ResultData().success();
+        } else {
+            return new ResultData().failure();
+        }
+    }
+
     /**
-     * 编辑对象回显
+     * 查找
      *
      * @param request
      * @return
@@ -178,7 +219,7 @@ public class AdminController {
     }
 
     /**
-     * 更新数据
+     * 更新
      *
      * @param item
      * @return
@@ -194,7 +235,7 @@ public class AdminController {
     }
 
     /**
-     * 删除对象
+     * 删除
      *
      * @param id
      * @return
@@ -207,12 +248,6 @@ public class AdminController {
         } else {
             return new ResultData().failure();
         }
-    }
-
-    @RequestMapping(value = "getItem", method = RequestMethod.GET)
-    @ResponseBody
-    public ResultData getItem(Long id) {
-        return new ResultData().success(itemService.selectDetailedItemById(id));
     }
 
 }

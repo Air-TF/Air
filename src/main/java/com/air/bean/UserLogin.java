@@ -17,6 +17,9 @@ public class UserLogin {
 
     private Integer status;
 
+    public UserLogin() {
+    }
+
     public String getId() {
         return id;
     }

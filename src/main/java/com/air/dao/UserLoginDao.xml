@@ -10,20 +10,27 @@
         <result column="created" jdbcType="TIMESTAMP" property="created"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
     </resultMap>
+
     <select id="selectUserLoginByPhone" parameterType="String" resultType="com.air.bean.UserLogin">
         select *
         from tb_user_login
         where phone = #{Phone}
     </select>
+
     <select id="selectUserLoginByEmail" parameterType="String" resultType="com.air.bean.UserLogin">
         select *
         from tb_user_login
         where email = #{email}
     </select>
 
-    <insert id="InsertUserLogin">
+    <insert id="insertUserLogin" parameterType="com.air.bean.UserLogin">
         insert into tb_user_login(id, name, password, phone, created, status)
-        values (#{id}, #{phone}, #{password}, #{phone}, NOW(), 1)
+        <if test="name == null">
+            values (#{id}, #{phone},#{password}, #{phone}, NOW(), 1)
+        </if>
+        <if test="name != null">
+            values (#{id}, #{name},#{password}, #{phone}, NOW(), 1)
+        </if>
     </insert>
 
     <update id="updateUser" parameterType="com.air.bean.UserLogin">
@@ -57,4 +64,25 @@
             tb_user_login.id = #{id}
         </where>
     </update>
+
+    <select id="selectUserLoginList" resultMap="BaseResultMap">
+        select * from tb_user_login
+        <where>
+            <if test="userName != null">
+                tb_user_login.name like "%"#{userName}"%"
+            </if>
+        </where>
+        <if test="start !=null and rows != null">
+            limit #{start},#{rows}
+        </if>
+    </select>
+
+    <select id="selectUserLoginListCount" resultType="int">
+        select COUNT(*) from tb_user_login
+        <where>
+            <if test="userName != null">
+                tb_user_login.name like "%"#{userName}"%"
+            </if>
+        </where>
+    </select>
 </mapper>
