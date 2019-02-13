@@ -132,7 +132,7 @@
                                 <a href="javascript:void(0);" class="menu-item" id="item" aria-expanded="false">
                                     <i class="fa fa-dashboard fa-fw"></i>产品管理</a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#itemEditDialog">
+                                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#edit_dialog">
                                         <i class="fa fa-dashboard fa-fw"></i>新增产品</a></li>
                                 </ul>
                             </li>
@@ -140,7 +140,8 @@
                                 <a href="javascript:void(0);" class="menu-item" id="user" aria-expanded="false">
                                     <i class="fa fa-dashboard fa-fw"></i>用户管理</a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#userEditDialog">
+                                    <li><a href="javascript:void(0);" data-toggle="modal"
+                                           data-target="#edit_dialog">
                                         <i class="fa fa-dashboard fa-fw"></i>新增用户</a></li>
                                 </ul>
                             </li>
@@ -188,7 +189,6 @@
                             <div class="col-lg-12">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">客户信息列表</div>
-                                    <!-- /.panel-heading -->
                                     <table class="table table-bordered table-striped table-hover">
                                         <thead>
                                         <tr>
@@ -242,7 +242,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12" v-show="visible && menu_type === 'item'">
+                            <div class="col-lg-12" v-show="total > 0 && menu_type === currentMenuType">
                                 <div class="panel panel-default table-responsive">
                                     <div class="panel-heading">产品信息列表</div>
                                     <table class="table table-bordered table-striped table-hover">
@@ -268,8 +268,8 @@
                                                 <td>{{ item.alias }}</td>
                                                 <td>
                                                     <a href="javascript:void(0);" class="btn btn-primary btn-xs"
-                                                       data-toggle="modal" data-target="#itemEditDialog"
-                                                       @click="editItem(item.id)">修改</a>
+                                                       data-toggle="modal" data-target="#edit_dialog"
+                                                       @click="selectItem(item.id)">修改</a>
                                                     <a href="javascript:void(0);" class="btn btn-danger btn-xs"
                                                        @click="deleteItem(item.id)">删除</a>
                                                 </td>
@@ -298,7 +298,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12" v-show="visible && menu_type === 'user'">
+                            <div class="col-lg-12" v-show="total > 0 && menu_type === currentMenuType">
                                 <div class="panel panel-default table-responsive">
                                     <div class="panel-heading">用户信息列表</div>
                                     <table class="table table-bordered table-striped table-hover">
@@ -326,8 +326,8 @@
                                                 <td>{{ item.status }}</td>
                                                 <td>
                                                     <a href="javascript:void(0);" class="btn btn-primary btn-xs"
-                                                       data-toggle="modal" data-target="#userEditDialog"
-                                                       @click="editItem(item.id)">修改</a>
+                                                       data-toggle="modal" data-target="#edit_dialog"
+                                                       @click="selectItem(item.id)">修改</a>
                                                     <a href="javascript:void(0);" class="btn btn-danger btn-xs"
                                                        @click="deleteItem(item.id)">删除</a>
                                                 </td>
@@ -344,7 +344,7 @@
                     </div>
                 </div>
 
-                <div class="row" v-show="total > 0">
+                <div class="row" v-show="total > 0 && menu_type === currentMenuType">
                     <div class="col-md-12 text-right">
                         <nav>
                             <ul class="pagination"></ul>
@@ -354,11 +354,12 @@
             </div>
 
         </div>
-        <!-- 产品编辑对话框 -->
-        <div class="modal fade" id="itemEditDialog" tabindex="-1" role="dialog"
+
+        <!-- 编辑对话框 -->
+        <div class="modal fade" id="edit_dialog" tabindex="-1" role="dialog"
              aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
+                <div class="modal-content" v-show="item_body.currentMenuType === 'item'">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -453,17 +454,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" onclick="updateItem()">保存修改</button>
+                        <button type="button" class="btn btn-primary" @click="isNew?insertItem():updateItem()">保存
+                        </button>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <%-- 用户编辑对话框 --%>
-        <div class="modal fade" id="userEditDialog" tabindex="-1" role="dialog"
-             aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
+                <div class="modal-content" v-show="item_body.currentMenuType === 'user'">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -512,7 +507,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" class="btn btn-primary" onclick="insertUser()">保存</button>
+                        <button type="button" class="btn btn-primary" @click="isNew?insertItem():updateItem()">保存
+                        </button>
                     </div>
                 </div>
             </div>
@@ -557,30 +553,27 @@
                 return o;
             };
 
-            var item_Body = new Vue({
+            var item_body = new Vue({
                 el: "#page-wrapper",
                 data: {
-                    visible: false,
+                    row: 0,
                     menu_type: "",
+                    currentMenuType: "",
                     total: -1,
                     items: []
                 }
             })
 
-            var itemEditDialog = new Vue({
-                el: "#itemEditDialog",
+            var item_dialog = new Vue({
+                el: "#edit_dialog",
                 data: {
-                    CategoryList: []
-                }
-            })
-            var userEditDialog = new Vue({
-                el: "userEditDialog",
-                data: {
+                    CategoryList: [],
                     isNew: true
                 }
             })
 
             $(function () {
+                //产品管理 类别选择改变
                 $(".detail-menu select[name='category']").change(function () {
                     $.ajax({
                         url: "admin/choose",
@@ -598,7 +591,8 @@
                     })
                 });
 
-                $("#itemEditDialog select[name='category']").change(function () {
+                //编辑窗口 类别选择器
+                $("#edit_dialog select[name='category']").change(function () {
                     $.ajax({
                         url: "admin/choose",
                         type: "GET",
@@ -615,10 +609,11 @@
                     })
                 });
 
+                // 侧边菜单
                 $("#side-menu .menu-item").click(function () {
                     var menuName = this.id
-                    item_Body.total = -1;
-                    // item_Body.menu_type = menuName;
+                    // item_body.total = -1;
+                    item_body.currentMenuType = menuName;
                     $.get("admin/choose", {"menuName": menuName}, function (data) {
                         if (data.meta.success) {
                             switch (menuName) {
@@ -641,12 +636,13 @@
 
                 })
 
+                // 查询按钮表单提交
                 $('.detail-menu .form-inline').submit(function () {
                     return refreshTabel($(this).attr("data-type"));
                 })
 
                 // 模态框初始化
-                $('#itemEditDialog').on('hide.bs.modal', function () {
+                $('#edit_dialog').on('hide.bs.modal', function () {
                     $("#edit_itemId").val("");
                     $("#edit_itemName").val("");
                     $("#edit_itemCategory").val("");
@@ -657,7 +653,14 @@
                     $("#edit_itemPrice").val("");
                     $("#edit_itemBrand").val("");
                     $("#edit_itemAlias").val("");
-                    itemEditDialog.CategoryList = [];
+                    item_dialog.CategoryList = [];
+
+                    $("#edit_userId").val("")
+                    $("#edit_userName").val("")
+                    $("#edit_userPassword").val("")
+                    $("#edit_userPhone").val("")
+                    $("#edit_userEmail").val("")
+                    $("#edit_userStatus").val("")
                 })
             })
 
@@ -680,10 +683,9 @@
                 }
                 $.get("admin/itemList", requsetParam, function (data) {
                     console.log(data)
-                    data.data["itemPage"]["rows"].length > 0 ? item_Body.visible = true : item_Body.visible = false
-                    item_Body.total = data.data["itemPage"]["total"]
-                    item_Body.items = data.data["itemPage"]["rows"]
-                    item_Body.menu_type = data.data["menuType"]
+                    item_body.total = data.data["itemPage"]["total"]
+                    item_body.items = data.data["itemPage"]["rows"]
+                    item_body.menu_type = data.data["menuType"]
                     pageProcess(data.data)
                 }, "json")
                 return false
@@ -702,7 +704,7 @@
                 var pageCount = Math.ceil(page.total / page.size);
                 //显示“上一页”按钮
                 if (page.page > 1) {
-                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + item_Body.menu_type + "\'," + (page.page - 1) + "," + page.size +
+                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + item_body.menu_type + "\'," + (page.page - 1) + "," + page.size +
                         ")\">上一页</a></li>"
                     );
                 } else {
@@ -718,27 +720,37 @@
                         NavigationTag.append("<li class=\"active\"><a href=\"javascript:void(0);\">" + indexPage + "</a></li>");
                         continue;
                     }
-                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + item_Body.menu_type + "\'," + indexPage + "," + page.size + ")\">" + indexPage + "</a></li>");
+                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + item_body.menu_type + "\'," + indexPage + "," + page.size + ")\">" + indexPage + "</a></li>");
                 }
                 //显示“下一页”按钮
                 if (page.page < pageCount) {
-                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + item_Body.menu_type + "\'," + (page.page + 1) + "," + page.size + ")\">下一页</a></li>");
+                    NavigationTag.append("<li><a href=\"javascript:void(0);\" onclick=\"refreshTabel(\'" + item_body.menu_type + "\'," + (page.page + 1) + "," + page.size + ")\">下一页</a></li>");
                 } else {
                     NavigationTag.append("<li class=\"disabled\"><a href=\"javascript:void(0);\">下一页</a></li>");
                 }
             }
 
-            function insertUser() {
+            function insertItem() {
+                var data_json;
+                switch (item_body.currentMenuType) {
+                    case 'item':
+                        data_json = JSON.stringify($("#edit_user_form").serializeObject());
+                        break;
+                    case 'user':
+                        data_json = JSON.stringify($("#edit_user_form").serializeObject());
+                        break;
+                }
                 $.ajax({
                     type: "post",
                     url: "admin/insert",
-                    data: JSON.stringify($("#edit_user_form").serializeObject()),
+                    data: data_json,
                     dataType: "json",
                     contentType: "application/json",
                     success: function (data) {
                         if (data.meta.success) {
                             alert("添加成功！");
-                            $("#userEditDialog").modal('hide')
+                            $("#edit_dialog").modal('hide')
+                            refreshTabel(item_body.currentMenuType, $(".pagination li.active a").text());
                         } else {
                             alert("添加异常！")
                             return "Error"
@@ -758,8 +770,8 @@
                         success: function (data) {
                             if (data.meta.success) {
                                 alert("客户信息更新成功！");
-                                $("#itemEditDialog").modal('hide')
-                                refreshTabel('item', $(".pagination li.active a").text());
+                                $("#edit_dialog").modal('hide')
+                                refreshTabel(item_body.currentMenuType, $(".pagination li.active a").text());
                             } else {
                                 alert("delete error！");
                                 return "Error"
@@ -770,17 +782,27 @@
             }
 
             function updateItem() {
+                var data_json;
+                switch (item_body.currentMenuType) {
+                    case 'item':
+                        data_json = JSON.stringify($("#edit_item_form").serializeObject())
+                        break;
+                    case 'user':
+                        data_json = JSON.stringify($("#edit_user_form").serializeObject())
+                        break
+                }
                 $.ajax({
                     type: "put",
                     url: "admin/update",
-                    data: JSON.stringify($("#edit_item_form").serializeObject()),
+                    data: data_json,
                     dataType: "json",
                     contentType: "application/json",
                     success: function (data) {
                         if (data.meta.success) {
                             alert("修改成功")
-                            $("#itemEditDialog").modal('hide')
-                            refreshTabel('item', $(".pagination li.active a").text());
+                            item_dialog.isNew = true
+                            $("#edit_dialog").modal('hide')
+                            refreshTabel(item_body.currentMenuType, $(".pagination li.active a").text());
                         } else {
                             alert("未修改")
                             return "Error"
@@ -789,31 +811,43 @@
                 });
             }
 
-            function editItem(id) {
+            function selectItem(id) {
+                item_dialog.isNew = false
                 $.ajax({
                     type: "get",
-                    url: "admin/edit",
+                    url: "admin/select",
                     data: {"itemId": id},
                     success: function (data) {
                         console.log(data)
                         item = data.data.item;
-                        category = data.data.category
-                        subcategory = data.data.subcategory
-                        $("#edit_itemId").val(item.id);
-                        $("#edit_itemName").val(item.name);
-                        $("#edit_itemCategory").val(category.id)
-                        $("#edit_itemCategory").change();
-                        $("#edit_itemSubcategory").val(subcategory.id);
-                        $("#edit_itemTitle").val(item.title);
-                        $("#edit_itemImage").val(item.image);
-                        $("#edit_itemPrice").val(item.price);
-                        $("#edit_itemBrand").val(item.brand);
-                        $("#edit_itemAlias").val(item.alias);
-                        itemEditDialog.CategoryList = item.paramCategoryList;
+                        switch (item_body.currentMenuType) {
+                            case 'item':
+                                category = data.data.category
+                                subcategory = data.data.subcategory
+                                $("#edit_itemId").val(item.id);
+                                $("#edit_itemName").val(item.name);
+                                $("#edit_itemCategory").val(category.id)
+                                $("#edit_itemCategory").change();
+                                $("#edit_itemSubcategory").val(subcategory.id);
+                                $("#edit_itemTitle").val(item.title);
+                                $("#edit_itemImage").val(item.image);
+                                $("#edit_itemPrice").val(item.price);
+                                $("#edit_itemBrand").val(item.brand);
+                                $("#edit_itemAlias").val(item.alias);
+                                item_dialog.CategoryList = item.paramCategoryList;
+                                break;
+                            case 'user':
+                                $("#edit_userId").val(item.id)
+                                $("#edit_userName").val(item.name)
+                                $("#edit_userPassword").val(item.password)
+                                $("#edit_userPhone").val(item.phone)
+                                $("#edit_userEmail").val(item.email)
+                                $("#edit_userStatus").val(item.status)
+                                break;
+                        }
                     }
                 });
             }
-
         </script>
     </c:otherwise>
 </c:choose>

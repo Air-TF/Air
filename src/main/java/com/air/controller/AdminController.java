@@ -3,25 +3,19 @@ package com.air.controller;
 import com.air.bean.*;
 import com.air.common.utils.CommonsUtils;
 import com.air.common.utils.Page;
-import com.air.dao.UserLoginDao;
 import com.air.service.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -98,16 +92,16 @@ public class AdminController {
      */
     @RequestMapping(value = "choose", method = RequestMethod.GET)
     @ResponseBody
-    public ResultData choose(HttpServletRequest request, HttpSession httpSession) {
+    public ResultData choose(HttpServletRequest request) {
         if (request.getParameter("menuName") != null) {
             Menu menu = Menu.getMenuByName(request.getParameter("menuName").trim());
             if (menu != null) {
-                httpSession.setAttribute("menu", menu);
+                request.getSession().setAttribute("menu", menu);
             }
         }
 
         List dataList = null;
-        switch ((Menu) httpSession.getAttribute("menu")) {
+        switch ((Menu) request.getSession().getAttribute("menu")) {
             case CATE:
                 break;
             case SUBCATE:
@@ -139,15 +133,14 @@ public class AdminController {
      * @param page
      * @param rows
      * @param request
-     * @param httpSession
      * @return
      */
     @RequestMapping(value = "itemList", method = RequestMethod.GET)
     @ResponseBody
     public ResultData itemList(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer rows,
-                               HttpServletRequest request, HttpSession httpSession) {
+                               HttpServletRequest request) {
         Map<String, Object> dataList = new HashMap<>();
-        Menu menu = (Menu) httpSession.getAttribute("menu");
+        Menu menu = (Menu) request.getSession().getAttribute("menu");
         switch (menu) {
             case CATE:
                 break;
@@ -158,7 +151,7 @@ public class AdminController {
                 Integer category = Integer.valueOf(request.getParameter("category"));
                 Integer subcategory = Integer.valueOf(request.getParameter("subcategory"));
                 Page<Item> itemPage = itemService.selectItemList(page, rows, itemName, subcategory);
-                dataList.put("menuType", menu.getTypeName()); //设置分页器链接
+                dataList.put("menuType", menu.getTypeName()); //当前数据类型
                 dataList.put("itemName", itemName);
                 dataList.put("category", category);
                 dataList.put("subcategory", subcategory);
@@ -176,10 +169,17 @@ public class AdminController {
         return new ResultData().success(dataList);
     }
 
+    /**
+     * 插入
+     *
+     * @param request
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "insert", method = RequestMethod.POST)
     @ResponseBody
-    public ResultData insert(HttpServletRequest request, HttpSession httpSession) throws IOException {
-        Menu menu = (Menu) httpSession.getAttribute("menu");
+    public ResultData insert(HttpServletRequest request) throws IOException {
+        Menu menu = (Menu) request.getSession().getAttribute("menu");
         ObjectMapper mapper = new ObjectMapper();
         BufferedReader reader = request.getReader();
         String json = reader.readLine();
@@ -204,46 +204,95 @@ public class AdminController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "edit", method = RequestMethod.GET)
+    @RequestMapping(value = "select", method = RequestMethod.GET)
     @ResponseBody
-    public ResultData edit(HttpServletRequest request) {
-        Long itemId = Long.valueOf(request.getParameter("itemId"));
+    public ResultData select(HttpServletRequest request) {
+        Menu menu = (Menu) request.getSession().getAttribute("menu");
+        String id = request.getParameter("itemId");
         Map<String, Object> data = new HashMap<>();
-        Item item = itemService.selectDetailedItemById(itemId);
-        Category category = categoryService.selectCategoryByItemId(item.getId());
-        Subcategory subcategory = subcategoryService.selectSubcategoryByItemId(item.getId());
-        data.put("category", category);
-        data.put("subcategory", subcategory);
-        data.put("item", item);
+        switch (menu) {
+            case ITEM:
+                Item item = itemService.selectDetailedItemById(Long.valueOf(id));
+                Category category = categoryService.selectCategoryByItemId(item.getId());
+                Subcategory subcategory = subcategoryService.selectSubcategoryByItemId(item.getId());
+                data.put("category", category);
+                data.put("subcategory", subcategory);
+                data.put("item", item);
+                break;
+            case USER:
+                UserLogin userLogin = userService.selectUserLoginById(id);
+                data.put("item", userLogin);
+                break;
+        }
         return new ResultData().success(data);
     }
 
     /**
      * 更新
      *
-     * @param item
+     * @param request
      * @return
+     * @throws IOException
      */
     @RequestMapping(value = "update", method = RequestMethod.PUT)
     @ResponseBody
-    public ResultData update(@RequestBody Item item) {
-        if (itemService.updateItemById(item)) {
+    public ResultData update(HttpServletRequest request) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        BufferedReader reader = request.getReader();
+        String json = reader.readLine();
+        Menu menu = (Menu) request.getSession().getAttribute("menu");
+        Boolean success = false;
+        switch (menu) {
+            case CATE:
+                break;
+            case SUBCATE:
+                break;
+            case ITEM:
+                Item item = mapper.readValue(json, Item.class);
+                success = itemService.updateItemById(item);
+                break;
+            case PARAM:
+                break;
+            case USER:
+                UserLogin userLogin = mapper.readValue(json, UserLogin.class);
+                success = userService.updateUser(userLogin);
+                break;
+        }
+        if (success) {
             return new ResultData().success();
         } else {
             return new ResultData().failure();
         }
     }
 
+
     /**
      * 删除
      *
-     * @param id
+     * @param request
      * @return
      */
     @RequestMapping(value = "delete", method = RequestMethod.DELETE)
     @ResponseBody
-    public ResultData delete(Long id) {
-        if (itemService.deleteItemById(id)) {
+    public ResultData delete(HttpServletRequest request) {
+        Menu menu = (Menu) request.getSession().getAttribute("menu");
+        String id = request.getParameter("id");
+        Boolean success = false;
+        switch (menu) {
+            case CATE:
+                break;
+            case SUBCATE:
+                break;
+            case ITEM:
+                success = itemService.deleteItemById(Long.valueOf(id));
+                break;
+            case PARAM:
+                break;
+            case USER:
+                success = userService.deleteUserLoginById(id);
+                break;
+        }
+        if (success) {
             return new ResultData().success();
         } else {
             return new ResultData().failure();

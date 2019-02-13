@@ -12,4 +12,8 @@ public interface UserService {
     Boolean updateUser(UserLogin userLogin);
 
     Page<UserLogin> selectUserList(Integer page, Integer rows, String userName);
+
+    UserLogin selectUserLoginById(String id);
+
+    Boolean deleteUserLoginById(String id);
 }

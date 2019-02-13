@@ -23,13 +23,19 @@
         where email = #{email}
     </select>
 
+    <select id="selectUserLoginById" parameterType="String" resultType="com.air.bean.UserLogin">
+        select *
+        from tb_user_login
+        where id = #{id}
+    </select>
+
     <insert id="insertUserLogin" parameterType="com.air.bean.UserLogin">
-        insert into tb_user_login(id, name, password, phone, created, status)
+        insert into tb_user_login(id, name, password, phone, email, created, status)
         <if test="name == null">
-            values (#{id}, #{phone},#{password}, #{phone}, NOW(), 1)
+            values (#{id}, #{phone},#{password}, #{phone}, #{email}, NOW(), 1)
         </if>
         <if test="name != null">
-            values (#{id}, #{name},#{password}, #{phone}, NOW(), 1)
+            values (#{id}, #{name},#{password}, #{phone}, #{email}, NOW(), 1)
         </if>
     </insert>
 
@@ -37,25 +43,17 @@
         update tb_user_login
         <set>
             <if test="name != null">
-                tb_user_login.name = #{name}
+                tb_user_login.name = #{name},
             </if>
-        </set>
-        <set>
             <if test="password != null">
-                tb_user_login.password = #{password}
+                tb_user_login.password = #{password},
             </if>
-        </set>
-        <set>
             <if test="phone != null">
-                tb_user_login.phone = #{phone}
+                tb_user_login.phone = #{phone},
             </if>
-        </set>
-        <set>
             <if test="email != null">
-                tb_user_login.email = #{email}
+                tb_user_login.email = #{email},
             </if>
-        </set>
-        <set>
             <if test="status != null">
                 tb_user_login.status = #{status}
             </if>
@@ -68,9 +66,11 @@
     <select id="selectUserLoginList" resultMap="BaseResultMap">
         select * from tb_user_login
         <where>
+            tb_user_login.status != 9
             <if test="userName != null">
-                tb_user_login.name like "%"#{userName}"%"
+                and tb_user_login.name like "%"#{userName}"%"
             </if>
+
         </where>
         <if test="start !=null and rows != null">
             limit #{start},#{rows}
@@ -85,4 +85,10 @@
             </if>
         </where>
     </select>
+
+    <update id="updateUserStatus">
+        update tb_user_login
+        set tb_user_login.status = #{status}
+        where tb_user_login.id = #{id}
+    </update>
 </mapper>

@@ -10,6 +10,8 @@ public interface UserLoginDao {
 
     UserLogin selectUserLoginByEmail(String email);
 
+    UserLogin selectUserLoginById(String id);
+
     Integer insertUserLogin(UserLogin userLogin);
 
     Integer updateUser(UserLogin userLogin);
@@ -17,4 +19,6 @@ public interface UserLoginDao {
     List<UserLogin> selectUserLoginList(@Param("start") Integer start, @Param("rows") Integer rows, @Param("userName") String userName);
 
     Integer selectUserLoginListCount(@Param("userName") String userName);
+
+    Boolean updateUserStatus(@Param("id") String id, @Param("status") Integer status);
 }

@@ -51,4 +51,14 @@ public class UserServiceImpl implements UserService {
         userLoginPage.setTotal(userLoginListCount);
         return userLoginPage;
     }
+
+    @Override
+    public UserLogin selectUserLoginById(String id) {
+        return userLoginDao.selectUserLoginById(id);
+    }
+
+    @Override
+    public Boolean deleteUserLoginById(String id) {
+        return userLoginDao.updateUserStatus(id,9);
+    }
 }
