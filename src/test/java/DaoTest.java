@@ -1,7 +1,9 @@
 import com.air.bean.Item;
 import com.air.bean.ParamDesc;
+import com.air.bean.UserLogin;
 import com.air.dao.ItemDao;
 import com.air.dao.ParamDescDao;
+import com.air.dao.UserLoginDao;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +17,7 @@ public class DaoTest {
     private Logger logger = Logger.getLogger(DaoTest.class);
     private ParamDescDao descDao;
     private ItemDao itemDao;
+    private UserLoginDao userLoginDao;
 
     @Before
     public void init() {
@@ -22,6 +25,7 @@ public class DaoTest {
         ApplicationContext context = new FileSystemXmlApplicationContext(resource);
         descDao = context.getBean(ParamDescDao.class);
         itemDao = context.getBean(ItemDao.class);
+        userLoginDao = context.getBean(UserLoginDao.class);
     }
 
     @Test
@@ -37,6 +41,16 @@ public class DaoTest {
 //        int a = descDao.updateParam(descList.get(0), item.getId());
 
         logger.info(a);
+    }
+
+    @Test
+    public void InsertTest() {
+        UserLogin userLogin=new UserLogin();
+        userLogin.setId("31822f5a4d6947c7b74e6acb35676d28");
+//        userLogin.setName("a");
+        userLogin.setPassword("123");
+        userLogin.setPhone("1234");
+        userLoginDao.insertUserLogin(userLogin);
     }
 
 }

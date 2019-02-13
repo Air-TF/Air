@@ -1,6 +1,7 @@
 package com.air.service.Impl;
 
 import com.air.bean.UserLogin;
+import com.air.common.utils.CommonsUtils;
 import com.air.common.utils.Page;
 import com.air.dao.UserLoginDao;
 import com.air.service.UserService;
@@ -31,6 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean insertUserLogin(UserLogin userLogin) {
+        userLogin.setId(CommonsUtils.getUUID());
         return userLoginDao.insertUserLogin(userLogin) == 1 ? true : false;
     }
 

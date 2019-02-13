@@ -1,10 +1,10 @@
 package com.air.controller;
 
 import com.air.bean.*;
-import com.air.common.utils.CommonsUtils;
 import com.air.common.utils.Page;
 import com.air.service.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,7 +100,6 @@ public class AdminController {
                 request.getSession().setAttribute("menu", menu);
             }
         }
-
         List dataList = null;
         switch ((Menu) request.getSession().getAttribute("menu")) {
             case CATE:
@@ -187,7 +187,6 @@ public class AdminController {
         switch (menu) {
             case USER:
                 UserLogin userLogin = mapper.readValue(json, UserLogin.class);
-                userLogin.setId(CommonsUtils.getUUID());
                 success = userService.insertUserLogin(userLogin);
                 break;
         }
@@ -236,7 +235,7 @@ public class AdminController {
      */
     @RequestMapping(value = "update", method = RequestMethod.PUT)
     @ResponseBody
-    public ResultData update(HttpServletRequest request) throws IOException {
+    public ResultData update(HttpServletRequest request) throws IOException, SQLException {
         ObjectMapper mapper = new ObjectMapper();
         BufferedReader reader = request.getReader();
         String json = reader.readLine();
@@ -255,7 +254,11 @@ public class AdminController {
                 break;
             case USER:
                 UserLogin userLogin = mapper.readValue(json, UserLogin.class);
-                success = userService.updateUser(userLogin);
+                try {
+                    success = userService.updateUser(userLogin);
+                } catch (Exception e) {
+                    throw new MySQLIntegrityConstraintViolationException();
+                }
                 break;
         }
         if (success) {
