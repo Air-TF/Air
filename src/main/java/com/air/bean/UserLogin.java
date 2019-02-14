@@ -1,5 +1,6 @@
 package com.air.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class UserLogin {
@@ -13,12 +14,10 @@ public class UserLogin {
 
     private String email;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date created;
 
     private Integer status;
-
-    public UserLogin() {
-    }
 
     public String getId() {
         return id;

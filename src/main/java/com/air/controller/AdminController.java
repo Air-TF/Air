@@ -1,15 +1,14 @@
 package com.air.controller;
 
 import com.air.bean.*;
+import com.air.common.utils.CommonsUtils;
 import com.air.common.utils.Page;
 import com.air.service.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,16 +26,15 @@ public class AdminController {
     private Logger logger = Logger.getLogger(AdminController.class);
 
     @Autowired
-    AdminService adminService;
+    private AdminService adminService;
     @Autowired
-    CategoryService categoryService;
+    private CategoryService categoryService;
     @Autowired
-    SubcategoryService subcategoryService;
+    private SubcategoryService subcategoryService;
     @Autowired
-    ItemService itemService;
+    private ItemService itemService;
     @Autowired
-    UserService userService;
-
+    private UserService userService;
 
     /**
      * 首页
@@ -49,7 +47,7 @@ public class AdminController {
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(new String("userName"))) {
+                if (cookie.getName().equals("userName")) {
                     request.getSession().setAttribute("user", adminService.getAdminByName(cookie.getValue()));
                 }
             }
@@ -89,6 +87,7 @@ public class AdminController {
     /**
      * 管理模块选择
      *
+     * @param request
      * @return
      */
     @RequestMapping(value = "choose", method = RequestMethod.GET)
@@ -180,13 +179,12 @@ public class AdminController {
     @ResponseBody
     public ResultData insert(HttpServletRequest request) throws IOException {
         Menu menu = (Menu) request.getSession().getAttribute("menu");
-        ObjectMapper mapper = new ObjectMapper();
         BufferedReader reader = request.getReader();
         String json = reader.readLine();
         Boolean success = false;
         switch (menu) {
             case USER:
-                UserLogin userLogin = mapper.readValue(json, UserLogin.class);
+                UserLogin userLogin = CommonsUtils.parse(UserLogin.class, json);
                 success = userService.insertUserLogin(userLogin);
                 break;
         }
@@ -226,17 +224,18 @@ public class AdminController {
         return new ResultData().success(data);
     }
 
+
     /**
      * 更新
      *
      * @param request
      * @return
      * @throws IOException
+     * @throws SQLException
      */
     @RequestMapping(value = "update", method = RequestMethod.PUT)
     @ResponseBody
     public ResultData update(HttpServletRequest request) throws IOException, SQLException {
-        ObjectMapper mapper = new ObjectMapper();
         BufferedReader reader = request.getReader();
         String json = reader.readLine();
         Menu menu = (Menu) request.getSession().getAttribute("menu");
@@ -247,17 +246,17 @@ public class AdminController {
             case SUBCATE:
                 break;
             case ITEM:
-                Item item = mapper.readValue(json, Item.class);
+                Item item = CommonsUtils.parse(Item.class, json);
                 success = itemService.updateItemById(item);
                 break;
             case PARAM:
                 break;
             case USER:
-                UserLogin userLogin = mapper.readValue(json, UserLogin.class);
+                UserLogin userLogin = CommonsUtils.parse(UserLogin.class, json);
                 try {
                     success = userService.updateUser(userLogin);
                 } catch (Exception e) {
-                    throw new MySQLIntegrityConstraintViolationException();
+                    throw new MySQLIntegrityConstraintViolationException("该号码已被注册");
                 }
                 break;
         }
@@ -267,7 +266,6 @@ public class AdminController {
             return new ResultData().failure();
         }
     }
-
 
     /**
      * 删除

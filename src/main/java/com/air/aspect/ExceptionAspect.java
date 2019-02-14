@@ -72,7 +72,7 @@ public class ExceptionAspect {
     @ExceptionHandler(SQLException.class)
     public ResultData handleSQLException(Exception e){
         log.error("Internal Server Error...", e);
-        return new ResultData().failure("Internal Server Error");
+        return new ResultData().failure(e.getMessage());
     }
     /**
      * 500 - Internal Server Error

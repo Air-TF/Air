@@ -5,19 +5,24 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
         http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd">
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
     <!--配置controller扫描-->
-    <context:component-scan base-package="com.air" use-default-filters="false">
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    <!--<context:component-scan base-package="com.air" use-default-filters="false">-->
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+        <!--<context:include-filter type="annotation"-->
+                                <!--expression="org.springframework.web.bind.annotation.ControllerAdvice"/>-->
+        <!--<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>-->
+    <!--</context:component-scan>-->
+    <context:component-scan base-package="com.air.controller"/>
+    <context:component-scan base-package="com.air.aspect">
         <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
-        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
     </context:component-scan>
 
     <!--注解驱动-->
@@ -34,8 +39,12 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- 对静态资源放行  -->
-    <mvc:resources location="/css/" mapping="/css/**"/>
-    <mvc:resources location="/js/" mapping="/js/**"/>
-    <mvc:resources location="/fonts/" mapping="/fonts/**"/>
+    <!-- 使用默认的Servlet来响应静态文件 -->
+    <mvc:default-servlet-handler/>
+
+    <!--&lt;!&ndash; 对静态资源放行  &ndash;&gt;-->
+    <!--<mvc:resources location="/css/" mapping="/css/**"/>-->
+    <!--<mvc:resources location="/js/" mapping="/js/**"/>-->
+    <!--<mvc:resources location="/fonts/" mapping="/fonts/**"/>-->
+
 </beans>

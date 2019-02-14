@@ -807,6 +807,9 @@
                             alert("未修改")
                             return "Error"
                         }
+                    },
+                    error:function (XMLHttpRequest) {
+                        alert(JSON.parse(XMLHttpRequest.responseText).meta.message);
                     }
                 });
             }

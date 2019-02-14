@@ -1,9 +1,10 @@
 package com.air.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Item {
+public class Item{
     private Long id;
 
     private String name;
@@ -16,6 +17,7 @@ public class Item {
 
     private String brand;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date created;
 
     private String alias;
