@@ -119,9 +119,6 @@ public class AdminController {
                 break;
             case PARAM:
                 break;
-            case USER:
-
-                break;
         }
         return new ResultData().success(dataList);
     }

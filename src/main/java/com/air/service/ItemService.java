@@ -6,7 +6,7 @@ import com.air.common.utils.Page;
 import java.util.List;
 
 public interface ItemService {
-    Page<Item> selectItemList(Integer page, Integer rows, String itemName, Integer contentId);
+    Page<Item> selectItemList(Integer page, Integer rows, String itemName, Integer subcategoryId);
 
     Item selectItemById(Long itemId);
 

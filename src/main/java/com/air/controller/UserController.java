@@ -5,7 +5,6 @@ import com.air.bean.ResultData;
 import com.air.bean.UserLogin;
 import com.air.common.utils.CommonsUtils;
 import com.air.service.UserService;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

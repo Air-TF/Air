@@ -32,10 +32,10 @@
     <insert id="insertUserLogin" parameterType="com.air.bean.UserLogin">
         insert into tb_user_login(id, name, password, phone, email, created, status)
         <if test="name == null">
-            values (#{id}, #{phone},#{password}, #{phone}, #{email}, NOW(), 1)
+            values (#{id}, #{phone},#{password}, #{phone}, #{email}, #{created}, 1)
         </if>
         <if test="name != null">
-            values (#{id}, #{name},#{password}, #{phone}, #{email}, NOW(), 1)
+            values (#{id}, #{name},#{password}, #{phone}, #{email}, #{created}, 1)
         </if>
     </insert>
 

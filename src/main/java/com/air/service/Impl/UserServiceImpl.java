@@ -8,6 +8,7 @@ import com.air.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,6 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean insertUserLogin(UserLogin userLogin) {
         userLogin.setId(CommonsUtils.getUUID());
+        userLogin.setCreated(new Date());
         return userLoginDao.insertUserLogin(userLogin) == 1 ? true : false;
     }
 

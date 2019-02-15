@@ -10,4 +10,6 @@ public interface CategoryService {
     Category selectCategoryBySubcategoryId(Long id);
 
     Category selectCategoryByItemId(Long id);
+
+    List<Category> selectDetailedCategoryList();
 }

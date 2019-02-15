@@ -5,6 +5,14 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
     </resultMap>
+    <resultMap id="DetailedResultMap" type="com.air.bean.Category">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <collection property="subcategoryList" javaType="java.util.List" ofType="com.air.bean.Subcategory">
+            <id column="s_id" jdbcType="BIGINT" property="id"/>
+            <result column="s_name" jdbcType="VARCHAR" property="name"/>
+        </collection>
+    </resultMap>
 
     <select id="selectCategoryBySubcategoryId" resultMap="BaseResultMap">
         select tb_category.id, tb_category.name from tb_category,tb_subcategory
@@ -17,7 +25,7 @@
     </select>
 
     <select id="selectCategoryByItemId" resultMap="BaseResultMap">
-        select tb_category.id,tb_category.name from  tb_category,tb_subcategory,tb_item
+        select tb_category.id,tb_category.name from tb_category,tb_subcategory,tb_item
         <where>
             <if test="id != null">
                 tb_item.id = #{id}
@@ -25,5 +33,11 @@
             and tb_subcategory.id = tb_item.subcategory_id
             and tb_subcategory.category_id=tb_category.id
         </where>
+    </select>
+
+    <select id="selectDetailedCategoryList" resultMap="DetailedResultMap">
+        select c.id, c.name, s.name s_name
+        from tb_category c
+                 left outer join tb_subcategory s on c.id = s.category_id
     </select>
 </mapper>
