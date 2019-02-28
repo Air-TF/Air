@@ -2,6 +2,7 @@ package com.air.controller;
 
 import com.air.bean.Item;
 import com.air.bean.ResultData;
+import com.air.common.utils.Page;
 import com.air.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +26,10 @@ public class ItemController {
     }
 
     @RequestMapping(value = "search/{keyword}", method = RequestMethod.GET)
-    public ResultData getItemList(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer rows,
+    public ResultData getItemList(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size,
                                   @PathVariable String keyword,Integer subcategoryId) {
-        itemService.selectItemList(page,rows,keyword,subcategoryId);
-        return new ResultData().success();
+        Page<Item> itemPage = itemService.selectItemList(page, size, keyword, subcategoryId);
+        return new ResultData().success(itemPage);
     }
-
 
 }

@@ -42,8 +42,8 @@
                 and subcategory_id = #{subcategoryId}
             </if>
         </where>
-        <if test="start !=null and rows != null">
-            limit #{start},#{rows}
+        <if test="start !=null and size != null">
+            limit #{start},#{size}
         </if>
     </select>
 
