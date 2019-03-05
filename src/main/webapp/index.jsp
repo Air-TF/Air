@@ -4,6 +4,6 @@
 	<meta charset="utf-8">
 </head>
 <body>
-	<a href="/admin">后台管理</a>
+	<a href="/Air/admin">后台管理</a>
 </body>
 </html>

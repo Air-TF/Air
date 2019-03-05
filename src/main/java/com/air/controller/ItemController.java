@@ -25,9 +25,9 @@ public class ItemController {
         return new ResultData().success();
     }
 
-    @RequestMapping(value = "search/{keyword}", method = RequestMethod.GET)
+    @RequestMapping(value = "search", method = RequestMethod.GET)
     public ResultData getItemList(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size,
-                                  @PathVariable String keyword,Integer subcategoryId) {
+                                  String keyword,Integer subcategoryId) {
         Page<Item> itemPage = itemService.selectItemList(page, size, keyword, subcategoryId);
         return new ResultData().success(itemPage);
     }

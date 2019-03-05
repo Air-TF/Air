@@ -36,7 +36,7 @@
     </select>
 
     <select id="selectDetailedCategoryList" resultMap="DetailedResultMap">
-        select c.id, c.name, s.name s_name
+        select c.id, c.name, s.id s_id, s.name s_name
         from tb_category c
                  left outer join tb_subcategory s on c.id = s.category_id
     </select>
