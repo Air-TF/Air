@@ -2,7 +2,7 @@ package com.air.service.Impl;
 
 import com.air.bean.UserLogin;
 import com.air.common.utils.CommonsUtils;
-import com.air.common.utils.Page;
+import com.air.bean.Page;
 import com.air.dao.UserLoginDao;
 import com.air.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +18,17 @@ public class UserServiceImpl implements UserService {
     UserLoginDao userLoginDao;
 
     @Override
-    public Boolean login(UserLogin userlogin) {
+    public String login(UserLogin userlogin) {
         UserLogin user;
         if (userlogin.getPhone() != null) {
             user = userLoginDao.selectUserLoginByPhone(userlogin.getPhone());
         } else if (userlogin.getEmail() != null) {
             user = userLoginDao.selectUserLoginByEmail(userlogin.getEmail());
         } else {
-            return false;
+            return null;
         }
 
-        return userlogin.getPassword().equals(user.getPassword()) ? true : false;
+        return userlogin.getPassword().equals(user.getPassword()) ? user.getId() : "";
     }
 
     @Override

@@ -1,9 +1,7 @@
 package com.air.service;
 
 import com.air.bean.Item;
-import com.air.common.utils.Page;
-
-import java.util.List;
+import com.air.bean.Page;
 
 public interface ItemService {
     Page<Item> selectItemList(Integer page, Integer size, String keyword, Integer subcategoryId);

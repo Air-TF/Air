@@ -1,6 +1,8 @@
+import com.air.bean.History;
 import com.air.bean.Item;
 import com.air.bean.ParamDesc;
 import com.air.bean.UserLogin;
+import com.air.dao.HistoryDao;
 import com.air.dao.ItemDao;
 import com.air.dao.ParamDescDao;
 import com.air.dao.UserLoginDao;
@@ -18,6 +20,7 @@ public class DaoTest {
     private ParamDescDao descDao;
     private ItemDao itemDao;
     private UserLoginDao userLoginDao;
+    private HistoryDao historyDao;
 
     @Before
     public void init() {
@@ -26,6 +29,7 @@ public class DaoTest {
         descDao = context.getBean(ParamDescDao.class);
         itemDao = context.getBean(ItemDao.class);
         userLoginDao = context.getBean(UserLoginDao.class);
+        historyDao = context.getBean(HistoryDao.class);
     }
 
     @Test
@@ -45,12 +49,16 @@ public class DaoTest {
 
     @Test
     public void InsertTest() {
-        UserLogin userLogin=new UserLogin();
-        userLogin.setId("31822f5a4d6947c7b74e6acb35676d28");
-//        userLogin.setName("a");
-        userLogin.setPassword("123");
-        userLogin.setPhone("1234");
-        userLoginDao.insertUserLogin(userLogin);
+//        UserLogin userLogin=new UserLogin();
+//        userLogin.setId("31822f5a4d6947c7b74e6acb35676d28");
+////        userLogin.setName("a");
+//        userLogin.setPassword("123");
+//        userLogin.setPhone("1234");
+//        userLoginDao.insertUserLogin(userLogin);
+        History history =new History();
+        history.setItemId(2L);
+        history.setUserId("1");
+        historyDao.insertHistory(history);
     }
 
 }

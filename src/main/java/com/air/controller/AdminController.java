@@ -2,13 +2,14 @@ package com.air.controller;
 
 import com.air.bean.*;
 import com.air.common.utils.CommonsUtils;
-import com.air.common.utils.Page;
+import com.air.bean.Page;
 import com.air.service.*;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -108,7 +109,7 @@ public class AdminController {
             case ITEM:
                 Integer categoryId = -1;
                 String s = request.getParameter("categoryId");
-                if (s != null && s != "") {
+                if (s != null && !s.equals("")) {
                     categoryId = Integer.valueOf(s);
                 }
                 if (categoryId < 0) {
@@ -180,6 +181,14 @@ public class AdminController {
         String json = reader.readLine();
         Boolean success = false;
         switch (menu) {
+            case CATE:
+                break;
+            case SUBCATE:
+                break;
+            case ITEM:
+                break;
+            case PARAM:
+                break;
             case USER:
                 UserLogin userLogin = CommonsUtils.parse(UserLogin.class, json);
                 success = userService.insertUserLogin(userLogin);

@@ -1,7 +1,7 @@
 package com.air.service.Impl;
 
 import com.air.bean.Item;
-import com.air.common.utils.Page;
+import com.air.bean.Page;
 import com.air.dao.ItemDao;
 import com.air.dao.ParamDescDao;
 import com.air.service.ItemService;

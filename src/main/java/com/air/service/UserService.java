@@ -1,11 +1,11 @@
 package com.air.service;
 
 import com.air.bean.UserLogin;
-import com.air.common.utils.Page;
+import com.air.bean.Page;
 
 public interface UserService {
 
-    Boolean login(UserLogin userlogin);
+    String login(UserLogin userlogin);
 
     Boolean insertUserLogin(UserLogin userLogin);
 

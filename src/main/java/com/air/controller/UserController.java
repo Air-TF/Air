@@ -20,21 +20,25 @@ public class UserController {
     /**
      * 登录验证
      *
-     * @param phone
+     * @param account
      * @param password
      * @return
      */
     @RequestMapping(value = "signIn", method = RequestMethod.GET)
-    public ResultData signIn(String phone, String password) {
+    public ResultData signIn(String account, String password) {
         UserLogin userlogin = new UserLogin();
-        userlogin.setPhone(phone);
+        if (account.contains("@")) {
+            userlogin.setEmail(account);
+        } else {
+            userlogin.setPhone(account);
+        }
         userlogin.setPassword(password);
-        Boolean login = userService.login(userlogin);
-        if (login != null) {
-            if (login) {
-                return new ResultData().success();
-            } else {
+        String userId = userService.login(userlogin);
+        if (userId != null) {
+            if (userId.equals("")) {
                 return new ResultData().failure("密码错误");
+            } else {
+                return new ResultData().success(userId);
             }
         } else {
             return new ResultData().failure("用户名不存在");
@@ -44,15 +48,19 @@ public class UserController {
     /**
      * 用户注册
      *
-     * @param phone
+     * @param account
      * @param password
      * @return
      */
     @RequestMapping(value = "signUp", method = RequestMethod.POST)
-    public ResultData signUp(String phone, String password) {
+    public ResultData signUp(String account, String password) {
         UserLogin userLogin = new UserLogin();
         userLogin.setId(CommonsUtils.getUUID());
-        userLogin.setPhone(phone);
+        if (account.contains("@")) {
+            userLogin.setEmail(account);
+        } else {
+            userLogin.setPhone(account);
+        }
         userLogin.setPassword(password);
         try {
             if (userService.insertUserLogin(userLogin)) {

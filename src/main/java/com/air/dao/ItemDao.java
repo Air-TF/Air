@@ -2,10 +2,8 @@ package com.air.dao;
 
 
 import com.air.bean.Item;
-import com.air.common.utils.Page;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
