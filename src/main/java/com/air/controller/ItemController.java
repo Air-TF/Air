@@ -18,6 +18,13 @@ public class ItemController {
     @Autowired
     private HistoryService historyService;
 
+    /**
+     * 获取详细产品信息，并记录浏览历史
+     *
+     * @param id
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public ResultData getDetailItem(@PathVariable String id, String userId) {
         Item item = itemService.selectDetailedItemById(Long.valueOf(id));

@@ -87,46 +87,46 @@ public class AdminController {
 
     /**
      * 管理模块选择
-     *
+     * TODO:待优化
      * @param request
      * @return
      */
-    @RequestMapping(value = "choose", method = RequestMethod.GET)
-    @ResponseBody
-    public ResultData choose(HttpServletRequest request) {
-        if (request.getParameter("menuName") != null) {
-            Menu menu = Menu.getMenuByName(request.getParameter("menuName").trim());
-            if (menu != null) {
-                request.getSession().setAttribute("menu", menu);
-            }
-        }
-        List dataList = null;
-        switch ((Menu) request.getSession().getAttribute("menu")) {
-            case CATE:
-                break;
-            case SUBCATE:
-                break;
-            case ITEM:
-                Integer categoryId = -1;
-                String s = request.getParameter("categoryId");
-                if (s != null && !s.equals("")) {
-                    categoryId = Integer.valueOf(s);
-                }
-                if (categoryId < 0) {
-                    dataList = categoryService.selectCategoryList();
-                } else {
-                    dataList = subcategoryService.selectSubcategoryListByCategoryId(categoryId);
-                }
-                break;
-            case PARAM:
-                break;
-        }
-        return new ResultData().success(dataList);
-    }
+//    @RequestMapping(value = "choose", method = RequestMethod.GET)
+//    @ResponseBody
+//    public ResultData choose(HttpServletRequest request) {
+//        if (request.getParameter("menuName") != null) {
+//            Menu menu = Menu.getMenuByName(request.getParameter("menuName").trim());
+//            if (menu != null) {
+//                request.getSession().setAttribute("menu", menu);
+//            }
+//        }
+//        List dataList = null;
+//        switch ((Menu) request.getSession().getAttribute("menu")) {
+//            case CATE:
+//                break;
+//            case SUBCATE:
+//                break;
+//            case ITEM:
+//                Integer categoryId = -1;
+//                String s = request.getParameter("categoryId");
+//                if (s != null && !s.equals("")) {
+//                    categoryId = Integer.valueOf(s);
+//                }
+//                if (categoryId < 0) {
+//                    dataList = categoryService.selectCategoryList();
+//                } else {
+//                    dataList = subcategoryService.selectSubcategoryListByCategoryId(categoryId);
+//                }
+//                break;
+//            case PARAM:
+//                break;
+//        }
+//        return new ResultData().success(dataList);
+//    }
 
     /**
      * 分页数据列表
-     *
+     * TODO:待优化
      * @param page
      * @param rows
      * @param request
@@ -168,7 +168,7 @@ public class AdminController {
 
     /**
      * 插入
-     *
+     * TODO:待优化
      * @param request
      * @return
      * @throws IOException
@@ -203,7 +203,7 @@ public class AdminController {
 
     /**
      * 查找
-     *
+     * TODO:待优化
      * @param request
      * @return
      */
@@ -233,7 +233,7 @@ public class AdminController {
 
     /**
      * 更新
-     *
+     * TODO:待优化
      * @param request
      * @return
      * @throws IOException
@@ -275,7 +275,7 @@ public class AdminController {
 
     /**
      * 删除
-     *
+     * TODO:待优化
      * @param request
      * @return
      */

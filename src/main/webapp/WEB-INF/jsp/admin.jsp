@@ -576,7 +576,7 @@
                 //产品管理 类别选择改变
                 $(".detail-menu select[name='category']").change(function () {
                     $.ajax({
-                        url: "admin/choose",
+                        url: "category/choose",
                         type: "GET",
                         data: {"categoryId": $(this).val()},
                         dataType: "json",
@@ -594,7 +594,7 @@
                 //编辑窗口 类别选择器
                 $("#edit_dialog select[name='category']").change(function () {
                     $.ajax({
-                        url: "admin/choose",
+                        url: "category/choose",
                         type: "GET",
                         data: {"categoryId": $(this).val()},
                         dataType: "json",
@@ -614,7 +614,7 @@
                     var menuName = this.id
                     // item_body.total = -1;
                     item_body.currentMenuType = menuName;
-                    $.get("admin/choose", {"menuName": menuName}, function (data) {
+                    $.get("category/choose", {"menuName": menuName}, function (data) {
                         if (data.meta.success) {
                             switch (menuName) {
                                 case 'item':

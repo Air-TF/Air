@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -38,7 +40,9 @@ public class UserController {
             if (userId.equals("")) {
                 return new ResultData().failure("密码错误");
             } else {
-                return new ResultData().success(userId);
+                HashMap<String, String> map = new HashMap<>();
+                map.put("userId",userId);
+                return new ResultData().success(map);
             }
         } else {
             return new ResultData().failure("用户名不存在");
