@@ -1,11 +1,5 @@
-import com.air.bean.History;
-import com.air.bean.Item;
-import com.air.bean.ParamDesc;
-import com.air.bean.UserLogin;
-import com.air.dao.HistoryDao;
-import com.air.dao.ItemDao;
-import com.air.dao.ParamDescDao;
-import com.air.dao.UserLoginDao;
+import com.air.bean.*;
+import com.air.dao.*;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,11 +10,12 @@ import java.util.List;
 
 
 public class DaoTest {
-    private Logger logger = Logger.getLogger(DaoTest.class);
-    private ParamDescDao descDao;
-    private ItemDao itemDao;
-    private UserLoginDao userLoginDao;
-    private HistoryDao historyDao;
+    Logger logger = Logger.getLogger(DaoTest.class);
+    ParamDescDao descDao;
+    ItemDao itemDao;
+    UserLoginDao userLoginDao;
+    HistoryDao historyDao;
+    RecommendDao recommendDao;
 
     @Before
     public void init() {
@@ -30,10 +25,11 @@ public class DaoTest {
         itemDao = context.getBean(ItemDao.class);
         userLoginDao = context.getBean(UserLoginDao.class);
         historyDao = context.getBean(HistoryDao.class);
+        recommendDao = context.getBean(RecommendDao.class);
     }
 
     @Test
-    public void UpdateTest() {
+    public void updateTest() {
         Item item = itemDao.selectDetailedItemById(1L);
         List<ParamDesc> descList = item.getParamCategoryList().get(0).getParamDescList();
         item.getParamCategoryList().get(0).getParamDescList().get(0).setDescribe("2018年12月27日");
@@ -48,17 +44,24 @@ public class DaoTest {
     }
 
     @Test
-    public void InsertTest() {
+    public void insertTest() {
 //        UserLogin userLogin=new UserLogin();
 //        userLogin.setId("31822f5a4d6947c7b74e6acb35676d28");
 ////        userLogin.setName("a");
 //        userLogin.setPassword("123");
 //        userLogin.setPhone("1234");
 //        userLoginDao.insertUserLogin(userLogin);
-        History history =new History();
+        History history = new History();
         history.setItemId(2L);
         history.setUserId("1");
         historyDao.insertHistory(history);
+    }
+
+    @Test
+    public void selectTest() {
+        Item item = recommendDao.getRecommendByHot(1);
+        logger.debug(item.toString());
+
     }
 
 }

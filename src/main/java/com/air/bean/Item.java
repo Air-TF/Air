@@ -95,4 +95,19 @@ public class Item{
     public void setParamCategoryList(List<ParamCategory> paramCategoryList) {
         this.paramCategoryList = paramCategoryList;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
+                ", image='" + image + '\'' +
+                ", price=" + price +
+                ", brand='" + brand + '\'' +
+                ", created=" + created +
+                ", alias='" + alias + '\'' +
+                ", paramCategoryList=" + paramCategoryList +
+                '}';
+    }
 }
