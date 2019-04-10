@@ -4,6 +4,8 @@ public class History {
     private Long itemId;
     private String userId;
     private int times;
+    private boolean favorite;
+    private boolean star;
 
     public History() {
     }
@@ -35,5 +37,21 @@ public class History {
 
     public void setTimes(int times) {
         this.times = times;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
+    public boolean isStar() {
+        return star;
+    }
+
+    public void setStar(boolean star) {
+        this.star = star;
     }
 }

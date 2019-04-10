@@ -1,5 +1,6 @@
 package com.air.service.Impl;
 
+import com.air.bean.Item;
 import com.air.bean.UserLogin;
 import com.air.common.utils.CommonsUtils;
 import com.air.bean.Page;
@@ -28,7 +29,11 @@ public class UserServiceImpl implements UserService {
             return null;
         }
 
-        return userlogin.getPassword().equals(user.getPassword()) ? user.getId() : "";
+        if (user != null) {
+            return userlogin.getPassword().equals(user.getPassword()) ? user.getId() : "";
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -63,6 +68,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Boolean deleteUserLoginById(String id) {
-        return userLoginDao.updateUserStatus(id,9);
+        return userLoginDao.updateUserStatus(id, 9);
+    }
+
+    @Override
+    public Page<Item> listStar(Integer page, Integer size, String userId) {
+        Integer start = (page - 1) * size;
+        List<Item> itemList = userLoginDao.selectUserStar(start, size, userId);
+        int itemCount = userLoginDao.selectUserStarCount(userId);
+        Page<Item> itemPage = new Page<>();
+        itemPage.setPage(page);
+        itemPage.setRows(itemList);
+        itemPage.setSize(size);
+        itemPage.setTotal(itemCount);
+        return itemPage;
     }
 }

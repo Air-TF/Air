@@ -52,8 +52,9 @@ public class DaoTest {
 //        userLogin.setPhone("1234");
 //        userLoginDao.insertUserLogin(userLogin);
         History history = new History();
-        history.setItemId(2L);
+        history.setItemId(3L);
         history.setUserId("1");
+        history.setStar(true);
         historyDao.insertHistory(history);
     }
 

@@ -2,8 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.air.dao.RecommendDao">
 
+    <select id="listRecommendByItem" resultType="com.air.bean.Item">
+        select ti.id, ti.name, ti.title, ti.price, ti.image
+        from tb_item ti
+        where ti.brand = (select item.brand
+                          from tb_item item
+                          where item.id = #{id})
+        limit 8
+    </select>
+
+    <select id="listRecommendByUser" resultType="com.air.bean.Item">
+        select ti.id, ti.name, ti.title, ti.price, ti.image
+        from tb_item ti
+                 join tb_history th on ti.id = th.item_id
+                 join tb_user_login tul on th.user_id = tul.id
+        where tul.id = #{id}
+        limit 8
+    </select>
+
     <select id="getRecommendByHot" resultType="com.air.bean.Item">
-        select ti.id, ti.name, ti.title, ti.price, SUM(th.times) totleTimes
+        select ti.id, ti.name, ti.title, ti.price, ti.image, SUM(th.times) totleTimes
         from air.tb_item ti
                  join air.tb_history th on ti.id = th.item_id
                  join air.tb_subcategory ts on ti.subcategory_id = ts.id
@@ -12,6 +30,17 @@
         group by ti.id
         order by totleTimes desc
         limit 1;
+    </select>
+
+    <select id="listRecommendByHot" resultType="com.air.bean.Item">
+        select ti.id, ti.name, ti.title, ti.price, ti.image, SUM(th.times) totleTimes
+        from air.tb_item ti
+                 join air.tb_history th on ti.id = th.item_id
+                 join air.tb_subcategory ts on ti.subcategory_id = ts.id
+                 join air.tb_category tc ON ts.category_id = tc.id
+        group by ti.id
+        order by totleTimes desc
+        limit 6;
     </select>
 
 </mapper>

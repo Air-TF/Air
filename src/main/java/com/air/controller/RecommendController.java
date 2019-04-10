@@ -16,23 +16,27 @@ public class RecommendController {
 
     @RequestMapping("item/{id}")
     public ResultData listRecommendByItem(@PathVariable String id) {
-
-        return new ResultData().success();
+        return new ResultData().success(recommendService.listRecommendByItem(Integer.valueOf(id)));
     }
 
     @RequestMapping("user/{id}")
     public ResultData listRecommendByUser(@PathVariable String id) {
-
-        return new ResultData().success();
+        return new ResultData().success(recommendService.listRecommendByUser(id));
     }
 
     /**
      * 每个分类下最多浏览数商品
+     *
      * @param id
      * @return
      */
     @RequestMapping("category/{id}")
     public ResultData getRecommendByHot(@PathVariable String id) {
         return new ResultData().success(recommendService.getRecommendByHot(Integer.valueOf(id)));
+    }
+
+    @RequestMapping("category")
+    public ResultData listRecommendByHot(){
+        return new ResultData().success(recommendService.listRecommendByHot());
     }
 }

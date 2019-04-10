@@ -4,7 +4,9 @@
     <resultMap id="BaseResultMap" type="com.air.bean.History">
         <id column="user_id" jdbcType="VARCHAR" property="userId"/>
         <id column="item_id" jdbcType="BIGINT" property="itemId"/>
-        <result column="times" jdbcType="INTEGER" property="items"/>
+        <result column="times" jdbcType="INTEGER" property="times"/>
+        <result column="star" jdbcType="INTEGER" property="star"/>
+        <result column="favorite" jdbcType="INTEGER" property="favorite"/>
     </resultMap>
 
     <insert id="insertHistory" parameterType="com.air.bean.History">
@@ -12,4 +14,27 @@
         values (#{userId}, #{itemId}, 1)
         on duplicate key update times=times + 1
     </insert>
+
+    <update id="updateHistory" parameterType="com.air.bean.History">
+        update tb_history th
+        <set>
+            <if test="favorite != null">
+                th.favorite = #{favorite},
+            </if>
+            <if test="star != null">
+                th.star = #{star}
+            </if>
+        </set>
+        <where>
+            th.item_id = #{itemId} and th.user_id = #{userId}
+        </where>
+    </update>
+
+    <select id="selectHistory" resultMap="BaseResultMap">
+        select * from tb_history th
+        <where>
+            th.item_id= #{itemId} and th.user_id = #{userId}
+        </where>
+        limit 1
+    </select>
 </mapper>

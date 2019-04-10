@@ -1,9 +1,6 @@
 package com.air.controller;
 
-import com.air.bean.History;
-import com.air.bean.Item;
-import com.air.bean.ResultData;
-import com.air.bean.Page;
+import com.air.bean.*;
 import com.air.service.HistoryService;
 import com.air.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +23,14 @@ public class ItemController {
      * @return
      */
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    public ResultData getDetailItem(@PathVariable String id, String userId) {
-        Item item = itemService.selectDetailedItemById(Long.valueOf(id));
-        if (userId != null) historyService.insertHistory(new History(Long.valueOf(id), userId));
-        return new ResultData().success(item);
+    public ResultData getDetailItem(@PathVariable String id, @RequestParam(required = false) String userId) {
+        ItemVO itemVO = new ItemVO();
+        itemVO.setItem(itemService.selectDetailedItemById(Long.valueOf(id)));
+        if (userId != null) {
+            historyService.insertHistory(new History(Long.valueOf(id), userId));
+            itemVO.setHistory(historyService.getHistory(Long.valueOf(id), userId));
+        }
+        return new ResultData().success(itemVO);
     }
 
     @RequestMapping(value = "newItem", method = RequestMethod.POST)

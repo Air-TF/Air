@@ -1,13 +1,14 @@
 package com.air.controller;
 
 
-import com.air.bean.ResultData;
-import com.air.bean.UserLogin;
+import com.air.bean.*;
 import com.air.common.utils.CommonsUtils;
+import com.air.service.HistoryService;
 import com.air.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -18,6 +19,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    HistoryService historyService;
 
     /**
      * 登录验证
@@ -41,7 +45,7 @@ public class UserController {
                 return new ResultData().failure("密码错误");
             } else {
                 HashMap<String, String> map = new HashMap<>();
-                map.put("userId",userId);
+                map.put("userId", userId);
                 return new ResultData().success(map);
             }
         } else {
@@ -68,7 +72,9 @@ public class UserController {
         userLogin.setPassword(password);
         try {
             if (userService.insertUserLogin(userLogin)) {
-                return new ResultData().success();
+                HashMap<String, String> map = new HashMap<>();
+                map.put("userId", userLogin.getId());
+                return new ResultData().success(map);
             } else {
                 return new ResultData().failure("注册失败");
             }
@@ -87,5 +93,27 @@ public class UserController {
     public ResultData update(UserLogin userLogin) {
         userService.updateUser(userLogin);
         return new ResultData().success();
+    }
+
+    /**
+     * 获取用户收藏列表
+     *
+     * @param page
+     * @param size
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "star", method = RequestMethod.GET)
+    public ResultData listStar(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size, String userId) {
+        Page<Item> itemPage = userService.listStar(page, size, userId);
+        return new ResultData().success(itemPage);
+    }
+
+    @RequestMapping(value = "favorite", method = RequestMethod.GET)
+    public ResultData setFavorite(History history) {
+        if (historyService.updateHistory(history))
+            return new ResultData().success();
+        else
+            return new ResultData().failure();
     }
 }
