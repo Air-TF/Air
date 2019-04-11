@@ -26,4 +26,6 @@ public interface UserLoginDao {
     List<Item> selectUserStar(@Param("start") Integer start, @Param("size") Integer size, @Param("userId") String userId);
 
     int selectUserStarCount(@Param("userId") String userId);
+
+    void deleteUserById(@Param("userId") String userId);
 }

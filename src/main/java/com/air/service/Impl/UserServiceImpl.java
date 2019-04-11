@@ -30,6 +30,10 @@ public class UserServiceImpl implements UserService {
         }
 
         if (user != null) {
+            if (user.getStatus() != 1 && (new Date()).getTime() - user.getCreated().getTime() > 60 * 1000){
+                userLoginDao.deleteUserById(user.getId());
+                return null;
+            }
             return userlogin.getPassword().equals(user.getPassword()) ? user.getId() : "";
         } else {
             return null;

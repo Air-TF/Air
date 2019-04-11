@@ -33,13 +33,13 @@
         insert into tb_user_login(id, name, password, phone, email, created, status)
         <choose>
             <when test="name == null and phone !=null">
-                values (#{id}, #{phone},#{password}, #{phone}, #{email}, #{created}, 1)
+                values (#{id}, #{phone},#{password}, #{phone}, #{email}, #{created}, #{status})
             </when>
             <when test="name == null and phone ==null">
-                values (#{id}, #{email},#{password}, #{phone}, #{email}, #{created}, 1)
+                values (#{id}, #{email},#{password}, #{phone}, #{email}, #{created}, #{status})
             </when>
             <otherwise>
-                values (#{id}, #{name},#{password}, #{phone}, #{email}, #{created}, 1)
+                values (#{id}, #{name},#{password}, #{phone}, #{email}, #{created}, #{status})
             </otherwise>
         </choose>
     </insert>
@@ -114,4 +114,10 @@
         where th.user_id = #{userId}
           and th.star = true
     </select>
+
+    <delete id="deleteUserById">
+        delete
+        from tb_user_login
+        where id = #{userId}
+    </delete>
 </mapper>

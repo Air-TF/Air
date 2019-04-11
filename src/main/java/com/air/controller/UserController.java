@@ -3,14 +3,13 @@ package com.air.controller;
 
 import com.air.bean.*;
 import com.air.common.utils.CommonsUtils;
+import com.air.common.utils.EmailUtils;
 import com.air.service.HistoryService;
 import com.air.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 
 @RestController
@@ -49,7 +48,7 @@ public class UserController {
                 return new ResultData().success(map);
             }
         } else {
-            return new ResultData().failure("用户名不存在");
+            return new ResultData().failure("用户名不存在或状态异常");
         }
     }
 
@@ -64,22 +63,40 @@ public class UserController {
     public ResultData signUp(String account, String password) {
         UserLogin userLogin = new UserLogin();
         userLogin.setId(CommonsUtils.getUUID());
+        int verificationCode = (int) ((Math.random() * 9 + 1) * 100000);
         if (account.contains("@")) {
             userLogin.setEmail(account);
         } else {
             userLogin.setPhone(account);
         }
         userLogin.setPassword(password);
+        userLogin.setStatus(verificationCode);
         try {
             if (userService.insertUserLogin(userLogin)) {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("userId", userLogin.getId());
+                if (userLogin.getEmail() != null) {
+                    String context = EmailUtils.EmailContext(userLogin.getEmail(), userLogin.getId(), String.valueOf(verificationCode));
+                    EmailUtils.sendEmail(userLogin.getEmail(), "账号激活", context, null);
+                }
                 return new ResultData().success(map);
             } else {
                 return new ResultData().failure("注册失败");
             }
         } catch (Exception e) {
             return new ResultData().failure("用户已存在");
+        }
+    }
+
+    @RequestMapping(value = "check/{userId}/{code}", produces = "text/html;charset=UTF-8")
+    public String check(@PathVariable("userId") String userId, @PathVariable("code") int code) {
+        UserLogin user = userService.selectUserLoginById(userId);
+        if (user.getStatus() == (code) && (new Date()).getTime() - user.getCreated().getTime() < 24 * 60 * 60 * 1000) {
+            user.setStatus(1);
+            userService.updateUser(user);
+            return "激活成功，请返回应用登陆";
+        } else {
+            return "链接失效，请重新注册";
         }
     }
 
