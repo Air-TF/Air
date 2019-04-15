@@ -7,7 +7,4 @@
     <result column="subcategory_id" jdbcType="BIGINT" property="subcategoryId" />
   </resultMap>
 
-  <sql id="Base_Column_List">
-    id, name, content_id
-  </sql>
 </mapper>

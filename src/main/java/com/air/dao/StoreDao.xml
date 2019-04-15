@@ -6,7 +6,5 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="score" jdbcType="REAL" property="score" />
   </resultMap>
-  <sql id="Base_Column_List">
-    user_id, name, score
-  </sql>
+
 </mapper>

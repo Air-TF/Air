@@ -37,4 +37,32 @@
         </where>
         limit 1
     </select>
+
+    <select id="listHistoryByUser" resultMap="BaseResultMap">
+        select th2.user_id, item_id, times, star, favorite
+        from tb_history th2
+        where th2.user_id in (select distinct th.user_id
+                              from tb_history th
+                              where th.item_id in (select t.item_id
+                                                   from tb_history t
+                                                   where t.user_id = #{userId}));
+    </select>
+
+    <select id="listHistoryByItem" resultMap="BaseResultMap">
+        select th2.user_id, item_id, times, star, favorite
+        from tb_history th2
+        where th2.item_id in (select distinct th.item_id
+                              from tb_history th
+                              where th.user_id in (select t.user_id
+                                                   from tb_history t
+                                                   where t.item_id = #{itemId}));
+    </select>
+
+    <insert id="addHistory" parameterType="com.air.bean.History">
+        insert tb_history(user_id, item_id, times, star, favorite)
+        values (#{userId}, #{itemId}, #{times}, #{star}, #{favorite})
+        on duplicate key update times=times + 1,
+                                star = #{star},
+                                favorite = #{favorite}
+    </insert>
 </mapper>

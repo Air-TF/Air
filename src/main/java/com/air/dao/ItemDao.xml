@@ -95,15 +95,25 @@
 
     <select id="selectDetailedItemById" resultMap="DetailedItemResultMap">
         select i.id, i.name, i.title, i.image, i.price, i.brand, i.created,
-               i.alias,c.id c_id, c.name c_name, s.id s_id, s.name s_name,d.`describe`
+        i.alias,c.id c_id, c.name c_name, s.id s_id, s.name s_name,d.`describe`
         from tb_item i
-          left outer join tb_param_desc d on d.item_id = i.id
-          left outer join tb_param_subcategory s on s.id = d.subcategory_id
-          left outer join tb_param_category c on c.id = s.category_id
+        left outer join tb_param_desc d on d.item_id = i.id
+        left outer join tb_param_subcategory s on s.id = d.subcategory_id
+        left outer join tb_param_category c on c.id = s.category_id
         <where>
             <if test="id != null">
                 i.id = #{id}
             </if>
         </where>
     </select>
+
+
+    <select id="listItemByKeyWord" resultMap="BaseResultMap">
+        select *
+        from air.tb_item
+        <where>
+            tb_item.name like "%"#{keyword}"%" and tb_item.subcategory_id = #{subcategoryId}
+        </where>
+    </select>
+
 </mapper>

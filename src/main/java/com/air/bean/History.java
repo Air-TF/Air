@@ -1,5 +1,7 @@
 package com.air.bean;
 
+import java.util.Objects;
+
 public class History {
     private Long itemId;
     private String userId;
@@ -53,5 +55,16 @@ public class History {
 
     public void setStar(boolean star) {
         this.star = star;
+    }
+
+    @Override
+    public String toString() {
+        return "History{" +
+                "itemId=" + itemId +
+                ", userId='" + userId + '\'' +
+                ", times=" + times +
+                ", favorite=" + favorite +
+                ", star=" + star +
+                '}';
     }
 }

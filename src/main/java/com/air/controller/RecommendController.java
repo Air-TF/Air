@@ -16,7 +16,7 @@ public class RecommendController {
 
     @RequestMapping("item/{id}")
     public ResultData listRecommendByItem(@PathVariable String id) {
-        return new ResultData().success(recommendService.listRecommendByItem(Integer.valueOf(id)));
+        return new ResultData().success(recommendService.listRecommendByItem(Long.valueOf(id)));
     }
 
     @RequestMapping("user/{id}")

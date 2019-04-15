@@ -19,9 +19,5 @@
     <result column="buyer_message" jdbcType="VARCHAR" property="buyerMessage" />
     <result column="buyer_rate" jdbcType="INTEGER" property="buyerRate" />
   </resultMap>
-  <sql id="Base_Column_List">
-    id, seller_id, buyer_id, address_id, status, post_fee, create_time, update_time, 
-    payment_time, consign_time, end_time, close_time, shipping_name, shipping_code, buyer_message, 
-    buyer_rate
-  </sql>
+
 </mapper>

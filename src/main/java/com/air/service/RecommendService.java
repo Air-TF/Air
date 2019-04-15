@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface RecommendService {
     Item getRecommendByHot(Integer id);
-    List<Item> listRecommendByItem(Integer id);
+    List<Item> listRecommendByItem(Long id);
     List<Item> listRecommendByUser(String id);
     List<Item> listRecommendByHot();
 }

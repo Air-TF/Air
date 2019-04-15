@@ -1,12 +1,15 @@
 import com.air.bean.*;
+import com.air.common.utils.RecommendUtils;
 import com.air.dao.*;
 import org.apache.log4j.Logger;
+import org.apache.log4j.Priority;
+import org.apache.solr.common.util.Hash;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import java.util.List;
+import java.util.*;
 
 
 public class DaoTest {
@@ -65,6 +68,56 @@ public class DaoTest {
 
     }
 
+    @Test
+    public void UserCFTest() {
+        String s = "1";
+        List<History> histories = historyDao.listHistoryByUser(s);
+
+        //Map<userId,<itemId,score>>
+//        Map<String, Map<Long, Double>> userMap = new HashMap<>();
+//        for (int i = 0; i < histories.size(); i++) {
+//            String userId = histories.get(i).getUserId();
+//            if (userMap.get(userId) == null) {
+//                HashMap<Long, Double> hashMap = new HashMap<>();
+//                userMap.put(userId, hashMap);
+//            }
+//            userMap.get(userId).put(histories.get(i).getItemId(), RecommendUtils.getUtils().getScore(histories.get(i)));
+//        }
+
+        List<Long> longList = RecommendUtils.getUtils().UserBased(histories, s, 10);
+        List<Item> itemList = recommendDao.listRecommendByIds(longList);
+        logger.info(itemList);
+    }
+
+    @Test
+    public void ItemCFTest(){
+        Long id = 1L;
+        List<History> histories = historyDao.listHistoryByItem(id);
+
+        List<Long> longList = RecommendUtils.getUtils().ItemBased(histories, id, 10);
+
+        List<Item> itemList = recommendDao.listRecommendByIds(longList);
+
+        logger.debug(itemList);
+    }
+
+    @Test
+    public void insertHistory() {
+        String userId = "86c072affb204c668afa70aa0c239782";
+        List<Item> itemList = itemDao.listItemByKeyWord("魅族", 31);
+        for (int i = 0; i < itemList.size(); i++) {
+            History history = new History();
+            int items = (int) (Math.random() * 100 + 1);
+            boolean star = Math.random() < 0.5;
+            boolean favorite = Math.random() < 0.5;
+
+            history.setItemId(itemList.get(i).getId());
+            history.setUserId(userId);
+            history.setTimes(items);
+            history.setStar(star);
+            history.setFavorite(favorite);
+            historyDao.addHistory(history);
+        }
+    }
+
 }
-
-

@@ -2,22 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.air.dao.RecommendDao">
 
-    <select id="listRecommendByItem" resultType="com.air.bean.Item">
+    <select id="listRecommendByIds" resultType="com.air.bean.Item">
         select ti.id, ti.name, ti.title, ti.price, ti.image
         from tb_item ti
-        where ti.brand = (select item.brand
-                          from tb_item item
-                          where item.id = #{id})
-        limit 8
-    </select>
-
-    <select id="listRecommendByUser" resultType="com.air.bean.Item">
-        select ti.id, ti.name, ti.title, ti.price, ti.image
-        from tb_item ti
-                 join tb_history th on ti.id = th.item_id
-                 join tb_user_login tul on th.user_id = tul.id
-        where tul.id = #{id}
-        limit 8
+        where ti.id in
+        <foreach collection="itemIdList" item="itemId" open="(" close=")" separator=",">
+            #{itemId}
+        </foreach>
     </select>
 
     <select id="getRecommendByHot" resultType="com.air.bean.Item">
@@ -40,7 +31,7 @@
                  join air.tb_category tc ON ts.category_id = tc.id
         group by ti.id
         order by totleTimes desc
-        limit 6;
+        limit #{start},#{num};
     </select>
 
 </mapper>

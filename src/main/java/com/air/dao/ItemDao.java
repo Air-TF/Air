@@ -20,4 +20,6 @@ public interface ItemDao {
     Integer deleteItemById(Long id);
 
     Item selectDetailedItemById(@Param("id") Long id);
+
+    List<Item> listItemByKeyWord(@Param("keyword")String keyword, @Param("subcategoryId")int subcategoryId);
 }

@@ -6,7 +6,5 @@
     <id column="item_id" jdbcType="BIGINT" property="itemId" />
     <result column="price" jdbcType="BIGINT" property="price" />
   </resultMap>
-  <sql id="Base_Column_List">
-    store_id, item_id, price
-  </sql>
+
 </mapper>
