@@ -126,11 +126,27 @@ public class UserController {
         return new ResultData().success(itemPage);
     }
 
+    /**
+     * 设置用户收藏或者喜欢
+     *
+     * @param history
+     * @return
+     */
     @RequestMapping(value = "favorite", method = RequestMethod.GET)
     public ResultData setFavorite(History history) {
         if (historyService.updateHistory(history))
             return new ResultData().success();
         else
             return new ResultData().failure();
+    }
+
+    /**
+     * 获取用户信息
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "{id}", method = RequestMethod.GET)
+    public ResultData getUser(@PathVariable("id") String id) {
+        return new ResultData().success(userService.getUser(id));
     }
 }

@@ -6,7 +6,6 @@ import com.air.common.utils.CommonsUtils;
 import com.air.bean.Page;
 import com.air.dao.UserLoginDao;
 import com.air.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -15,8 +14,11 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    UserLoginDao userLoginDao;
+    private UserLoginDao userLoginDao;
+
+    public UserServiceImpl(UserLoginDao userLoginDao) {
+        this.userLoginDao = userLoginDao;
+    }
 
     @Override
     public String login(UserLogin userlogin) {
@@ -30,7 +32,7 @@ public class UserServiceImpl implements UserService {
         }
 
         if (user != null) {
-            if (user.getStatus() != 1 && (new Date()).getTime() - user.getCreated().getTime() > 60 * 1000){
+            if (user.getStatus() != 1 && (new Date()).getTime() - user.getCreated().getTime() > 60 * 1000) {
                 userLoginDao.deleteUserById(user.getId());
                 return null;
             }
@@ -44,12 +46,12 @@ public class UserServiceImpl implements UserService {
     public Boolean insertUserLogin(UserLogin userLogin) {
         userLogin.setId(CommonsUtils.getUUID());
         userLogin.setCreated(new Date());
-        return userLoginDao.insertUserLogin(userLogin) == 1 ? true : false;
+        return userLoginDao.insertUserLogin(userLogin) == 1;
     }
 
     @Override
     public Boolean updateUser(UserLogin userLogin) {
-        return userLoginDao.updateUser(userLogin) == 1 ? true : false;
+        return userLoginDao.updateUser(userLogin) == 1;
     }
 
     @Override
@@ -86,5 +88,12 @@ public class UserServiceImpl implements UserService {
         itemPage.setSize(size);
         itemPage.setTotal(itemCount);
         return itemPage;
+    }
+
+    @Override
+    public UserLogin getUser(String id) {
+        UserLogin user = userLoginDao.selectUserLoginById(id);
+        user.setPassword("");
+        return user;
     }
 }

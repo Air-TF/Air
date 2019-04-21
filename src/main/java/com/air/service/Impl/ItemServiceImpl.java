@@ -2,6 +2,7 @@ package com.air.service.Impl;
 
 import com.air.bean.Item;
 import com.air.bean.Page;
+import com.air.common.utils.SolrUtils;
 import com.air.dao.ItemDao;
 import com.air.dao.ParamDescDao;
 import com.air.service.ItemService;
@@ -30,15 +31,16 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     public Page<Item> selectItemList(Integer page, Integer size, String keyword, Integer subcategoryId) {
-        Integer start = (page - 1) * size;
-        List<Item> itemList = itemDao.selectItemList(start, size, keyword, subcategoryId);
-        Integer itemListCount = itemDao.selectItemListCount(keyword, subcategoryId);
-        Page<Item> itemPage = new Page<>();
-        itemPage.setPage(page);
-        itemPage.setRows(itemList);
-        itemPage.setSize(size);
-        itemPage.setTotal(itemListCount);
-        return itemPage;
+//        Integer start = (page - 1) * size;
+//        List<Item> itemList = itemDao.selectItemList(start, size, keyword, subcategoryId);
+//        Integer itemListCount = itemDao.selectItemListCount(keyword, subcategoryId);
+//
+//        Page<Item> itemPage = new Page<>();
+//        itemPage.setPage(page);
+//        itemPage.setRows(itemList);
+//        itemPage.setSize(size);
+//        itemPage.setTotal(itemListCount);
+        return SolrUtils.getUtils().getItemList(page, size, keyword, subcategoryId);
     }
 
     /**

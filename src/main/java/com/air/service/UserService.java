@@ -19,4 +19,6 @@ public interface UserService {
     Boolean deleteUserLoginById(String id);
 
     Page<Item> listStar(Integer page, Integer size, String userId);
+
+    UserLogin getUser(String id);
 }

@@ -1,4 +1,5 @@
 import com.air.bean.*;
+import com.air.common.utils.MD5Utils;
 import com.air.common.utils.RecommendUtils;
 import com.air.dao.*;
 import org.apache.log4j.Logger;
@@ -8,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
+import sun.security.provider.MD5;
 
 import java.util.*;
 
@@ -90,7 +92,7 @@ public class DaoTest {
     }
 
     @Test
-    public void ItemCFTest(){
+    public void ItemCFTest() {
         Long id = 1L;
         List<History> histories = historyDao.listHistoryByItem(id);
 
@@ -118,6 +120,20 @@ public class DaoTest {
             history.setFavorite(favorite);
             historyDao.addHistory(history);
         }
+    }
+
+    @Test
+    public void addSalt() {
+        List<UserLogin> userLoginList = userLoginDao.selectUserLoginList(0, 20, "");
+        for (UserLogin user : userLoginList) {
+            String password = user.getPassword();
+            password = MD5Utils.md5(password);
+            password = MD5Utils.md5(password + MD5Utils.addSalt(password));
+            user.setPassword(password);
+            userLoginDao.updateUser(user);
+        }
+
+
     }
 
 }
