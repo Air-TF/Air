@@ -6,7 +6,7 @@ import com.air.bean.SimilarityDTO;
 import java.util.*;
 
 public class RecommendUtils {
-    RecommendAlgorithm algorithm = new RecommendAlgorithm();
+    private RecommendAlgorithm algorithm = new RecommendAlgorithm();
 
     private static class SingletonHolder {
         private static final RecommendUtils RECOMMEND_UTILS = new RecommendUtils();
@@ -17,14 +17,15 @@ public class RecommendUtils {
     }
 
     private class RecommendAlgorithm {
+
         /**
-         * 杰卡德相似性度量算法
+         * 欧式距离
          *
          * @param map1
          * @param map2
          * @return
          */
-        private double jacCardSimilarity(Map<?, Double> map1, Map<?, Double> map2) {
+        private double euclideanDistance(Map<?, Double> map1, Map<?, Double> map2) {
             Set set = new HashSet(map1.keySet());
             set.addAll(map2.keySet());
             Object[] array = set.toArray();
@@ -36,11 +37,13 @@ public class RecommendUtils {
         }
 
         /**
-         * 余弦相似度算法
+         * 余弦距离
          *
+         * @param map1
+         * @param map2
          * @return
          */
-        public double cosineSimilarity(Map<?, Double> map1, Map<?, Double> map2) {
+        public double cosineDistance(Map<?, Double> map1, Map<?, Double> map2) {
             Set set = new HashSet(map1.keySet());
             set.addAll(map2.keySet());
             Object[] array = set.toArray();
@@ -59,47 +62,51 @@ public class RecommendUtils {
     /**
      * 用户相关度推荐
      *
-     * @param historyList
-     * @param id
-     * @return
+     * @param historyList 历史纪录
+     * @param id          用户id
+     * @param num         推荐条数
+     * @return 推荐产品id列表
      */
     public List<Long> UserBased(List<History> historyList, String id, Integer num) {
-        //数据转化
+        //数据转化 Map<UserId,Map<ItemId,score>>
         Map<String, Map<Long, Double>> userMap = new HashMap<>();
-        for (int i = 0; i < historyList.size(); i++) {
-            String userId = historyList.get(i).getUserId();
+        for (History history : historyList) {
+            String userId = history.getUserId();
             if (userMap.get(userId) == null) {
                 HashMap<Long, Double> hashMap = new HashMap<>();
                 userMap.put(userId, hashMap);
             }
-            userMap.get(userId).put(historyList.get(i).getItemId(), getUserBaseScore(historyList.get(i)));
+            userMap.get(userId).put(history.getItemId(), getUserBaseScore(history));
         }
 
         //计算用户相似度
         List<SimilarityDTO<String>> userSimilarity = getSimilarityList(userMap, id);
 
-//        //计算相似度
-//        String[] keyStrings = userMap.keySet().toArray(new String[0]);
-//        ArrayList<SimilarityDTO<String>> userSimilarity = new ArrayList<>();
-//        for (int i = 0; i < keyStrings.length; i++) {
-//            if (keyStrings[i].equals(id)) continue;
-//            userSimilarity.add(new SimilarityDTO<>(id, keyStrings[i], algorithm.cosineSimilarity(userMap.get(id), userMap.get(keyStrings[i]))));
-//        }
-//
-//        //相似度排序
-//        Collections.sort(userSimilarity, new Comparator<SimilarityDTO<String>>() {
-//            @Override
-//            public int compare(SimilarityDTO<String> o1, SimilarityDTO<String> o2) {
-//                if (o1.getSimilarity() > o2.getSimilarity())
-//                    return -1;
-//                else if (o1.getSimilarity() < o2.getSimilarity())
-//                    return 1;
-//                else return 0;
-//            }
-//        });
+        //获取推荐物品列表
+        List<Long> itemList = getRecommendItem(userMap, userSimilarity, 20);
 
-        //返回推荐物品
-        return calcRecommendItem(userMap, userSimilarity, 11, num);
+        //排除已经收藏物品
+        ArrayList<Map.Entry<Long, Double>> collectedList = new ArrayList<>(userMap.get(id).entrySet());
+        for (int i = 0; i < itemList.size(); i++) {
+            for (Map.Entry<Long, Double> longDoubleEntry : collectedList) {
+                if (longDoubleEntry.getKey() > 5) {
+                    if (itemList.get(i) == longDoubleEntry.getKey().longValue()) {
+                        itemList.remove(i);
+                        break;
+                    }
+                }
+            }
+        }
+
+        //获取推荐物品列表前num条数据
+        List<Long> list = new ArrayList<>();
+        num = itemList.size() > num ? num : itemList.size();
+        for (int i = 0; i < num; i++) {
+            list.add(itemList.get(i));
+        }
+
+        //返回推荐物品列表
+        return list;
     }
 
     /**
@@ -113,19 +120,19 @@ public class RecommendUtils {
     public List<Long> ItemBased(List<History> historyList, Long id, Integer num) {
         //数据转化
         Map<Long, Map<String, Double>> itemMap = new HashMap<>();
-        for (int i = 0; i < historyList.size(); i++) {
-            Long itemId = historyList.get(i).getItemId();
+        for (History history : historyList) {
+            Long itemId = history.getItemId();
             if (itemMap.get(itemId) == null) {
                 HashMap<String, Double> hashMap = new HashMap<>();
                 itemMap.put(itemId, hashMap);
             }
-            itemMap.get(itemId).put(historyList.get(i).getUserId(), getItemBaseScore(historyList.get(i)));
+            itemMap.get(itemId).put(history.getUserId(), getItemBaseScore(history));
         }
 
         //计算相似度
         List<SimilarityDTO<Long>> itemSimilarity = getSimilarityList(itemMap, id);
 
-        //返回指定数目推荐物品
+        //返回推荐物品id列表
         List<Long> list = new ArrayList<>();
         num = itemSimilarity.size() > num ? num : itemSimilarity.size();
         for (int i = 0; i < num; i++) {
@@ -135,24 +142,29 @@ public class RecommendUtils {
         return list;
     }
 
+    /**
+     * 计算相似度
+     *
+     * @param itemMap 评分矩阵
+     * @param id
+     * @param <T>     相关类型
+     * @param <H>     被相关类型
+     * @return
+     */
     private <T, H> List<SimilarityDTO<T>> getSimilarityList(Map<T, Map<H, Double>> itemMap, T id) {
         //计算相似度
         T[] KeyArr = (T[]) itemMap.keySet().toArray();
         ArrayList<SimilarityDTO<T>> itemSimilarity = new ArrayList<>();
         for (T t : KeyArr) {
             if (t.equals(id)) continue;
-            itemSimilarity.add(new SimilarityDTO<>(id, t, algorithm.jacCardSimilarity(itemMap.get(id), itemMap.get(t))));
+            itemSimilarity.add(new SimilarityDTO<>(id, t, algorithm.euclideanDistance(itemMap.get(id), itemMap.get(t))));
         }
 
-        //相似度排序
+        //相似度升序排序
         Collections.sort(itemSimilarity, new Comparator<SimilarityDTO>() {
             @Override
             public int compare(SimilarityDTO o1, SimilarityDTO o2) {
-                if (o1.getSimilarity() > o2.getSimilarity())
-                    return -1;
-                else if (o1.getSimilarity() < o2.getSimilarity())
-                    return 1;
-                else return 0;
+                return Double.compare(o1.getSimilarity(), o2.getSimilarity());
             }
         });
 
@@ -160,24 +172,26 @@ public class RecommendUtils {
     }
 
     /**
-     * 计算推荐对象
+     * 计算推荐物品
      *
      * @param historyMap 历史纪录
      * @param similarity 相似度List
      * @param top        按前top对象相似推荐
-     * @param num        推荐数量
      * @return
      */
-    private List<Long> calcRecommendItem(Map<String, Map<Long, Double>> historyMap, List<? extends SimilarityDTO> similarity, int top, int num) {
+    private List<Long> getRecommendItem(Map<String, Map<Long, Double>> historyMap, List<SimilarityDTO<String>> similarity, int top) {
         //计算推荐度  Map<itemId,推荐度>
         HashMap<Long, Double> recommendMap = new HashMap<>();
         top = top > similarity.size() ? similarity.size() : top;
+        double sumSimilarity = 0;
+        for (SimilarityDTO similarityDTO : similarity) sumSimilarity += similarityDTO.getSimilarity();
         for (int i = 0; i < top; i++) {
+            //Map<itemId,评分>
             Map<Long, Double> itemMap = historyMap.get(similarity.get(i).getT2());
             Long[] itemKey = itemMap.keySet().toArray(new Long[0]);
-            for (Long aLong : itemKey) {
-                double rate = getValue(recommendMap, aLong) + itemMap.get(aLong) * similarity.get(i).getSimilarity();
-                recommendMap.put(aLong, rate);
+            for (Long itemId : itemKey) {
+                double rate = getValue(recommendMap, itemId) + itemMap.get(itemId) * (1 - similarity.get(i).getSimilarity() / sumSimilarity);
+                recommendMap.put(itemId, rate);
             }
         }
 
@@ -190,28 +204,21 @@ public class RecommendUtils {
             }
         });
 
-
-        //排除已经收藏物品
-        ArrayList<Map.Entry<Long, Double>> collectedList = new ArrayList<>(historyMap.get(similarity.get(0).getT1()).entrySet());
-        for (int i = 0; i < recommendList.size(); i++) {
-            for (Map.Entry<Long, Double> longDoubleEntry : collectedList) {
-                if (recommendList.get(i).getKey().longValue() == longDoubleEntry.getKey().longValue()) {
-                    recommendList.remove(i);
-                    break;
-                }
-            }
-        }
-
-        //返回指定数目推荐物品
+        //返回推荐物品Id
         List<Long> list = new ArrayList<>();
-        num = recommendList.size() > num ? num : recommendList.size();
-        for (int i = 0; i < num; i++) {
+        for (int i = 0; i < recommendList.size(); i++) {
             list.add(recommendList.get(i).getKey());
         }
 
         return list;
     }
 
+    /**
+     * 获取评分
+     *
+     * @param history
+     * @return
+     */
     private double getUserBaseScore(History history) {
         double score = 0.0;
         if (history.isFavorite()) score += 2.0;
@@ -220,12 +227,25 @@ public class RecommendUtils {
         return score > 10 ? 10 : score;
     }
 
+    /**
+     * 获取评分
+     *
+     * @param history
+     * @return
+     */
     private Double getItemBaseScore(History history) {
         double score = 0.0;
         if (history.isFavorite() || history.isStar()) score = 1.0;
         return score;
     }
 
+    /**
+     * 安全获取Map值
+     *
+     * @param map
+     * @param key
+     * @return
+     */
     private double getValue(Map<?, Double> map, Object key) {
         Double value = map.get(key);
         if (value == null) return 0;
