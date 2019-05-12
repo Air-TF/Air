@@ -4,6 +4,7 @@ import com.air.bean.History;
 import com.air.bean.SimilarityDTO;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class RecommendUtils {
     private RecommendAlgorithm algorithm = new RecommendAlgorithm();
@@ -80,10 +81,10 @@ public class RecommendUtils {
         }
 
         //计算用户相似度
-        List<SimilarityDTO<String>> userSimilarity = getSimilarityList(userMap, id);
+        List<SimilarityDTO<String>> userSimilarity = getSimilarityList(userMap, id, 20);
 
         //获取推荐物品列表
-        List<Long> itemList = getRecommendItem(userMap, userSimilarity, 20);
+        List<Long> itemList = getRecommendItem(userMap, userSimilarity);
 
         //排除已经收藏物品
         ArrayList<Map.Entry<Long, Double>> collectedList = new ArrayList<>(userMap.get(id).entrySet());
@@ -98,15 +99,16 @@ public class RecommendUtils {
             }
         }
 
-        //获取推荐物品列表前num条数据
-        List<Long> list = new ArrayList<>();
-        num = itemList.size() > num ? num : itemList.size();
-        for (int i = 0; i < num; i++) {
-            list.add(itemList.get(i));
-        }
+//        //获取推荐物品列表前num条数据
+//        List<Long> list = new ArrayList<>();
+//        num = itemList.size() > num ? num : itemList.size();
+//        for (int i = 0; i < num; i++) {
+//            list.add(itemList.get(i));
+//        }
+//        return itemList.subList(0,num);
 
         //返回推荐物品列表
-        return list;
+        return itemList.stream().limit(num).collect(Collectors.toList());
     }
 
     /**
@@ -130,16 +132,18 @@ public class RecommendUtils {
         }
 
         //计算相似度
-        List<SimilarityDTO<Long>> itemSimilarity = getSimilarityList(itemMap, id);
+        List<SimilarityDTO<Long>> itemSimilarity = getSimilarityList(itemMap, id, num);
 
         //返回推荐物品id列表
-        List<Long> list = new ArrayList<>();
-        num = itemSimilarity.size() > num ? num : itemSimilarity.size();
-        for (int i = 0; i < num; i++) {
-            list.add(itemSimilarity.get(i).getT2());
-        }
+        //        num = itemSimilarity.size() > num ? num : itemSimilarity.size();
+//        for (int i = 0; i < num; i++) {
+//            list.add(itemSimilarity.get(i).getT2());
+//        }
+//        for (SimilarityDTO<Long> similarityDTO : itemSimilarity) {
+//            list.add(similarityDTO.getT2());
+//        }
 
-        return list;
+        return itemSimilarity.stream().map(SimilarityDTO::getT2).collect(Collectors.toList());
     }
 
     /**
@@ -151,7 +155,7 @@ public class RecommendUtils {
      * @param <H>     被相关类型
      * @return
      */
-    private <T, H> List<SimilarityDTO<T>> getSimilarityList(Map<T, Map<H, Double>> itemMap, T id) {
+    private <T, H> List<SimilarityDTO<T>> getSimilarityList(Map<T, Map<H, Double>> itemMap, T id, int k) {
         //计算相似度
         T[] KeyArr = (T[]) itemMap.keySet().toArray();
         ArrayList<SimilarityDTO<T>> itemSimilarity = new ArrayList<>();
@@ -161,56 +165,46 @@ public class RecommendUtils {
         }
 
         //相似度升序排序
-        Collections.sort(itemSimilarity, new Comparator<SimilarityDTO>() {
-            @Override
-            public int compare(SimilarityDTO o1, SimilarityDTO o2) {
-                return Double.compare(o1.getSimilarity(), o2.getSimilarity());
-            }
-        });
+        itemSimilarity.sort(Comparator.comparingDouble(SimilarityDTO::getSimilarity));
 
-        return itemSimilarity;
+//        k = itemSimilarity.size() > k ? k : itemSimilarity.size();
+//        return itemSimilarity.subList(0, k);
+        return itemSimilarity.stream().limit(k).collect(Collectors.toList());
     }
 
     /**
-     * 计算推荐物品
+     * 计算UserBased推荐物品列表
      *
      * @param historyMap 历史纪录
      * @param similarity 相似度List
-     * @param top        按前top对象相似推荐
      * @return
      */
-    private List<Long> getRecommendItem(Map<String, Map<Long, Double>> historyMap, List<SimilarityDTO<String>> similarity, int top) {
+    private List<Long> getRecommendItem(Map<String, Map<Long, Double>> historyMap, List<SimilarityDTO<String>> similarity) {
         //计算推荐度  Map<itemId,推荐度>
         HashMap<Long, Double> recommendMap = new HashMap<>();
-        top = top > similarity.size() ? similarity.size() : top;
-        double sumSimilarity = 0;
-        for (SimilarityDTO similarityDTO : similarity) sumSimilarity += similarityDTO.getSimilarity();
-        for (int i = 0; i < top; i++) {
+        double sumSimilarity = similarity.stream().mapToDouble(SimilarityDTO::getSimilarity).sum();
+//        for (SimilarityDTO similarityDTO : similarity) sumSimilarity += similarityDTO.getSimilarity();
+        for (SimilarityDTO<String> stringSimilarityDTO : similarity) {
             //Map<itemId,评分>
-            Map<Long, Double> itemMap = historyMap.get(similarity.get(i).getT2());
+            Map<Long, Double> itemMap = historyMap.get(stringSimilarityDTO.getT2());
             Long[] itemKey = itemMap.keySet().toArray(new Long[0]);
             for (Long itemId : itemKey) {
-                double rate = getValue(recommendMap, itemId) + itemMap.get(itemId) * (1 - similarity.get(i).getSimilarity() / sumSimilarity);
+                double rate = getValue(recommendMap, itemId) + itemMap.get(itemId) * (1 - stringSimilarityDTO.getSimilarity() / sumSimilarity);
                 recommendMap.put(itemId, rate);
             }
         }
 
         //推荐列表按推荐度逆序排序
         ArrayList<Map.Entry<Long, Double>> recommendList = new ArrayList<>(recommendMap.entrySet());
-        Collections.sort(recommendList, new Comparator<Map.Entry<Long, Double>>() {
-            @Override
-            public int compare(Map.Entry<Long, Double> o1, Map.Entry<Long, Double> o2) {
-                return o2.getValue().compareTo(o1.getValue());
-            }
-        });
+        recommendList.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
 
         //返回推荐物品Id
-        List<Long> list = new ArrayList<>();
-        for (int i = 0; i < recommendList.size(); i++) {
-            list.add(recommendList.get(i).getKey());
-        }
+//        List<Long> list = new ArrayList<>();
+//        for (Map.Entry<Long, Double> longDoubleEntry : recommendList) {
+//            list.add(longDoubleEntry.getKey());
+//        }
 
-        return list;
+        return recommendList.stream().map(Map.Entry::getKey).collect(Collectors.toList());
     }
 
     /**

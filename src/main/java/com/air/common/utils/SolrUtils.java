@@ -24,7 +24,7 @@ public class SolrUtils {
         return SingletonHolder.SOLR_UTILS;
     }
 
-    public SolrUtils() {
+    private SolrUtils() {
         solrClient = new HttpSolrClient.Builder("http://120.78.81.63:8983/solr/airmail").build();
     }
 

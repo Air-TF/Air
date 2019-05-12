@@ -263,7 +263,7 @@
                                                 <td>{{ item.id }}</td>
                                                 <td>{{ item.name }}</td>
                                                 <td>{{ item.title }}</td>
-                                                <td>{{ item.price }}</td>
+                                                <td>¥{{ item.price/100 }}</td>
                                                 <td>{{ item.brand }}</td>
                                                 <td>{{ item.alias }}</td>
                                                 <td>

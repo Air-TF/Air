@@ -75,17 +75,6 @@ public class DaoTest {
         String s = "1";
         List<History> histories = historyDao.listHistoryByUser(s);
 
-        //Map<userId,<itemId,score>>
-//        Map<String, Map<Long, Double>> userMap = new HashMap<>();
-//        for (int i = 0; i < histories.size(); i++) {
-//            String userId = histories.get(i).getUserId();
-//            if (userMap.get(userId) == null) {
-//                HashMap<Long, Double> hashMap = new HashMap<>();
-//                userMap.put(userId, hashMap);
-//            }
-//            userMap.get(userId).put(histories.get(i).getItemId(), RecommendUtils.getUtils().getScore(histories.get(i)));
-//        }
-
         List<Long> longList = RecommendUtils.getUtils().UserBased(histories, s, 10);
         List<Item> itemList = recommendDao.listRecommendByIds(longList);
         logger.info(itemList);
