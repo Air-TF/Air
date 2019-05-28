@@ -40,6 +40,7 @@ public class ItemServiceImpl implements ItemService {
 //        itemPage.setRows(itemList);
 //        itemPage.setSize(size);
 //        itemPage.setTotal(itemListCount);
+        keyword = keyword.replaceAll("([\u4e00-\u9fa5]+|[a-zA-Z]+|\\d+)", "$1 ").trim();
         return SolrUtils.getUtils().getItemList(page, size, keyword, subcategoryId);
     }
 

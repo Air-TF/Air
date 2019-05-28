@@ -8,26 +8,26 @@
 - [ ] 商品属性管理
 - [X] 商品管理(删改查)
 - [X] 用户管理(增删改查)
-### 前台APP
+### APP
 - [App项目地址](https://github.com/Air-TF/AirMall)
 ### 后端API
-- [ ] 用户模块
+- [X] 用户模块
 - [X] 登录模块
 - [ ] 订单模块
 - [X] 搜索模块
-- [ ] 推荐模块
+- [X] 推荐模块
 - [X] 商品模块
-## 前端所用技术
-- 后台页面
-    - Vue
-    - Bootstrap
-    - MetisMenu
-    - Jquery
-    - Font Awesome
+## 后台所用技术
+- Vue
+- Bootstrap
+- MetisMenu
+- Jquery
+- Font Awesome
 ## 后端所用技术
 - Spring
 - SpringMVC
 - MyBaits
+- Solr
 - MySQL
 - Tomcat
-- Maven 
+- Maven
