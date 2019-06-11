@@ -1,6 +1,7 @@
 package com.air.dao;
 
 import com.air.bean.Item;
+import com.air.bean.User;
 import com.air.bean.UserLogin;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,6 +13,8 @@ public interface UserLoginDao {
     UserLogin selectUserLoginByEmail(String email);
 
     UserLogin selectUserLoginById(String id);
+
+    User selectUserById(String id);
 
     Integer insertUserLogin(UserLogin userLogin);
 

@@ -3,16 +3,16 @@ package com.air.bean;
 import java.util.List;
 
 public class User {
-    private UserLogin userlogin;
+    private UserLogin userLogin;
     private UserDesc userDesc;
     private List<Address> addressList;
 
-    public UserLogin getUserlogin() {
-        return userlogin;
+    public UserLogin getUserLogin() {
+        return userLogin;
     }
 
-    public void setUserlogin(UserLogin userlogin) {
-        this.userlogin = userlogin;
+    public void setUserLogin(UserLogin userLogin) {
+        this.userLogin = userLogin;
     }
 
     public UserDesc getUserDesc() {

@@ -1,6 +1,7 @@
 package com.air.service.Impl;
 
 import com.air.bean.Item;
+import com.air.bean.User;
 import com.air.bean.UserLogin;
 import com.air.common.utils.CommonsUtils;
 import com.air.bean.Page;
@@ -91,9 +92,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserLogin getUser(String id) {
+    public UserLogin getUserLogin(String id) {
         UserLogin user = userLoginDao.selectUserLoginById(id);
         user.setPassword("");
+        return user;
+    }
+
+    @Override
+    public User getUser(String id) {
+        User user = userLoginDao.selectUserById(id);
+        user.getUserLogin().setPassword("");
         return user;
     }
 }

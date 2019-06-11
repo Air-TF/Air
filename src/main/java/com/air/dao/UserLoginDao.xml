@@ -11,22 +11,40 @@
         <result column="status" jdbcType="INTEGER" property="status"/>
     </resultMap>
 
+    <resultMap id="UserDetails" type="com.air.bean.User">
+        <id column="id" property="userLogin.id"/>
+        <result column="name" property="userLogin.name"/>
+        <result column="password" property="userLogin.password"/>
+        <result column="phone" property="userLogin.phone"/>
+        <result column="email" property="userLogin.email"/>
+        <result column="created" property="userLogin.created"/>
+        <result column="status" property="userLogin.status"/>
+        <result column="sex" property="userDesc.sex"/>
+    </resultMap>
+
     <select id="selectUserLoginByPhone" parameterType="String" resultType="com.air.bean.UserLogin">
         select *
-        from tb_user_login
-        where phone = #{Phone}
+                from tb_user_login
+                where phone = #{Phone}
     </select>
 
     <select id="selectUserLoginByEmail" parameterType="String" resultType="com.air.bean.UserLogin">
         select *
-        from tb_user_login
-        where email = #{email}
+                from tb_user_login
+                where email = #{email}
     </select>
 
     <select id="selectUserLoginById" parameterType="String" resultType="com.air.bean.UserLogin">
         select *
-        from tb_user_login
-        where id = #{id}
+                from tb_user_login
+                where id = #{id}
+    </select>
+
+    <select id="selectUserById" parameterType="String" resultMap="UserDetails">
+        select tul.id, name, password, phone, email, created, status, tud.sex sex, birthday
+                from tb_user_login tul
+                left join tb_user_desc tud ON tud.user_id = tul.id
+                where id = #{id}
     </select>
 
     <insert id="insertUserLogin" parameterType="com.air.bean.UserLogin">
@@ -109,10 +127,10 @@
 
     <select id="selectUserStarCount" resultType="int">
         select count(*)
-        from tb_history th
-                 join tb_item ti on th.item_id = ti.id
-        where th.user_id = #{userId}
-          and th.star = true
+                from tb_history th
+                join tb_item ti on th.item_id = ti.id
+                where th.user_id = #{userId}
+                and th.star = true
     </select>
 
     <delete id="deleteUserById">

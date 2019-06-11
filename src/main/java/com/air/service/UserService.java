@@ -1,6 +1,7 @@
 package com.air.service;
 
 import com.air.bean.Item;
+import com.air.bean.User;
 import com.air.bean.UserLogin;
 import com.air.bean.Page;
 
@@ -20,5 +21,7 @@ public interface UserService {
 
     Page<Item> listStar(Integer page, Integer size, String userId);
 
-    UserLogin getUser(String id);
+    UserLogin getUserLogin(String id);
+
+    User getUser(String id);
 }

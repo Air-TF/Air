@@ -3,7 +3,9 @@ import com.air.common.utils.CommonsUtils;
 import com.air.common.utils.EmailUtils;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 public class CommonTest {
@@ -31,5 +33,18 @@ public class CommonTest {
         s= s.replaceAll("([\u4e00-\u9fa5]+|[a-zA-Z]+|\\d+)","$1 ").trim();
 //        for(String s1:split) System.out.println(s1);
         System.out.println(s);
+    }
+
+    @Test
+    public void fun1(){
+        List<String> itemList = new ArrayList<>(Arrays.asList("a", "b", "c", "d"));
+        List<String> subList = itemList.subList(0, 1);
+        subList.clear();
+        List<String> subList2 = itemList.subList(1, 2);
+        subList.remove("a");
+        subList2.remove("b");
+        System.out.println("total:"+itemList);
+        System.out.println("subList:"+subList);
+        System.out.println("subList2:"+subList2);
     }
 }

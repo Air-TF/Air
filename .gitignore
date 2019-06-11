@@ -1,4 +1,5 @@
 *.class
+src/main/resource/jdbc.properties
 
 #package files
 
